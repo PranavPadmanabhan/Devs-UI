@@ -4,7 +4,7 @@ function MainNavigation() {
     <header className="flex items-center h-[10vh] w-screen justify-between bg-transparent pl-[10px]">
       <div className="">React Meetups</div>
       <nav className="flex w-[50%]" >
-        <ul className="flex bg-transparent w-full h-[100%] items-center justify-evenly " >
+        <ul className="flex bg-transparent w-full h-[90%] items-center justify-evenly " >
           <li>
             <Link href="/">Designs</Link>
           </li>
