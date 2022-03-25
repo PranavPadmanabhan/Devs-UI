@@ -13,18 +13,18 @@ const Home: NextPage = () => {
       </Head>
       <div className="w-screen h-screen ">
       <Header />
-      <div className="w-screen h-screen flex flex-col items-center justify-start pt-[30px] snap-start">
-        <img src="/Assets/images/discord.png" alt="discord" className="self-center w-[88%] h-[16%] min-h-[150px] rounded-[15px] mb-[20px]" />
+      <div className="w-screen h-screen flex flex-col items-center justify-start pt-[10vh] snap-center">
+        <img src="/Assets/images/discord.png" alt="discord" className="self-center w-[85%] h-[16%] min-h-[130px] rounded-[15px] mb-[20px]" />
         <div className="flex flex-col items-center justify-start">
-          <img src="/Assets/lightmode/choose-icon.png" className="w-[20%] mt-[15px]" />
-          <span className="text-[22px] max-w-[60%] text-center my-[10px]">Choose your topic or design from us</span>
-          <img src="/Assets/lightmode/design-dev.png" className="w-[20%] mt-[15px]" />
-          <span className="text-[22px] max-w-[60%] text-center my-[10px]">Develop or design your item</span>
-          <img src="/Assets/lightmode/publish-icon.png" className="w-[20%] mt-[15px]" />
-          <span className="text-[22px] max-w-[60%] text-center my-[10px]">Publish on our site and support others</span>
+          <img src="/Assets/lightmode/choose-icon.png" className="w-[20%]" />
+          <span className="text-[20px] max-w-[60%] text-center mt-[7px] mb-[7px]">Choose your topic or design from us</span>
+          <img src="/Assets/lightmode/design-dev.png" className="w-[22%] " />
+          <span className="text-[20px] max-w-[60%] text-center mt-[7px] mb-[7px]">Develop or design your item</span>
+          <img src="/Assets/lightmode/publish-icon.png" className="w-[19%] " />
+          <span className="text-[20px] max-w-[60%] text-center mt-[7px] mb-[7px]">Publish on our site and support others</span>
         </div>
         </div>
-        <div className="flex flex-col w-screen h-screen items-center justify-start snap-start">
+        <div className="flex flex-col w-screen h-screen items-center justify-start snap-center">
             
         </div>
       </div>
