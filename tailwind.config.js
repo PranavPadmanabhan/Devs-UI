@@ -9,9 +9,6 @@ module.exports = {
         'portrait':'url(/Assets/images/mesh-mobile.png)'
       },
       screens: {
-        'xs':'300px',
-        'lm':'400px',
-        'msm':'500px',
         'sm': '640px',  
         'md': '768px',  
         'lg': '1024px',  
