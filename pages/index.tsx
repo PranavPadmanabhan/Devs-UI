@@ -33,6 +33,29 @@ const Home: NextPage = () => {
             <Task url='/Assets/images/image1.JPG' title='Dream Job Finder' description='This project will help you to improve your app development skills. We provide designs and assets to  develop the ui. You can also code with flutter or Java' />
           </div>
         </div>
+        <footer className="w-screen h-[25vh] box-border bg-footer-mesh bg-no-repeat bg-cover bg-center snap-center flex items-start justify-between">
+          <div className="w-[40%] max-w-[200px] h-[90%] flex flex-col items-center justify-start pt-[6vh]">
+            <p className="">ofifiuahfuafihafu</p>
+            <p className="">ofifiuahfuafihafu</p>
+            <p className="">ofifiuahfuafihafu</p>
+
+          </div>
+          <div className="w-[30%] flex flex-col items-center h-[60%] justify-between mt-[15px] mr-[10px]">
+            <span className="text-[5vw] font-semibold">Explore</span>
+            <span className="">Home</span>
+            <span className="">Designs</span>
+            <span className="">Challenges</span>
+          </div>
+          <div className="w-[30%] flex flex-col items-center h-[60%] justify-between mt-[15px]">
+            <span className="text-[5vw] font-semibold">Contact Us</span>
+            <span className="">Email Us</span>
+            <span className="">Discord</span>
+            <div className="flex w-[100%] items-center justify-evenly px-1">
+              <img src="/Assets/lightmode/instagram.png" alt="instagram" className="w-[25%]" />
+              <img src="/Assets/lightmode/twitter.png" alt="twitter" className="w-[25%]" />
+            </div>
+          </div>
+        </footer>
       </div>
     </div>
   )

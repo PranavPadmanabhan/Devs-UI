@@ -6,7 +6,8 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage:{
-        'portrait':'url(/Assets/images/mesh-mobile.png)'
+        'portrait':'url(/Assets/images/mesh-mobile.png)',
+        'footer-mesh':'url(/Assets/images/mesh-footer.png)'
       },
       screens: {
         'sm': '640px',  
