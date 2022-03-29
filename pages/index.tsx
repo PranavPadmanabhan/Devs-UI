@@ -1,7 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Header from '../components/Header'
-import Task from '../components/Task'
 
 const Home: NextPage = () => {
   return (
@@ -27,9 +26,7 @@ const Home: NextPage = () => {
         <div className="flex flex-col w-screen box-border h-screen items-center justify-start pt-[12vh] snap-center ">
           <h1 className="mb-[8px]  font-bold text-[5vw]">Top Tasks</h1>
           <div className="flex items-center justify-start w-[98vw] h-[85%] box-border overflow-x-scroll snap-x snap-mandatory px-[7%] scroll-pl-4 scrollbar-hide">
-            <Task url='/Assets/images/image1.JPG' title='Dream Job Finder' description='This project will help you to improve your app development skills. We provide designs and assets to  develop the ui. You can also code with flutter or Java' />
-            <Task url='/Assets/images/image1.JPG' title='Dream Job Finder' description='This project will help you to improve your app development skills. We provide designs and assets to  develop the ui. You can also code with flutter or Java' />
-            <Task url='/Assets/images/image1.JPG' title='Dream Job Finder' description='This project will help you to improve your app development skills. We provide designs and assets to  develop the ui. You can also code with flutter or Java' />
+
           </div>
         </div>
         <footer className="w-screen h-[25vh] box-border bg-footer-mesh bg-no-repeat bg-cover bg-center snap-center flex items-start justify-between">
