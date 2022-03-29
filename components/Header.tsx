@@ -1,4 +1,3 @@
-import { type } from 'os'
 import React, { useEffect } from 'react'
 import NavBar from './NavBar'
 
