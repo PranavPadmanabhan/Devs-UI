@@ -2,8 +2,8 @@
 
 function NavBar() {
   return (
-    <div className="fixed top-0 flex items-center h-[10vh] w-[100vw] justify-between box-border px-[15px] ">
-      <div className="">LOGO</div>
+    <div className="fixed z-1000 top-0 flex items-center h-[10vh] w-[100vw] justify-between box-border px-[15px] ">
+      <img src="/Assets/lightmode/logo-light.png" alt="logo" className="w-[30%]" />
       <div className="">
         <div className="hidden sm:block">
             <span className="">Designs</span>
