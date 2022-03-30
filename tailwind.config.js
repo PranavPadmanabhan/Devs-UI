@@ -7,7 +7,9 @@ module.exports = {
     extend: {
       backgroundImage:{
         'portrait':'url(/Assets/images/mesh-mobile.png)',
-        'footer-mesh':'url(/Assets/images/mesh-footer.png)'
+        'landscape':'url(/Assets/images/mesh.png)',
+        'footer-mesh':'url(/Assets/images/mesh-footer.png)',
+        'discord':'url(/Assets/images/discord.png)'
       },
       screens: {
         'sm': '640px',  

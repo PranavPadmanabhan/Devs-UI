@@ -1,10 +1,13 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import Header from "../components/Header";
+import ThemeContextProvider from "../contexts/ThemeContext";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <Component {...pageProps} />
+    <ThemeContextProvider>
+      <Component {...pageProps} />
+    </ThemeContextProvider>
   );
 }
 
