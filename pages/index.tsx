@@ -25,30 +25,34 @@ const Home: NextPage = () => {
           </div>
         </div>
         <div className="flex flex-col w-screen box-border h-screen items-center justify-start pt-[12vh] snap-center ">
-          <h1 className="mb-[8px]  font-bold text-[5vw]">Top Tasks</h1>
+          <h1 className="mb-[8px]  font-bold text-[5vw]">Top Challenges</h1>
             <Carousel />
         </div>
-        <footer className="w-screen h-[25vh] box-border bg-footer-mesh bg-no-repeat bg-cover bg-center snap-center flex items-start justify-between">
-          <div className="w-[40%] max-w-[200px] h-[90%] flex flex-col items-center justify-start pt-[6vh]">
+        <footer className="w-screen h-[50vh] box-border bg-footer-mesh bg-no-repeat bg-cover bg-center snap-center flex flex-col items-center justify-center">
+          <div className="w-screen max-w-[200px] h-[25%] flex flex-col items-center justify-start my-[15px]">
             <p className="">ofifiuahfuafihafu</p>
             <p className="">ofifiuahfuafihafu</p>
             <p className="">ofifiuahfuafihafu</p>
-
-          </div>
-          <div className="w-[30%] flex flex-col items-center h-[60%] justify-between mt-[15px] mr-[10px]">
-            <span className="text-[5vw] font-semibold">Explore</span>
-            <span className="">Home</span>
-            <span className="">Designs</span>
-            <span className="">Challenges</span>
-          </div>
-          <div className="w-[30%] flex flex-col items-center h-[60%] justify-between mt-[15px]">
-            <span className="text-[5vw] font-semibold">Contact Us</span>
-            <span className="">Email Us</span>
-            <span className="">Discord</span>
-            <div className="flex w-[100%] items-center justify-evenly px-1">
+            <div className="flex w-[100%] items-center justify-evenly mt-[20px]">
               <img src="/Assets/lightmode/instagram.png" alt="instagram" className="w-[25%]" />
               <img src="/Assets/lightmode/twitter.png" alt="twitter" className="w-[25%]" />
             </div>
+          </div>
+          <div className="w-screen flex flex-col items-center h-[25%] justify-center mt-[25px]">
+            <span className="text-[5vw] font-semibold">Explore</span>
+           <div className="w-[60%] mt-[5px] flex items-center justify-between">
+           <span className="">Home</span>
+            <span className="">Designs</span>
+            <span className="">Challenges</span>
+           </div>
+          </div>
+          <div className="w-screen flex flex-col items-center h-[25%] justify-center ">
+            <span className="text-[5vw] font-semibold">Contact Us</span>
+            <div className="flex w-[40%] items-center justify-between mt-[5px]">
+            <span className="">Email Us</span>
+            <span className="">Discord</span>
+            </div>
+            
           </div>
         </footer>
       </div>
