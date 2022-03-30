@@ -11,11 +11,6 @@ function Header() {
 
   const { theme, toggleTheme, preferredTheme } = useContext(ThemeContext);
 
-
-
-
-
-
   useEffect(() => {
     console.log(theme);
 
@@ -24,7 +19,7 @@ function Header() {
 
 
   return (
-    <div className={`w-screen h-screen box-border flex flex-col items-center justify-start p-[15px] pt-[10vh] snap-center bg-portrait bg-no-repeat bg-cover bg-center sm:flex-row sm:bg-landscape sm:bg-cover`}>
+    <div className={`relative w-screen h-screen box-border flex flex-col items-center justify-start p-[15px] pt-[10vh] snap-center bg-portrait bg-no-repeat bg-cover bg-center sm:flex-row sm:bg-landscape sm:bg-cover`}>
       <NavBar />
       <div className="flex flex-col items-end sm:w-[60%] sm:h-[80%] sm:items-center sm:justify-center sm:pr-[3%]">
         <h1 className="self-end text-[7vw] sm:text-[3vw] sm:self-center">A problem well started <br /> is a problem half solved </h1>

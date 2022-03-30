@@ -1,3 +1,6 @@
+import { AppProps } from "next/dist/shared/lib/router/router";
+import React, { ReactElement } from "react";
+
 export type backgroundImage = {
     portrait:string,
     landscape:string
@@ -19,3 +22,9 @@ export type  props = {
 
 export type theme = "light" | "dark";
 export type themeContext = { theme: theme; toggleTheme: () => void,preferredTheme:themeMode };
+
+export type drawerProps = {
+    url:string,
+    title:string,
+    redAccent:boolean
+}
