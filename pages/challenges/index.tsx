@@ -12,7 +12,7 @@ const Challenges: NextPage = () => {
     const [filter, setFilter] = useState<Array<any>>([] as Array<any>)
     const [filterOptions, setFilterOptions] = useState(["Level 1", "Level 2", "Level 3", "Level 4"])
     const [sortOptions, setsortOptions] = useState(["Easier First", "Harder First"]);
-    const [sort, setSort] = useState([])
+    const [sort, setSort] = useState<Array<any>>([] as Array<any>)
     const [sortingDrawerVisiblity, setSortingDrawerVisiblity] = useState<boolean>(false)
     const [filterDrawerVisiblity, setFilterDrawerVisibility] = useState<boolean>(false)
 
@@ -29,6 +29,14 @@ const Challenges: NextPage = () => {
         }
         else {
             setFilter([...filter, item])
+        }
+    }
+    const addtoSort = (item: string, index: number,) => {
+        if (sort.includes(item)) {
+            setSort(sort.filter((f) => f !== item))
+        }
+        else {
+            setSort([...sort,item])
         }
     }
 
@@ -60,8 +68,8 @@ const Challenges: NextPage = () => {
                                     key={index}
                                     borderEnabled={true}
                                     title={item}
-                                    selected={filter.includes(item) ? true : false}
-                                    onClick={() => addFilter(item, index)} />
+                                    selected={sort.includes(item) ? true : false}
+                                    onClick={() => addtoSort(item, index)} />
                             ))
                         }
                     </div>
@@ -74,8 +82,8 @@ const Challenges: NextPage = () => {
                                             key={index}
                                             borderEnabled={true}
                                             title={item}
-                                            selected={filter.includes(item) ? true : false}
-                                            onClick={() => addFilter(item, index)} />
+                                            selected={sort.includes(item) ? true : false}
+                                            onClick={() => addtoSort(item, index)} />
                                     ))
                                 }
                             </div>
