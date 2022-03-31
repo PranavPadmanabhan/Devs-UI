@@ -35,7 +35,8 @@ export interface Cardprops  {
     url:string,
     title:string,
     description:string,
-    animationEnabled:boolean
+    animationEnabled:boolean,
+    level:number
 }
 
 export interface optionProps  {
