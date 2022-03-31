@@ -31,3 +31,16 @@ export type drawerProps = {
     upcoming:boolean
 }
 
+export interface Cardprops  {
+    url:string,
+    title:string,
+    description:string,
+    animationEnabled:boolean
+}
+
+export interface optionProps  {
+    selected:boolean,
+    onClick:() => void,
+    title:string,
+    borderEnabled:boolean
+}

@@ -28,7 +28,7 @@ const Designs: NextPage = () => {
                 <link rel="icon" href="/faviconhttps://www.getdroidtips.com/realme-narzo-10a-firmware-flash-file/#google_vignette.ico" />
             </Head>
             <NavBar />
-            <h1 className="text-[7vw] flex font-bold self-start ml-[20px] mb-[10px]  sm:hidden ">Designs</h1>
+            <h1 className="text-[7vw] flex font-bold self-start snap-center ml-[20px] mb-[10px]  sm:hidden ">Designs</h1>
             <h1 className="text-[5vw] font-bold self-start ml-[20px] mb-[10px] snap-start sm:text-[2vw] sm:snap-none">Latest updates</h1>
             <div className="flex flex-col w-screen items-center box-border  border-2 sm:grid sm:grid-cols-4 sm:place-items-center sm:px-[3%] gap-y-[50px] sm:pt-[3vh] sm:pb-[7vh] sm:pt-[5vh]">
                 <DesignCard />
