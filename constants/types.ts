@@ -36,7 +36,8 @@ export interface Cardprops  {
     title:string,
     description:string,
     animationEnabled:boolean,
-    level:number
+    level:number,
+    destination:string
 }
 
 export interface optionProps  {
@@ -44,4 +45,12 @@ export interface optionProps  {
     onClick:() => void,
     title:string,
     borderEnabled:boolean
+}
+
+export type buttonProps = {
+    title:string
+}
+
+export type providedItemProps = {
+    title:string
 }

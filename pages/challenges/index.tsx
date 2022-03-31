@@ -128,12 +128,12 @@ const Challenges: NextPage = () => {
                 </div>
             </div>
             <div className="flex flex-col w-screen items-center box-border  border-2 sm:grid sm:grid-cols-4 sm:place-items-center sm:px-[3%] gap-y-[50px] sm:pt-[3vh] sm:pb-[7vh] sm:pt-[5vh]">
-                <Card url='/Assets/images/image1.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' animationEnabled={true} level={1}/>
-                <Card url='/Assets/images/image2.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' animationEnabled={true} level={1}/>
-                <Card url='/Assets/images/image3.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' animationEnabled={true} level={1}/>
-                <Card url='/Assets/images/image1.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' animationEnabled={true} level={1}/>
-                <Card url='/Assets/images/image2.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' animationEnabled={true} level={1}/>
-                <Card url='/Assets/images/image3.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' animationEnabled={true} level={1}/>
+                <Card url='/Assets/images/image1.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' animationEnabled={true} level={1} destination={"challenges/1"}/>
+                <Card url='/Assets/images/image2.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' animationEnabled={true} level={1} destination={"challenges/2"}/>
+                <Card url='/Assets/images/image3.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' animationEnabled={true} level={1} destination={"challenges/3"}/>
+                <Card url='/Assets/images/image1.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' animationEnabled={true} level={1} destination={"challenges/1"}/>
+                <Card url='/Assets/images/image2.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' animationEnabled={true} level={1} destination={"challenges/2"}/>
+                <Card url='/Assets/images/image3.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' animationEnabled={true} level={1} destination={"challenges/3"}/>
                 {width < 640 && (<Footer />)}
             </div>
             {width > 640 && (<Footer />)}
