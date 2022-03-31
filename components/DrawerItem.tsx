@@ -1,12 +1,15 @@
+import Link from 'next/link'
 import React from 'react'
 import { drawerProps } from '../constants/types'
 
-function DrawerItem({url,title,redAccent}:drawerProps) {
+function DrawerItem({ url, title, redAccent, destination, upcoming }: drawerProps) {
     return (
-        <div className="w-[100%] h-[13%] my-[4px] flex items-center justify-between box-border px-[15px] sm:h-[20%]">
-            <img src={url} alt="" className="w-[15%]" />
-            <span className="text-[7vw] sm:text-[2vw]" style={{color:redAccent?"#e95353":"black"}}>{title}</span>
-        </div>
+        <Link href={destination?`/${destination}`:"/"}>
+            <div className=" w-[100%] h-[13%] my-[4px] cursor-pointer flex items-center justify-between box-border px-[15px] sm:h-[20%] ">
+                <img src={url} alt="" className="w-[15%] hover:animate-bounce" />
+                <span className="group text-[7vw] text-black sm:text-[1.7vw] sm:hover:text-[1.9vw] duration-700 hover:transition-transform " style={{ color: redAccent ? "#e95353" : "black",textDecorationLine:upcoming?"line-through":"none"}}>{title}</span>
+            </div>
+        </Link>
     )
 }
 

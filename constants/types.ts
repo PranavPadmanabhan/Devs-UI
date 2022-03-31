@@ -26,5 +26,8 @@ export type themeContext = { theme: theme; toggleTheme: () => void,preferredThem
 export type drawerProps = {
     url:string,
     title:string,
-    redAccent:boolean
+    redAccent:boolean,
+    destination:string,
+    upcoming:boolean
 }
+
