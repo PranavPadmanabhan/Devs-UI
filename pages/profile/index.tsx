@@ -91,15 +91,15 @@ const Profile: NextPage = () => {
                         {/*---------------- first column with image and follow section starts here -----------------------*/}
                         <div className="w-[55%] h-[100%] flex flex-col items-center justify-start box-border pt-7 sm:w-[40%] ">
                             <div className="w-[100%] h-[50%] flex flex-col items-center justify-center mr-3 mb-0 sm:mb-5 ">
-                                <img src="/Assets/icons/avatar.png" alt="" className="w-[60%] sm:w-[45%]" />
+                                <img src="/Assets/icons/avatar.png" alt="" className="w-[60%] sm:w-[45%] mt-0 sm:mt-7" />
                                 {/*-------- update profile image button starts here ------*/}
-                                <div className="w-[50%] h-[15%] rounded-[10px] bg-[#323c71] flex items-center justify-center mb-5 sm:w-[30%] sm:h-[20%] sm:mb-[1vh]">
-                                    <span className="text-white">Edit image</span>
+                                <div className="w-[50%] h-[15%] rounded-[10px] bg-[#323c71] min-h-[35px] flex items-center justify-center mb-5 sm:w-[30%] sm:h-[20%] sm:mb-[1vh]">
+                                    <span className="text-white text-[4vw] sm:text-[1.5vw] ">Edit image</span>
                                 </div>
                                 {/*-------- update profile image button starts here ------*/}
 
                             </div>
-                            <div className="w-[100%] h-[20%] flex items-center justify-evenly box-border box-border pl-9 mt-5 sm:mt-0">
+                            <div className="w-[100%] h-[20%] flex items-center justify-evenly box-border box-border pl-9 mt-5 sm:mt-[10vh]">
                                 <div className="w-[25%] h-[100%] flex flex-col items-center justify-center  mr-7">
                                     <span className="mb-2 text-[12px] font-light sm:text-[18px]">contributions</span>
                                     <span className=" text-[22px] font-light">20</span>
