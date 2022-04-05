@@ -35,7 +35,6 @@ export interface Cardprops  {
     url:string,
     title:string,
     description:string,
-    animationEnabled:boolean,
     level:number,
     destination:string
 }

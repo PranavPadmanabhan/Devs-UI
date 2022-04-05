@@ -6,6 +6,8 @@ import Footer from '../../components/Footer'
 import NavBar from '../../components/NavBar'
 import { FaFilter, FaSort } from 'react-icons/fa'
 import OptionItems from '../../components/OptionItems'
+import DrawerItem from '../../components/DrawerItem'
+import MiniFooter from '../../components/MiniFooter'
 
 const Challenges: NextPage = () => {
     const [width, setWidth] = useState(0);
@@ -36,107 +38,119 @@ const Challenges: NextPage = () => {
             setSort(sort.filter((f) => f !== item))
         }
         else {
-            setSort([...sort,item])
+            setSort([...sort, item])
         }
     }
 
     return (
-        <div className='w-screen h-screen flex flex-col justify-start items-center overflow-y-scroll snap-y snap-mandatory scrollbar-hide pt-[14vh] sm:pt-[10vh] sm:snap-none'>
+        <div className='w-screen  flex flex-col justify-start items-center box-border  pt-[10vh] sm:pt-[12vh] px-[3%] sm:overflow-y-scroll sm:snap-y sm:snap-mandatory sm:'>
             <Head>
                 <title>Challenges 🌩️ </title>
                 <meta name="description" content="designs" />
                 <link rel="icon" href="/faviconhttps://www.getdroidtips.com/realme-narzo-10a-firmware-flash-file/#google_vignette.ico" />
             </Head>
             <NavBar />
-            <h1 className="text-[7vw] font-bold self-start ml-[20px] mb-[10px] snap-start sm:text-[2vw] sm:snap-none">Challenges</h1>
-            <div className="flex items-center w-[100vw] min-h-[10vh] self-start  justify-center snap-center box-border">
-                <div className="w-[55%] h-[70%] flex items-start ml-[15px] rounded-[15px] bg-gray-200 items-center px-[2%]">
-                    <input placeholder='search' type="text" className=" w-[100%] h-[90%] bg-transparent cursor-auto focus:outline-none" />
-                    <img src="/Assets/lightmode/magnifying-glass.png" alt="" className="w-[15%] min-w-[30px] sm:w-[5%]" />
+            <h1 className="self-start block text-[7vw] text-black font-bold sm:hidden">Challenges</h1>
+
+
+            {/*--------------- second header with search options starts here ---------------*/}
+
+
+            <div className="w-screen h-[40vh] box-border flex items-start px-[3%] justify-between sm:px-[5%]  pt-[5%] sm:pt-0 ">
+                <div className="w-[70%] h-[55%] flex items-center justify-between max-h-[50px] px-[3%]  bg-gray-200 rounded-[8px] sm:w-[50%] sm:h-[75%] sm:px-[1%]">
+                    <input type="text" className="w-[90%]  h-[100%] min-h-[45px]  focus:outline-none bg-transparent" />
+                    <img src="/Assets/lightmode/magnifying-glass.png" alt="" className="w-[10%] sm:max-w-[30px]" />
                 </div>
-                <div onClick={() => {
-                    setSortingDrawerVisiblity(!sortingDrawerVisiblity);
-                    setFilterDrawerVisibility(false)
-                }}
-                    className="group w-[14%] bg-gray-200 flex items-center justify-center min-h-[70%] rounded-[10px] mx-[10px] sm:w-[10%] sm:mx-[5%]">
-                    <h1 className="hidden sm:flex text-gray-700">sort By</h1>
-                    <FaSort className='flex sm:hidden' />
-                    <div className="fixed z-1000 top-[26.5vh] right-[22vw] w-[14%] h-auto bg-white shadow-task rounded-[20px] border-2 border-gray-300 hidden sm:group-hover:flex hover:flex flex-col items-center justify-start overflow-hidden">
-                        {
-                            sortOptions.map((item, index) => (
-                                <OptionItems
-                                    key={index}
-                                    borderEnabled={true}
-                                    title={item}
-                                    selected={sort.includes(item) ? true : false}
-                                    onClick={() => addtoSort(item, index)} />
-                            ))
-                        }
-                    </div>
-                    {
-                        sortingDrawerVisiblity && (
-                            <div className="fixed z-1000 top-[30vh] right-[22vw] w-[50%] h-auto bg-white shadow-task rounded-[20px] border-2 border-gray-300 flex flex-col items-center justify-start overflow-hidden sm:hidden">
+                <div className="w-[40%] h-[100%] flex items-center max-h-[50px] justify-evenly ">
+                    <div onClick={() => {
+                        setSortingDrawerVisiblity(!sortingDrawerVisiblity);
+                        setFilterDrawerVisibility(false)
+                    }} className="relative group z-[-1] cursor-pointer w-[35%] h-[100%] bg-gray-200 flex items-center justify-center rounded-[8px] sm:z-[100]">
+                        <span className="hidden sm:block">sort By</span>
+                        <FaSort className='block sm:hidden' />
+
+                        {/*--------------- sort options in desktop view starts here ---------------*/}
+
+                        <div className="absolute  hidden flex-col top-[110%] right-1  w-[20vw] h-auto bg-white shadow-task overflow-hidden rounded-[10%] group-hover-none sm:group-hover:flex hover:flex">
+                            {
+                                sortOptions.map((item, index) => (
+                                    <OptionItems key={index} title={item} onClick={() => addtoSort(item, index)} selected={sort.includes(item) ? true : false} borderEnabled={true} />
+                                ))
+                            }
+                        </div>
+
+                        {/*--------------- sort options in desktop view ends here ---------------*/}
+
+
+                        {/*--------------- sort options in mobile view starts here ---------------*/}
+
+                        {sortingDrawerVisiblity && (
+                            <div className="absolute flex flex-col top-[115%] right-1  w-[50vw] h-auto bg-white shadow-task overflow-hidden rounded-[10%] sm:hidden">
                                 {
                                     sortOptions.map((item, index) => (
-                                        <OptionItems
-                                            key={index}
-                                            borderEnabled={true}
-                                            title={item}
-                                            selected={sort.includes(item) ? true : false}
-                                            onClick={() => addtoSort(item, index)} />
+                                        <OptionItems key={index} title={item} onClick={() => addtoSort(item, index)} selected={sort.includes(item) ? true : false} borderEnabled={true} />
                                     ))
                                 }
-                            </div>
-                        )
-                    }
-                </div>
-                <div onClick={() => {
-                    setFilterDrawerVisibility(!filterDrawerVisiblity);
-                    setSortingDrawerVisiblity(false)
-                }}
-                    className="group w-[14%] bg-gray-200 flex items-center justify-center min-h-[70%] rounded-[10px] sm:w-[10%]">
-                    <h1 className=" hidden sm:flex text-gray-700">Filter By</h1>
-                    <FaFilter className='flex sm:hidden' />
-                    <div className="fixed  top-[26.5vh] right-[6.9vw] w-[14%] h-auto bg-white shadow-task rounded-[20px] border-2 border-gray-300 overflow-hidden hidden sm:group-hover:flex hover:flex flex-col items-center justify-start">
-                        {
-                            filterOptions.map((item, index) => (
-                                <OptionItems
-                                    key={index}
-                                    borderEnabled={false}
-                                    title={item}
-                                    selected={filter.includes(item) ? true : false}
-                                    onClick={() => addFilter(item, index)} />
-                            ))
-                        }
+                            </div>)}
+                        {/*--------------- sort options in mobile view ends here ---------------*/}
+
                     </div>
-                    {
-                        filterDrawerVisiblity && (
-                            <div className="fixed  top-[30vh] right-[6.9vw] w-[50%] h-auto bg-white shadow-task rounded-[20px] border-2 border-gray-300 overflow-hidden flex flex-col items-center justify-start sm:hidden">
+                    <div onClick={() => {
+                        setFilterDrawerVisibility(!filterDrawerVisiblity);
+                        setSortingDrawerVisiblity(false)
+                    }} className="relative group z-[-1] w-[35%] cursor-pointer h-[100%] bg-gray-200 flex items-center  justify-center  max-h-[50px] rounded-[8px] sm:z-[100]">
+                        <span className="hidden sm:block">filter by</span>
+                        <FaFilter className='block sm:hidden' />
+
+                        {/*--------------- filter options in Desktop view starts here ---------------*/}
+
+
+                        <div className="absolute hidden  flex-col top-[115%] right-1  w-[15vw] h-auto bg-white shadow-task overflow-hidden rounded-[10%] group-hover-none sm:group-hover:flex hover:flex ">
+                            {
+                                filterOptions.map((item, index) => (
+                                    <OptionItems key={index} title={item} onClick={() => addFilter(item, index)} selected={filter.includes(item) ? true : false} borderEnabled={false} />
+                                ))
+                            }
+                        </div>
+
+                        {/*--------------- filter options in Desktop view ends here ---------------*/}
+
+
+                        {/*--------------- filter options in mobile view starts here ---------------*/}
+
+                        {filterDrawerVisiblity && (
+                            <div className="absolute flex flex-col top-[115%] right-1  w-[50vw] h-auto bg-white shadow-task overflow-hidden rounded-[10%] sm:hidden">
                                 {
                                     filterOptions.map((item, index) => (
-                                        <OptionItems
-                                            key={index}
-                                            borderEnabled={false}
-                                            title={item}
-                                            selected={filter.includes(item) ? true : false}
-                                            onClick={() => addFilter(item, index)} />
+                                        <OptionItems key={index} title={item} onClick={() => addFilter(item, index)} selected={filter.includes(item) ? true : false} borderEnabled={false} />
                                     ))
                                 }
-                            </div>
-                        )
-                    }
+                            </div>)}
+
+                        {/*--------------- filter options in mobile view ends here ---------------*/}
+
+
+                    </div>
                 </div>
             </div>
-            <div className="flex flex-col w-screen items-center box-border  border-2 sm:grid sm:grid-cols-4 sm:place-items-center sm:px-[3%] gap-y-[50px] sm:pt-[3vh] sm:pb-[7vh] sm:pt-[5vh]">
-                <Card url='/Assets/images/image1.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' animationEnabled={true} level={1} destination={"challenges/1"}/>
-                <Card url='/Assets/images/image2.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' animationEnabled={true} level={1} destination={"challenges/2"}/>
-                <Card url='/Assets/images/image3.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' animationEnabled={true} level={1} destination={"challenges/3"}/>
-                <Card url='/Assets/images/image1.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' animationEnabled={true} level={1} destination={"challenges/1"}/>
-                <Card url='/Assets/images/image2.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' animationEnabled={true} level={1} destination={"challenges/2"}/>
-                <Card url='/Assets/images/image3.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' animationEnabled={true} level={1} destination={"challenges/3"}/>
-                {width < 640 && (<Footer />)}
-            </div>
+
+            {/*--------------- second header with search options starts here ---------------*/}
+
+            {/*--------------- challenges container starts here ---------------*/}
+
+            <section className="w-screen h-[80%] mt-[-30vh] flex flex-col items-center overflow-y-scroll snap-y snap-mandatory scrollbar-hide sm:snap-none sm:grid sm:grid-cols-4 place-items-center sm:mt-[-15%] sm:h-[90%]">
+                <Card url='/Assets/images/image1.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/1"} />
+                <Card url='/Assets/images/image1.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/1"} />
+                <Card url='/Assets/images/image1.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/1"} />
+                <Card url='/Assets/images/image1.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/1"} />
+                <Card url='/Assets/images/image1.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/1"} />
+                {width < 640 && (<MiniFooter />)}
+            </section>
+
+            {/*--------------- challenges container ends here ---------------*/}
+
             {width > 640 && (<Footer />)}
+
         </div>
     )
 }

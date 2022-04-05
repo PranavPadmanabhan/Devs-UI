@@ -1,8 +1,18 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 function Footer() {
+
+  const [width, setwidth] = useState(0);
+  useEffect(() => {
+    if(typeof(window) !== undefined){
+      setwidth(window.innerWidth)
+    }
+  }, [])
+  
+
+
   return (
-    <footer className=" w-screen min-w-[100vw] h-[50vh] z-[-1] box-border bg-footer-mesh bg-no-repeat bg-cover bg-center snap-center flex flex-col items-center justify-center sm:flex-row sm:items-start sm:justify-end sm:pt-[10vh]">
+    <footer className=" w-screen z-[-1] box-border bg-footer-mesh bg-no-repeat bg-cover bg-center snap-center flex flex-col items-center justify-center sm:flex-row sm:items-start sm:justify-end sm:pt-[10vh] " >
           <div className="w-screen max-w-[200px] h-[25%] flex flex-col items-center justify-start my-[15px] sm:mt-[5vh]">
             <p className="text-left">ofifiuahfuafihafu</p>
             <p className="text-left">ofifiuajkbafbjkbafkhfuafihafu</p>
