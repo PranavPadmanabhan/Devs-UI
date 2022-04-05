@@ -37,7 +37,7 @@ function Header() {
 
       {/*------------- second quote-text with button container starts here ----------------*/}
 
-      <div className="flex flex-col items-start h-[50%] sm:order-2 sm:w-[40%] sm:h-[80%] sm:flex-col-reverse sm:justify-end sm:pl-[2%]">
+      <div className="flex flex-col items-start h-[50%]  sm:order-2 sm:w-[40%] sm:h-[80%] sm:flex-col-reverse sm:justify-end sm:pl-[2%]">
         <h1 className="self-start text-[7vw] sm:text-[3vw] sm:order-1 sm:self-start sm:my-[10px] sm:text-left sm:max-w-[80%]">Build Your Career With Us By Solving Tasks</h1>
         <img src="/Assets/icons/code-illustration.png" className="self-start w-[75%] h-[25%] min-h-[150px] my-[4%] sm:order-3 sm:self-start" />
         <div onClick={navigate} className="self-center cursor-pointer w-[80%] h-[15%] max-h-[50px] min-h-[40] flex items-center justify-center bg-black rounded-[25px] mt-[5%] sm:self-start sm:w-[70%]">
