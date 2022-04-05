@@ -53,3 +53,10 @@ export type buttonProps = {
 export type providedItemProps = {
     title:string
 }
+
+export type socialMediaProps = {
+    url:string,
+    title:string
+}
+
+export type CurrentTab = "My Designs" | "Task In Progress" | "Task Completed"

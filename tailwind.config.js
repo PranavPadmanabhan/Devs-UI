@@ -12,6 +12,9 @@ module.exports = {
         'discord':'url(/Assets/images/discord.png)'
       },
       screens: {
+        'esm':{ 'min': '320px', 'max':'399px'},
+        'asm':{ 'min': '400px', 'max':'479px'},
+        'msm':{ 'min': '480px', 'max':'560px'},
         'sm': '640px',  
         'md': '768px',  
         'lg': '1024px',  

@@ -7,6 +7,7 @@ import Header from '../components/Header'
 
 const Home: NextPage = () => {
 
+  
 
   return (
     <div className='box-border overflow-y-scroll snap-y snap-mandatory scrollbar-hide'>
@@ -17,6 +18,9 @@ const Home: NextPage = () => {
       </Head>
       <div className="w-screen h-screen ">
         <Header />
+
+      {/* ---------------  second page with discord logo starts here ---------------------- */}
+
         <div className="w-screen h-screen flex flex-col items-center justify-start pt-[11vh] snap-center">
           <div className="self-center w-[95%] h-[16%] min-h-[130px] rounded-[15px] mb-[20px] bg-discord bg-[#5965f1] bg-fit bg-no-repeat bg-center flex items-end justify-center sm:h-[30%] sm:max-h-[300px] sm:pb-[10px] sm:bg-[center_bottom_-2.5rem] sm:mb-[18vh]">
              <h1 className="hidden sm:block text-white font-semibold text-[2vw] tracking-wide">Connect  with  1000+  people  through  Discord</h1>
@@ -36,10 +40,24 @@ const Home: NextPage = () => {
             </div>
           </div>
         </div>
+
+      {/* ---------------  second page with discord logo ends here ---------------------- */}
+
+      {/* ---------------  third page with top challenged starts here ---------------------- */}
+
+
         <div className="flex flex-col w-screen box-border h-screen items-center justify-start pt-[12vh] snap-center ">
           <h1 className="mb-[8px]  font-bold text-[5vw] sm:text-[2vw]">Top Challenges</h1>
-          <Carousel />
+
+          {/* ------ component which contains all challenge cards ----------*/}
+          <Carousel /> 
+          {/* ------ component which contains all challenge cards ----------*/}
+
         </div>
+
+      {/* ---------------  third page with top challenged ends here ---------------------- */}
+
+
         <Footer />
       </div>
     </div>
