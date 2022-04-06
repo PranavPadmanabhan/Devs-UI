@@ -14,13 +14,13 @@ module.exports = {
       screens: {
         'esm':{ 'min': '320px', 'max':'399px'},
         'asm':{ 'min': '400px', 'max':'479px'},
-        'msm':{ 'min': '480px', 'max':'560px'},
+        'msm':{ 'min': '480px', 'max':'630px'},
         'sm': '640px',  
         'md': '768px',  
         'lg': '1024px',  
         'xl': '1280px',  
         '2xl': '1536px', 
-        'lh': {'raw': '(min-height: 800px)'},
+        'ds': {'raw': '(min-height: 1600px)'},
       },
       boxShadow: {
         'task': 'rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px',

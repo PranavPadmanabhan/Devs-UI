@@ -1,6 +1,7 @@
 import { NextPage } from 'next'
 import Head from 'next/head'
-import React, { useState } from 'react'
+import { useRouter } from 'next/router'
+import React, { useEffect, useState } from 'react'
 import { useSwipeable } from 'react-swipeable'
 import Card from '../../components/Card'
 import Footer from '../../components/Footer'
@@ -9,7 +10,7 @@ import SocialMediaItems from '../../components/SocialMediaItems'
 import { CurrentTab } from '../../constants/types'
 
 const Profile: NextPage = () => {
-
+    const router = useRouter()
     const config = {
         delta: 10,
         preventDefaultTouchmoveEvent: false,
@@ -133,7 +134,7 @@ const Profile: NextPage = () => {
 
                     </div>
                     {/*----------------- design upload button starts here-------------*/}
-                    <div className="w-[35%] h-[5%] min-h-[30px] rounded-[25px] bg-[#323c71] mr-0 flex items-center justify-center my-4 sm:w-[25%] sm:mr-5">
+                    <div onClick={() => router.push('/uploadDesign')} className="w-[35%] h-[5%] min-h-[30px] rounded-[25px] bg-[#323c71] mr-0 flex items-center justify-center my-4 sm:w-[25%] sm:mr-5">
                         <span className='text-white text-[16px]'>Upload design</span>
                     </div>
                     {/*----------------- design upload button ends here -------------*/}
