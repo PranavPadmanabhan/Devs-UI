@@ -51,6 +51,7 @@
             justify-content: flex-start;
             width: 100%;
             height: 25%;
+           
         }
 
         .ProfileAvatar {
@@ -86,8 +87,8 @@
             column-gap: 2rem;
             padding-bottom: 0;
             overflow-y: scroll;
-            padding-bottom: 5vh;
         }
+        
 
         @media (max-height: 1700px) {
             .Content {
@@ -107,6 +108,9 @@
         .Content {
             padding-bottom: 0;
         }
+        .FollowerSection {
+            margin-top: 10vh;
+        }
 
         /*-------  Profile page ----------*/
         /*-------  Card component ----------*/
@@ -118,9 +122,15 @@
             min-height: 23vh;
 
         }
-
+        .CardTitle {
+            font-size: 2vw;
+            margin-top: 1vh;
+        }
         .CardImg {
             min-height: 60%;
+        }
+        .CardDescription {
+            font-size: 70%;
         }
 
         /*-------  Card component ----------*/
@@ -243,6 +253,50 @@
         }
 
         /*------- check box component ----------*/
+        /*------- single challenge page ----------*/
+        .Section1 {
+           display: flex;
+           flex-direction: column;
+           align-items: center;
+           justify-content: center;
+
+        }
+        .ChallengeName {
+            font-size: 4vw;
+            margin-top: -25%;
+        }
+        .AuthorContainer {
+          margin-top: -15%;            
+        }
+        .ProvidedItemsDetails {
+            margin-top:-5vh;
+        }
+        .ChallengeImgContainer {
+            height: 50%;
+            width: 120%;
+        }
+        .ChallengeImgContainer img {
+            height: 80%;
+            width: 100%;
+        }
+        .IconRow {
+            width: 100%;
+            height: 5%;
+        }
+        .ChallengeDetails {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+        }
+        .VisitProfileBtn {
+            min-height: 30px;
+            max-height: 30px;
+        }
+        .ButtonsContainer {
+            min-height: 10%;
+        }
+        /*------- single challenge page ----------*/
 
     }
 }

@@ -13,7 +13,7 @@ function Footer() {
 
 
   return (
-    <footer className={`${styles.footer} w-screen z-[-1] box-border bg-footer-mesh bg-no-repeat bg-cover bg-center snap-center flex flex-col items-center justify-center sm:flex-row sm:items-start sm:justify-end sm:pt-[10vh]`} >
+    <footer className={`relative ${styles.footer} w-screen z-[-1] box-border bg-footer-mesh bg-no-repeat bg-cover bg-center snap-center flex flex-col items-center justify-center sm:relative sm:flex-row sm:items-start sm:justify-end sm:pt-[10vh]`} >
           <div className="w-screen max-w-[200px] h-[25%] flex flex-col items-center justify-start my-[15px] sm:mt-[5vh]">
             <p className="text-left">ofifiuahfuafihafu</p>
             <p className="text-left">ofifiuajkbafbjkbafkhfuafihafu</p>

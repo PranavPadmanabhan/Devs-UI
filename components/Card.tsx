@@ -26,8 +26,8 @@ function Card({ url, title, description, level, destination }: Cardprops) {
 
           {/*------ level of challenge ends here ----------*/}
 
-        <h1 className="self-center text-[7vw] font-semibold mb-[5px] sm:text-[1.6vw] sm:mb-[1vw]">{title}</h1>
-        <p className="self-center text-[4vw] text-center max-w-[95%] font-semibold sm:text-[0.7vw]">{description}</p>
+        <h1 className={`${styles.CardTitle} self-center text-[7vw] font-semibold mb-[5px] sm:text-[1.6vw] sm:mb-[1vw]`}>{title}</h1>
+        <p className={`${styles.CardDescription} self-center text-[4vw] text-center max-w-[95%] font-semibold sm:text-[0.7vw]`}>{description}</p>
       </div>
     </Link>
   )
