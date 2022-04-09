@@ -92,7 +92,7 @@ const Profile: NextPage = () => {
                     <div className={` w-[100%] h-[80%] flex `}>
                         {/*---------------- first column with image and follow section starts here -----------------------*/}
                         <div className={`${styles.FirstColumn} w-[55%] h-[100%] flex flex-col items-center justify-start box-border pt-7 sm:w-[40%] `}>
-                            <div className={`${styles.LogoContainer} w-[100%] h-[50%] flex flex-col items-center justify-center mr-3 mb-0 sm:mb-5 `}>
+                            <div className={`${styles.LogoContainer}  w-[100%] h-[50%] flex flex-col items-center justify-center mr-3 mb-0 sm:mb-5 `}>
                                 <img src="/Assets/icons/avatar.png" alt="" className={`${styles.ProfileAvatar} w-[60%] sm:w-[45%] mt-0 sm:mt-7`} />
                                 {/*-------- update profile image button starts here ------*/}
                                 <div onClick={() => router.push('/personalDetails')} className={`${styles.EditProfileBtn} w-[50%] h-[15%] rounded-[10px] bg-[#323c71] min-h-[32px] flex items-center justify-center cursor-pointer mb-5 sm:w-[30%] sm:h-[20%] sm:mb-[1vh]`}>
