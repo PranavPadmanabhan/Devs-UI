@@ -85,7 +85,8 @@
             row-gap: 2rem;
             column-gap: 2rem;
             padding-bottom: 0;
-            overflow-y: hidden;
+            overflow-y: scroll;
+            padding-bottom: 5vh;
         }
 
         @media (max-height: 1700px) {
@@ -171,12 +172,77 @@
         }
 
         .footer {
-            position: absolute;
+            position: fixed;
             bottom: 0;
             z-index: 1;
         }
 
         /*------- personal details page ----------*/
+        /*------- upload design page ----------*/
+        .Container {
+            padding-top: 10vh;
+            scroll-padding-top: 10vh;
+            outline: 1px solid black;
+        }
+        .MainContainer {
+            padding-bottom: 5vh;
+            height: 70%;
+        }
+        .heading_UploadDesign {
+            font-size: 4vw;
+        }
+        .input_UploadDesign,.input_uploadDesign_bio {
+            width: 85%;
+            height: 8%;
+        }
+        .input_UploadDesign{
+            min-height: 50px;
+        }
+        .input_uploadDesign_bio {
+            min-height: 135px;
+        }
+        .input_UploadDesign,.input_uploadDesign_bio::placeholder {
+            font-size: 24px;
+            font-style: italic;
+        }
+
+        .UploadDesignText {
+            font-size: 3vw;
+            margin-top: 0.7vh;
+            margin-bottom: 1vh;
+        }
+        .UploadFileBtnContainer {
+            margin-top: 1vh;
+            margin-bottom: 1vh;
+        }
+        .UploadImageFile {
+           
+        }
+        .CompleteStatusContainer {
+            margin-top: 3vh;
+        }
+        .UploadDesignPageBtn {
+
+        }
+        .UploadFileText {
+            font-size: 2.5vw;
+        }
+        .UploadFileBtn {
+            font-size: 90%;
+            width: 20%;
+            min-height: 50px;
+        }
+        /*------- upload design page ----------*/
+        /*------- check box component ----------*/
+        .checkboxText {
+            font-size: 2.7vw;
+        }
+        .checkBox {
+            min-height: 50px;
+            min-width: 50px;
+        }
+
+        /*------- check box component ----------*/
 
     }
 }
