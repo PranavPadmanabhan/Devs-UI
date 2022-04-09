@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { useContext, useState } from 'react';
 import { AiOutlineBell } from 'react-icons/ai';
 import DrawerItem from './DrawerItem';
+import styles from '../styles/desktop.module.css'
 
 
 function NavBar() {
@@ -9,25 +10,25 @@ function NavBar() {
   const [drawerMode, setdrawerMode] = useState<boolean>(false);
 
   return (
-    <div className="fixed z-1000 top-0 flex items-center h-[10vh] w-[100vw] justify-between box-border px-[15px] ">
+    <div className={`${styles.NavBar} fixed z-1000 top-0 flex items-center h-[10vh] w-[100vw] justify-between box-border px-[15px] `} >
       {/*---------- logo -----------*/}
-      <img src="/Assets/lightmode/logo-light.png" alt="logo" className="w-[30%] max-w-[100px]" />
+      <img src="/Assets/lightmode/logo-light.png" alt="logo" className={`${styles.Logo} w-[30%] max-w-[100px]`} />
       {/*---------- logo -----------*/}
 
       {/*------------- navigation bar contents starts here --------------------- */}
 
-      <div className="sm:w-[45%]">
+      <div className={`${styles.NavBarItemsContainer} sm:w-[45%]`}>
 
         {/*---------------- navigation bar items visible only in desktop mode starts here --------------------*/}
 
         <div className="w-[100%] hidden sm:flex sm:items-center sm:justify-evenly ">
-          <Link href={"/"}><span className="cursor-pointer">Home</span></Link>
-          <Link href={"/designs"}><span className="cursor-pointer">Designs</span></Link>
-          <Link href={"/challenges"}><span className="cursor-pointer">Challenges</span></Link>
-          <Link href={"/"}><span className="cursor-pointer">About Us</span></Link>
-          <AiOutlineBell className='cursor-pointer' size={25} />
+          <Link href={"/"}><span className={`${styles.NavBarItems} cursor-pointer`}>Home</span></Link>
+          <Link href={"/designs"}><span className={`${styles.NavBarItems} cursor-pointer`}>Designs</span></Link>
+          <Link href={"/challenges"}><span className={`${styles.NavBarItems} cursor-pointer`}>Challenges</span></Link>
+          <Link href={"/"}><span className={`${styles.NavBarItems} cursor-pointer`}>About Us</span></Link>
+          <AiOutlineBell className={`${styles.BellIcon} cursor-pointer`} size={25} />
           <div className="group flex flex-col items-center justify-center cursor-pointer">
-            <img src="/Assets/icons/avatar.png" alt="" className="max-w-[50px] cursor-pointer" />
+            <img src="/Assets/icons/avatar.png" alt="" className={`${styles.Avatar} max-w-[50px] cursor-pointer`} />
 
             {/*----------------- mini navigation drawer of desktopmode starts here --------------*/}
 

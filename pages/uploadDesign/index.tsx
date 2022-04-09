@@ -58,18 +58,18 @@ const UploadDesign: NextPage = () => {
       </Head>
       <NavBar />
       <div className="w-[100%] h-[100%] flex flex-col overflow-y-scroll scrollbar-hide ">
-        <div className="w-[100%] flex flex-col box-border px-5 sm:px-[45px]">
-        <h1 className="text-[8vw] mt-3  sm:text-[2vw] esm:text-[6.8vw] asm:text-[7vw]">Upload Design</h1>
-        <input type="text" placeholder='Name' className=" w-[85%] h-[6%] min-h-[40px] focus:outline-none bg-gray-200 rounded-[10px] mt-5 my-3 pl-5 sm:w-[30%] sm:max-w-[350px]" />
-        <input type="text" placeholder='Description' className=" w-[85%] h-[15%] focus:outline-none min-h-[80px] bg-gray-200 rounded-[10px] my-3 pl-5 sm:w-[30%] sm:max-w-[350px] sm:min-h-[120px]" />
-        <div className="w-[100%] h-[10%] flex flex-col my-1 esm:my-2">
-          <span className="text-gray-500 text-[4vw] sm:text-[1vw] sm:font-bold">Upload designs in PNG or JPG format</span>
+        <div className="w-[100%] flex flex-col box-border px-5 sm:px-[45px] lg:px-[55px]">
+        <h1 className="text-[8vw] mt-3 esm:text-[6.8vw] asm:text-[7vw] sm:text-[2vw] md:text-[3vw] lg:text-[2vw] xl:text-[2.2vw]">Upload Design</h1>
+        <input type="text" placeholder='Name' className=" w-[85%] h-[6%] min-h-[40px] focus:outline-none bg-gray-200 rounded-[10px] mt-5 my-3 pl-5 sm:w-[30%] sm:max-w-[350px] md:w-[45%] md:max-w-[450px] xl:w-[45%] xl:max-w-[550px] xl:h-[8%] xl:min-h-[55px]" />
+        <input type="text" placeholder='Description' className=" w-[85%] h-[15%] focus:outline-none min-h-[80px] bg-gray-200 rounded-[10px] my-3 pl-5 sm:w-[30%] sm:max-w-[350px] sm:min-h-[120px] md:w-[45%] md:max-w-[450px] xl:max-w-[550px] xl:min-h-[150px]" />
+        <div className="w-[100%] h-[10%] flex flex-col my-1 esm:my-2 xl:my-4">
+          <span className="text-gray-500 text-[4vw] sm:text-[1vw] sm:font-bold md:text-[2.4vw] lg:text-[1.5vw] lg:font-light xl:text-[1.7vw]">Upload designs in PNG or JPG format</span>
           <div className="flex items-center justify-start mt-2 w-[100%] h-[100%] esm:mt-5">
-            <button className='w-[35%] h-[85%] min-h-[35px] min-w-[120px] focus:outline-none rounded-[10px] flex items-center justify-center bg-gray-200 text-gray-500 text-[4vw] esm:text-[3.4vw] asm:text-[3vw] msm:text-[2.5vw] sm:text-[0.8vw]'>Upload File</button>
+            <button className='w-[35%] h-[85%] min-h-[35px] min-w-[120px] focus:outline-none rounded-[10px] flex items-center justify-center bg-gray-200 text-gray-500 text-[4vw] esm:text-[3.4vw] asm:text-[3vw] msm:text-[2.5vw] sm:text-[0.8vw] md:text-[1.8vw] md:w-[20%] md:h-[85%] md:min-h-[35px] md:min-w-[80px] lg:text-[1.3vw] lg:w-[12%] lg:h-[85%] lg:min-h-[35px] lg:min-w-[80px] xl:min-h-[45px]'>Upload File</button>
           </div>
         </div>
-        <div className="w-[100%] h-[20%] flex  items-start  mt-5 sm:w-[30%] esm:mt-[35px] esm:w-[90%] asm:w-[80%] msm:w-[75%]">
-          <span className="font-semibold text-gray-500">completed:</span>
+        <div className="w-[100%] h-[20%] flex  items-start  mt-5 sm:w-[30%] esm:mt-[35px] esm:w-[90%] asm:w-[80%] msm:w-[75%] md:w-[50%] lg:w-[40%]">
+          <span className="font-semibold text-gray-500 esm:text-[3.4vw] asm:text-[3vw] msm:text-[2.5vw] sm:text-[0.8vw] md:text-[2.5vw] lg:text-[1.5vw] xl:text-[1.6vw]">Completed:</span>
           <CheckBox percentage={'25%'} checked={checked === '25%' ? true : false} onClick={() => addCheckMark('25%')} />
           <CheckBox percentage={'50%'} checked={checked === '50%' ? true : false} onClick={() => addCheckMark('50%')} />
           <CheckBox percentage={'75%'} checked={checked === '75%' ? true : false} onClick={() => addCheckMark('75%')} />
@@ -84,23 +84,23 @@ const UploadDesign: NextPage = () => {
           {
             uploadedDetails.map((item,index) => (
               <div key={index} className="w-[100%] h-[50%] flex flex-col my-2 cursor-pointer">
-              <span className="text-gray-500 text-[7vw] sm:text-[1.4vw] esm:text-[5vw] asm:text-[4.4vw] msm:text-[4vw]">Upload {item}</span>
+              <span className="text-gray-500 text-[7vw] sm:text-[1.4vw] esm:text-[5vw] asm:text-[4.4vw] msm:text-[4vw] md:text-[2.5vw] lg:text-[1.6vw] xl:text-[1.7vw]">Upload {item}</span>
               <div className="w-[100%] h-[70%] flex mt-3">
-                <button className='w-[35%] h-[85%] min-h-[35px] min-w-[120px] focus:outline-none rounded-[10px] flex items-center justify-center bg-gray-200 text-gray-500 text-[4vw] esm:text-[3.4vw] asm:text-[3vw] msm:text-[2.5vw] sm:text-[0.8vw] sm:w-[10%]'>Upload {item}</button>
+                <button className='w-[35%] h-[85%] min-h-[35px] min-w-[120px] focus:outline-none rounded-[10px] flex items-center justify-center bg-gray-200 text-gray-500 text-[4vw] esm:text-[3.4vw] asm:text-[3vw] msm:text-[2.5vw] sm:text-[0.8vw] md:text-[1.4vw] sm:w-[10%] lg:w-[12%] lg:text-[0.9vw] xl:min-h-[45px] xl:text-[1.3vw] xl:w-[15%]'>Upload {item}</button>
               </div>
             </div>
             ))
           }
         </div>
-        <div className="w-[100%] h-[20%] flex  items-start  mt-5  my-0 sm:w-[30%] sm:my-5 esm:w-[90%] asm:w-[80%] msm:w-[75%]">
-          <span className="font-semibold text-gray-500">Levels:</span>
+        <div className="w-[100%] h-[20%] flex  items-start  mt-5  my-0 sm:w-[30%] sm:my-5 esm:w-[90%] asm:w-[80%] msm:w-[75%] md:w-[50%] lg:w-[40%]">
+          <span className="font-semibold text-gray-500 text-[4vw] esm:text-[3.4vw] asm:text-[3vw] msm:text-[2.5vw] sm:text-[2.4vw] lg:text-[1.5vw] xl:text-[1.6vw]">Levels:</span>
           <CheckBox percentage={'1'} checked={levelChecked === '1' ? true : false} onClick={() => addLevelCheckMark('1')} />
           <CheckBox percentage={'2'} checked={levelChecked === '2' ? true : false} onClick={() => addLevelCheckMark('2')} />
           <CheckBox percentage={'3'} checked={levelChecked === '3' ? true : false} onClick={() => addLevelCheckMark('3')} />
           <CheckBox percentage={'4'} checked={levelChecked === '4' ? true : false} onClick={() => addLevelCheckMark('4')} />
         </div>
-        <div className="w-[100%] h-[10%] flex flex-col  sm:w-[50%]">
-          <span className="text-gray-500 font-semibold my-2 text-[4vw] sm:text-[1vw]">Tools Used</span>
+        <div className="w-[100%] h-[10%] flex flex-col  sm:w-[50%] md:w-[80%]">
+          <span className="text-gray-500 font-semibold my-2 text-[4vw] esm:text-[3.4vw] asm:text-[3vw] msm:text-[2.5vw] sm:text-[2.4vw] lg:text-[1.5vw] xl:text-[1.6vw]">Tools Used</span>
           <div className=" w-[100%] h-[90%] flex items-center">
            <DesignTools url='/Assets/icons/figma.png' checked={toolsUsed.includes('Figma')?true:false} onClick={() => addTool('Figma')} />
            <DesignTools url='/Assets/icons/xd.png' checked={toolsUsed.includes('XD')?true:false} onClick={() =>addTool('XD')}/>
@@ -110,7 +110,7 @@ const UploadDesign: NextPage = () => {
            <DesignTools url='/Assets/icons/sketch.png' checked={toolsUsed.includes('Sketch')?true:false} onClick={() =>addTool('Sketch')}/>
           </div>
         </div>
-        <button className=' min-w-[60px] max-w-[150px] min-h-[35px] bg-[#323c71] max-h-[45px] rounded-[10px] text-white flex items-center justify-center focus:outline-none mt-8 mb-4 text-[4vw] esm:text-[3.4vw] asm:text-[3vw] msm:text-[2.5vw] sm:text-[0.8vw] esm:my-[50px]'>Upload Design</button>
+        <button className=' min-w-[60px] max-w-[150px] min-h-[35px] bg-[#323c71] max-h-[45px] rounded-[10px] text-white flex items-center justify-center focus:outline-none mt-8 mb-4 text-[4vw] esm:text-[3.4vw] asm:text-[3vw] msm:text-[2.5vw] sm:text-[0.8vw] esm:my-[50px] md:text-[80%] md:mt-[65px] md:mb-[45px] lg:mt-[85px] lg:mb-[65px]'>Upload Design</button>
         </div>
         <Footer />
       </div>

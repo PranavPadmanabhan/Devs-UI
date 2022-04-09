@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 import { Cardprops } from '../constants/types'
+import styles from '../styles/desktop.module.css'
 
 
 
@@ -11,9 +12,9 @@ function Card({ url, title, description, level, destination }: Cardprops) {
 
   return (
     <Link href={`/${destination}`}>
-      <div className={`w-[87%] h-[65vh] flex-none cursor-pointer snap-center rounded-[20px] mx-[15px] my-[10px] shadow-task last:mr-[30px] p-[5%] flex flex-col sm:h-[75vh] sm:max-h-[600px] sm:rounded-[25px] sm:w-[88%] sn:hover-z-1  sm:hover:scale-110 duration-700`}>
+      <div className={`${styles.Card} w-[87%] h-[65vh] flex-none cursor-pointer snap-center rounded-[20px] mx-[15px] my-[10px] shadow-task last:mr-[30px] p-[5%] flex flex-col sm:h-[75vh] sm:max-h-[600px] sm:rounded-[25px] sm:w-[88%] sn:hover-z-1  sm:hover:scale-110 duration-700`}>
         {/*------- challenge image ----- */}
-        <img src={url} alt="" className="rounded-[15px] max-h-[60%] w-[100%] min-h-[40vh] sm:max-h-[65%]" style={{ boxShadow: "rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px" }} />
+        <img src={url} alt="" className={`${styles.CardImg} rounded-[15px] max-h-[60%] w-[100%] min-h-[40vh] sm:max-h-[65%]`} style={{ boxShadow: "rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px" }} />
         {/*------- challenge image ----- */}
 
           {/*------ level of challenge starts here ----------*/}
