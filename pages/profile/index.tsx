@@ -11,6 +11,14 @@ import { CurrentTab } from '../../constants/types'
 import styles from '../../styles/desktop.module.css'
 
 const Profile: NextPage = () => {
+
+
+    // useEffect(() => {
+    //   if(typeof(window) !== undefined){
+    //       alert(`${window.innerHeight}  ${window.innerWidth}`)
+    //   }
+    // }, [])
+
     const router = useRouter()
     const config = {
         delta: 10,
@@ -151,8 +159,8 @@ const Profile: NextPage = () => {
                     </div>
                     <RenderTabs />
                 </section>
-                <Footer />
             </div>
+                <Footer />
 
         </div>
     )
