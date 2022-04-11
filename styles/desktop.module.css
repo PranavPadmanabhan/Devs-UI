@@ -140,7 +140,6 @@
             max-height: 100%;
             max-height: 23vh;
             min-height: 23vh;
-            z-index: -1;
         }
 
         .CardTitle {

@@ -65,7 +65,7 @@ const Challenges: NextPage = () => {
                     <div onClick={() => {
                         setSortingDrawerVisiblity(!sortingDrawerVisiblity);
                         setFilterDrawerVisibility(false)
-                    }} className="relative group sm:z-[-1] cursor-pointer w-[35%] h-[100%] bg-gray-200 flex items-center justify-center rounded-[8px] sm:z-[100]">
+                    }} className="relative group z-[-1] sm:z-[-1] cursor-pointer w-[35%] h-[100%] bg-gray-200 flex items-center justify-center rounded-[8px] sm:z-[100]">
                         <span className="hidden sm:block">sort By</span>
                         <FaSort className='block sm:hidden' />
 
@@ -98,7 +98,7 @@ const Challenges: NextPage = () => {
                     <div onClick={() => {
                         setFilterDrawerVisibility(!filterDrawerVisiblity);
                         setSortingDrawerVisiblity(false)
-                    }} className="relative group sm:z-[-1] w-[35%] cursor-pointer h-[100%] bg-gray-200 flex items-center  justify-center  max-h-[50px] rounded-[8px] sm:z-[100]">
+                    }} className="relative group z-[-1] sm:z-[-1] w-[35%] cursor-pointer h-[100%] bg-gray-200 flex items-center  justify-center  max-h-[50px] rounded-[8px] sm:z-[100]">
                         <span className="hidden sm:block">filter by</span>
                         <FaFilter className='block sm:hidden' />
 

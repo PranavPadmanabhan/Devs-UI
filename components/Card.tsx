@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import React from 'react'
 import { Cardprops } from '../constants/types'
 import styles from '../styles/desktop.module.css'
@@ -9,10 +10,14 @@ import styles from '../styles/desktop.module.css'
 function Card({ url, title, description, level, destination, snap }: Cardprops) {
 
   const colors = ["#58FF74", "#F4FF58", "#FFA658", "#FF5858"]
+  const router = useRouter();
+
+  const navigate = () => {
+    router.push(`/${destination}`)
+  }
 
   return (
-    <Link href={`/${destination}`}>
-      <div className={`${styles.Card} w-[87%] h-[65vh] flex-none cursor-pointer ${snap} rounded-[20px] mx-[15px] my-[10px] shadow-task last:mr-[30px] p-[5%] flex flex-col sm:h-[75vh] sm:max-h-[600px] sm:rounded-[25px] sm:w-[88%] sn:hover-z-1  sm:hover:scale-110 duration-700`}>
+      <div onClick={navigate} className={`${styles.Card} w-[87%] z-[1] sm:z-[1] h-[65vh] flex-none cursor-pointer ${snap} rounded-[20px] mx-[15px] my-[10px] shadow-task last:mr-[30px] p-[5%] flex flex-col sm:h-[75vh] sm:max-h-[600px] sm:rounded-[25px] sm:w-[88%] sn:hover-z-1  sm:hover:scale-110 duration-700`}>
         {/*------- challenge image ----- */}
         <img src={url} alt="" className={`${styles.CardImg} rounded-[15px] max-h-[60%] w-[100%] min-h-[40vh] sm:max-h-[65%]`} style={{ boxShadow: "rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px" }} />
         {/*------- challenge image ----- */}
@@ -29,7 +34,6 @@ function Card({ url, title, description, level, destination, snap }: Cardprops) 
         <h1 className={`${styles.CardTitle} self-center text-[7vw] font-semibold mb-[5px] sm:text-[1.6vw] sm:mb-[1vw]`}>{title}</h1>
         <p className={`${styles.CardDescription} self-center text-[4vw] text-center max-w-[95%] font-semibold sm:text-[0.7vw]`}>{description}</p>
       </div>
-    </Link>
   )
 }
 

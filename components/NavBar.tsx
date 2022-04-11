@@ -10,7 +10,7 @@ function NavBar() {
   const [drawerMode, setdrawerMode] = useState<boolean>(false);
 
   return (
-    <div className={`${styles.NavBar} fixed z-1000 top-0 flex items-center h-[10vh] w-[100vw] justify-between box-border px-[15px] backdrop-blur-2xl`} >
+    <div className={`${styles.NavBar} fixed z-[1000] top-0 flex items-center h-[10vh] w-[100vw] justify-between box-border px-[15px] backdrop-blur-2xl`} >
       {/*---------- logo -----------*/}
       <img src="/Assets/lightmode/logo-light.png" alt="logo" className={`${styles.Logo} w-[30%] max-w-[100px]`} />
       {/*---------- logo -----------*/}
