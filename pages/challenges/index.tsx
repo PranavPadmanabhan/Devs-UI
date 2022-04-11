@@ -66,7 +66,7 @@ const Challenges: NextPage = () => {
                     <div onClick={() => {
                         setSortingDrawerVisiblity(!sortingDrawerVisiblity);
                         setFilterDrawerVisibility(false)
-                    }} className="relative group z-[-1] sm:z-[-1] cursor-pointer w-[35%] h-[100%] bg-gray-200 flex items-center justify-center rounded-[8px] sm:z-[100]">
+                    }} className="relative group  sm:z-[-1] cursor-pointer w-[35%] h-[100%] bg-gray-200 flex items-center justify-center rounded-[8px] sm:z-[100]">
                         <span className="hidden sm:block">sort By</span>
                         <FaSort className='block sm:hidden' />
 
@@ -86,7 +86,7 @@ const Challenges: NextPage = () => {
                         {/*--------------- sort options in mobile view starts here ---------------*/}
 
                         {sortingDrawerVisiblity && (
-                            <div className="absolute flex flex-col top-[115%] right-1  w-[50vw] h-auto bg-white shadow-task overflow-hidden rounded-[10%] sm:hidden">
+                            <div className="absolute z-[100] flex flex-col top-[115%] right-1  w-[50vw] h-auto bg-white shadow-task overflow-hidden rounded-[10%] sm:hidden">
                                 {
                                     sortOptions.map((item, index) => (
                                         <OptionItems key={index} title={item} onClick={() => addtoSort(item, index)} selected={sort.includes(item) ? true : false} borderEnabled={true} />
@@ -98,8 +98,8 @@ const Challenges: NextPage = () => {
                     </div>
                     <div onClick={() => {
                         setFilterDrawerVisibility(!filterDrawerVisiblity);
-                        setSortingDrawerVisiblity(false)
-                    }} className="relative group z-[-1] sm:z-[-1] w-[35%] cursor-pointer h-[100%] bg-gray-200 flex items-center  justify-center  max-h-[50px] rounded-[8px] sm:z-[100]">
+                        // setSortingDrawerVisiblity(false)
+                    }} className="relative group sm:z-[-1] w-[35%] cursor-pointer h-[100%] bg-gray-200 flex items-center  justify-center  max-h-[50px] rounded-[8px] sm:z-[100]">
                         <span className="hidden sm:block">filter by</span>
                         <FaFilter className='block sm:hidden' />
 
@@ -120,7 +120,7 @@ const Challenges: NextPage = () => {
                         {/*--------------- filter options in mobile view starts here ---------------*/}
 
                         {filterDrawerVisiblity && (
-                            <div className="absolute flex flex-col top-[115%] right-1  w-[50vw] h-auto bg-white shadow-task overflow-hidden rounded-[10%] sm:hidden">
+                            <div className="absolute z-[100] flex flex-col top-[115%] right-1  w-[50vw] h-auto bg-white shadow-task overflow-hidden rounded-[10%] sm:hidden">
                                 {
                                     filterOptions.map((item, index) => (
                                         <OptionItems key={index} title={item} onClick={() => addFilter(item, index)} selected={filter.includes(item) ? true : false} borderEnabled={false} />

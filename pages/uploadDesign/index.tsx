@@ -65,7 +65,7 @@ const UploadDesign: NextPage = () => {
       </Head>
       <NavBar />
       <div className={`${styles.MainContainer} w-[100%]  h-[100%] flex flex-col overflow-y-scroll scrollbar-hide `}>
-        <div className={`w-[100%] flex flex-col box-border px-5 sm:px-[45px] lg:px-[55px]`}>
+        <div className={`${styles.PageContent} w-[100%] flex flex-col box-border px-5 sm:px-[45px] lg:px-[55px]`}>
         <h1 className={`${styles.heading_UploadDesign} text-[8vw] mt-3 esm:text-[6.8vw] asm:text-[7vw] sm:text-[2vw] md:text-[3vw] lg:text-[2vw] xl:text-[2.2vw]`}>Upload Design</h1>
         <input type="text" placeholder='Name' className={`${styles.input_UploadDesign} w-[85%] h-[6%] min-h-[40px] focus:outline-none bg-gray-200 rounded-[10px] mt-5 my-3 pl-5 sm:w-[30%] sm:max-w-[350px] md:w-[45%] md:max-w-[450px] xl:w-[45%] xl:max-w-[550px] xl:h-[8%] xl:min-h-[55px]`} />
         <input type="text" placeholder='Description' className={`${styles.input_uploadDesign_bio} w-[85%] h-[15%] focus:outline-none min-h-[80px] bg-gray-200 rounded-[10px] my-3 pl-5 sm:w-[30%] sm:max-w-[350px] sm:min-h-[120px] md:w-[45%] md:max-w-[450px] xl:max-w-[550px] xl:min-h-[150px]`} />

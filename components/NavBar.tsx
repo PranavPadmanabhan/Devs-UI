@@ -32,7 +32,7 @@ function NavBar() {
 
             {/*----------------- mini navigation drawer of desktopmode starts here --------------*/}
 
-            <div className={`${styles.DrawerDesktop} hidden group-hover:flex flex-col items-center justify-start fixed w-[15vw] min-w-[200px] h-[30vh] bg-white top-[9vh] right-[4vw] rounded-[20px] shadow-task sm:z-[100]`}>
+            <div className={`${styles.DrawerDesktop} hidden group-hover:flex flex-col items-center justify-start fixed w-[15vw] min-w-[200px] h-auto bg-white top-[9vh] right-[4vw] rounded-[20px] shadow-task sm:z-[100]`}>
               <DrawerItem url='/Assets/lightmode/home(1).png' title='Home' redAccent={false} destination={""} upcoming={false} />
               <DrawerItem url='/Assets/lightmode/user.png' title='Profile' redAccent={false} destination={"profile"} upcoming={false} />
               <DrawerItem url='/Assets/lightmode/log-out.png' title='Sign Out' redAccent={true} destination={""} upcoming={false} />

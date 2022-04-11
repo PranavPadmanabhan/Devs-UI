@@ -163,6 +163,9 @@
 
 
         /*------- personal details page ----------*/
+        .PersonalDetails {
+            height: 100vh;
+        }
         .heading {
             margin-left: 70px;
             font-size: 4.5vw;
@@ -172,7 +175,12 @@
         .ImageContainer {
             z-index: -1;
         }
+        .InputContainer {
+            height: 100%;
+            margin-bottom: 15vh;
+            padding-top: 2vh;
 
+        }
         .input, .input_bio {
             width: 80%;
             margin-top: 35px;
@@ -224,6 +232,9 @@
         .MainContainer {
             height: 100vh;
             overflow-y: scroll;
+        }
+        .PageContent {
+            height: 100vh;
         }
 
         .heading_UploadDesign {

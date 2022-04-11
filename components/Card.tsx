@@ -16,7 +16,7 @@ function Card({ url, title, description, level, destination, snap }: Cardprops) 
   }
 
   return (
-      <div onClick={navigate} className={`${styles.Card} w-[87%] z-[1] sm:z-[1] h-[65vh] flex-none cursor-pointer ${snap} rounded-[20px] mx-[15px] my-[10px] shadow-task last:mr-[30px] p-[5%] flex flex-col sm:h-[75vh] sm:max-h-[600px] sm:rounded-[25px] sm:w-[88%] sn:hover-z-1  sm:hover:scale-110 duration-700`}>
+      <div onClick={navigate} className={`${styles.Card} group w-[87%] z-[1] sm:z-[1] h-[65vh] flex-none cursor-pointer ${snap} rounded-[20px] mx-[15px] my-[10px] shadow-task last:mr-[30px] p-[5%] flex flex-col sm:h-[70vh] sm:max-h-[600px] sm:rounded-[25px] sm:w-[88%] sm:hover:z-1  sm:hover:scale-110 duration-700`}>
         {/*------- challenge image ----- */}
         <img src={url} alt="" className={`${styles.CardImg} rounded-[15px] max-h-[60%] w-[100%] min-h-[40vh] sm:max-h-[65%]`} style={{ boxShadow: "rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px" }} />
         {/*------- challenge image ----- */}
@@ -24,7 +24,7 @@ function Card({ url, title, description, level, destination, snap }: Cardprops) 
           {/*------ level of challenge starts here ----------*/}
 
         <div className="self-start my-[8px] flex items-center justify-between w-[35%] h-[10%] max-h-[30px] pl-[5px] border-[1px] border-gray-300 rounded-[8px]">
-          <span className="">Level {level}</span>
+          <span className="text-[3vw] sm:text-[1vw]">Level {level}</span>
           <div className="w-[30px] h-[30px] rounded-[5px] flex items-center justify-center mr-[-2px]" style={{ backgroundColor: colors[level - 1] }}><span className="text-white font-bold">{level}</span></div>
         </div>
 
