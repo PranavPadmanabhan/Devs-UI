@@ -36,7 +36,8 @@ export interface Cardprops {
     title: string,
     description: string,
     level: number,
-    destination: string
+    destination: string,
+    snap:'snap-start'|'snap-center'|'snap-end'|'snap-none'
 }
 
 export interface optionProps {
@@ -83,3 +84,7 @@ export type toolsProps = {
 }
 
 export type ToolsUsed = 'Figma' |'XD' |'AE'| 'Illustrator' |'Photoshop'|'Sketch' ;
+
+export type FooterProps = { 
+    position : 'absolute'|'relative'|'fixed'|'sticky'
+}

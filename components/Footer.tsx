@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
+import { FooterProps } from '../constants/types';
 import styles from '../styles/desktop.module.css'
 
-function Footer() {
+function Footer({position = 'relative'}:FooterProps) {
 
   const [width, setwidth] = useState(0);
   useEffect(() => {
@@ -13,7 +14,7 @@ function Footer() {
 
 
   return (
-    <footer className={`relative ${styles.footer} w-screen z-[-1] box-border bg-footer-mesh bg-no-repeat bg-cover bg-center snap-center flex flex-col items-center justify-center sm:relative sm:flex-row sm:items-start sm:justify-end sm:pt-[10vh]`} >
+    <footer className={`${styles.footer} bottom-0 w-screen z-[-1] box-border bg-footer-mesh bg-no-repeat bg-cover bg-center snap-center flex flex-col items-center justify-center sm:relative sm:flex-row sm:items-start sm:justify-end sm:pt-[10vh]`} style={{position:position}}>
           <div className="w-screen max-w-[200px] h-[25%] flex flex-col items-center justify-start my-[15px] sm:mt-[5vh]">
             <p className="text-left">ofifiuahfuafihafu</p>
             <p className="text-left">ofifiuajkbafbjkbafkhfuafihafu</p>

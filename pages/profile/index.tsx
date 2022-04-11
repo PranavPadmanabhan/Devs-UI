@@ -57,30 +57,30 @@ const Profile: NextPage = () => {
     const RenderTabs = () => {
         if (currentTab === 'My Designs') {
             return (
-                <div {...handlers} className={`${styles.singleTab} w-[100%] h-[100%] flex flex-col overflow-y-scroll snap-y snap-mandatory scrollbar-hide sm:grid sm:grid-cols-4 sm:place-items-center sm:gap-y-5 sm:snap-none`}>
-                    <Card url='/Assets/images/image1.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/1"} />
-                    <Card url='/Assets/images/image2.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/2"} />
-                    <Card url='/Assets/images/image3.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/3"} />
-                    <Card url='/Assets/images/image1.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/1"} />
-                    <Card url='/Assets/images/image2.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/2"} />
-                    <Card url='/Assets/images/image3.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/3"} />
+                <div {...handlers} className={`${styles.singleTab} w-[100%] h-[100%] flex flex-col overflow-y-scroll snap-y snap-mandatory scrollbar-hide sm:grid sm:grid-cols-4 sm:place-items-center sm:gap-y-5 sm:snap-none `}>
+                    <Card snap='snap-start' url='/Assets/images/image1.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/1"} />
+                    <Card snap='snap-start' url='/Assets/images/image2.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/2"} />
+                    <Card snap='snap-start' url='/Assets/images/image3.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/3"} />
+                    <Card snap='snap-start' url='/Assets/images/image1.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/1"} />
+                    <Card snap='snap-start' url='/Assets/images/image2.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/2"} />
+                    <Card snap='snap-start' url='/Assets/images/image3.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/3"} />
                 </div>
             )
         }
         else if (currentTab === 'Task In Progress') {
             return (
-                <div {...handlers} className={`${styles.singleTab} w-[100%] h-[100%] flex flex-col overflow-y-scroll snap-y snap-mandatory scrollbar-hide sm:grid sm:grid-cols-4 sm:place-items-center sm:gap-y-5 sm:snap-none`}>
-                    <Card url='/Assets/images/image1.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={3} destination={"challenges/1"} />
+                <div {...handlers} className={`${styles.singleTab} w-[100%] h-[100%] flex flex-col overflow-y-scroll snap-y snap-mandatory scrollbar-hide sm:grid sm:grid-cols-4 sm:place-items-center sm:gap-y-5 sm:snap-none pt-1`}>
+                    <Card snap='snap-start' url='/Assets/images/image1.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={3} destination={"challenges/1"} />
                 </div>
             )
         }
         else {
             return (
                 <div {...handlers} className={`${styles.singleTab} w-[100%] h-[100%] flex flex-col overflow-y-scroll snap-y snap-mandatory scrollbar-hide sm:grid sm:grid-cols-4 sm:place-items-center sm:gap-y-5 sm:snap-none`}>
-                    <Card url='/Assets/images/image1.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={2} destination={"challenges/1"} />
-                    <Card url='/Assets/images/image2.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/2"} />
-                    <Card url='/Assets/images/image1.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={3} destination={"challenges/1"} />
-                    <Card url='/Assets/images/image1.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={3} destination={"challenges/1"} />
+                    <Card snap='snap-start' url='/Assets/images/image1.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={2} destination={"challenges/1"} />
+                    <Card snap='snap-start' url='/Assets/images/image2.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/2"} />
+                    <Card snap='snap-start' url='/Assets/images/image1.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={3} destination={"challenges/1"} />
+                    <Card snap='snap-start' url='/Assets/images/image1.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={3} destination={"challenges/1"} />
                 
                 </div>
             )
@@ -153,15 +153,15 @@ const Profile: NextPage = () => {
                 </section>
                 {/*------------- details ends here -----------*/}
 
-                <section className={`${styles.Content} w-[100%] h-screen snap-start box-border pb-[10vh] sm:mt-[6vh]`}>
-                    <div className={`${styles.TabsContainer} flex w-[100%] h-[5%] items-center justify-between box-border px-3 mb-[2vh] sm:px-[10%] sm:mt-[2vh]`}>
+                <section className={`${styles.Content} w-[100%] h-screen  snap-start box-border pb-[10vh] sm:mt-[6vh] `}>
+                    <div className={`${styles.TabsContainer} flex w-[100%] h-[5%] items-center justify-between box-border px-3 mb-[2vh] sm:px-[10%] sm:mt-[2vh] `}>
                         <span onClick={() => setCurrentTab("My Designs")} className={`${currentTab === "My Designs" ? `border-b-4 border-[#323c71] text-[#323c71] font-bold text-[18px] ${styles.TabActive}` : `border-none text-black font-light text-[14px] ${styles.Tab}`} duration-1000 py-2 cursor-pointer `}>My Designs</span>
                         <span onClick={() => setCurrentTab("Task In Progress")} className={`${currentTab === "Task In Progress" ? `border-b-4 border-[#323c71] text-[#323c71] font-bold text-[18px] ${styles.TabActive}` : `border-none text-black font-light text-[14px] ${styles.Tab}`} duration-1000 py-2 cursor-pointer`}>Task In Progress</span>
                         <span onClick={() => setCurrentTab("Task Completed")} className={`${currentTab === "Task Completed" ? `border-b-4 border-[#323c71] text-[#323c71] font-bold text-[18px] ${styles.TabActive}` : `border-none text-black font-light text-[14px] ${styles.Tab}`} duration-1000 py-2 cursor-pointer`}>Task Completed</span>
                     </div>
                     <RenderTabs />
                 </section>
-                <Footer />
+                <Footer position='relative'/>
 
             </div>
 

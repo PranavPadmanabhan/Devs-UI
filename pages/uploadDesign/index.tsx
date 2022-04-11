@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { NextPage } from 'next'
 import Head from 'next/head'
 import NavBar from '../../components/NavBar'
@@ -15,6 +15,14 @@ const UploadDesign: NextPage = () => {
   const [levelChecked, setLevelChecked] = useState<check>(null)
   const [uploadedDetails,setUploadedDetails] = useState<Array<string>>([] as Array<string>);
   const [toolsUsed, setToolsUsed] = useState<Array<ToolsUsed>>([])
+  const [height, setHeight] = useState(0)
+
+  useEffect(() => {
+    if(typeof(window) !== undefined){
+      setHeight(window.innerHeight)
+    }
+  }, [])
+  
 
   const addCheckMark = (current: check) => {
     setChecked(current)
@@ -56,7 +64,7 @@ const UploadDesign: NextPage = () => {
         <link rel="icon" href="/faviconhttps://www.getdroidtips.com/realme-narzo-10a-firmware-flash-file/#google_vignette.ico" />
       </Head>
       <NavBar />
-      <div className={`${styles.MainContainer} w-[100%] h-[100%] flex flex-col overflow-y-scroll scrollbar-hide `}>
+      <div className={`${styles.MainContainer} w-[100%]  h-[100%] flex flex-col overflow-y-scroll scrollbar-hide `}>
         <div className={`w-[100%] flex flex-col box-border px-5 sm:px-[45px] lg:px-[55px]`}>
         <h1 className={`${styles.heading_UploadDesign} text-[8vw] mt-3 esm:text-[6.8vw] asm:text-[7vw] sm:text-[2vw] md:text-[3vw] lg:text-[2vw] xl:text-[2.2vw]`}>Upload Design</h1>
         <input type="text" placeholder='Name' className={`${styles.input_UploadDesign} w-[85%] h-[6%] min-h-[40px] focus:outline-none bg-gray-200 rounded-[10px] mt-5 my-3 pl-5 sm:w-[30%] sm:max-w-[350px] md:w-[45%] md:max-w-[450px] xl:w-[45%] xl:max-w-[550px] xl:h-[8%] xl:min-h-[55px]`} />
@@ -111,8 +119,9 @@ const UploadDesign: NextPage = () => {
         </div>
         <button className={`${styles.UploadDesignPageBtn} min-w-[60px] max-w-[150px] min-h-[35px] bg-[#323c71] max-h-[45px] rounded-[10px] text-white flex items-center justify-center focus:outline-none mt-8 mb-4 text-[4vw] esm:text-[3.4vw] asm:text-[3vw] msm:text-[2.5vw] sm:text-[0.8vw] esm:my-[50px] md:text-[80%] md:mt-[65px] md:mb-[45px] lg:mt-[85px] lg:mb-[65px]`}>Upload Design</button>
         </div>
-        <Footer />
+        <Footer position='relative'/>
       </div>
+      
     </div>
   )
 }

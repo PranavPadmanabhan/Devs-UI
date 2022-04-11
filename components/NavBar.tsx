@@ -10,7 +10,7 @@ function NavBar() {
   const [drawerMode, setdrawerMode] = useState<boolean>(false);
 
   return (
-    <div className={`${styles.NavBar} fixed z-1000 top-0 flex items-center h-[10vh] w-[100vw] justify-between box-border px-[15px] `} >
+    <div className={`${styles.NavBar} fixed z-1000 top-0 flex items-center h-[10vh] w-[100vw] justify-between box-border px-[15px] backdrop-blur-2xl`} >
       {/*---------- logo -----------*/}
       <img src="/Assets/lightmode/logo-light.png" alt="logo" className={`${styles.Logo} w-[30%] max-w-[100px]`} />
       {/*---------- logo -----------*/}
@@ -32,9 +32,8 @@ function NavBar() {
 
             {/*----------------- mini navigation drawer of desktopmode starts here --------------*/}
 
-            <div className="hidden group-hover:flex flex-col items-center justify-start fixed w-[15vw] min-w-[200px] h-[30vh] bg-white top-[9vh] right-[4vw] rounded-[20px] shadow-task">
+            <div className={`${styles.DrawerDesktop} hidden group-hover:flex flex-col items-center justify-start fixed w-[15vw] min-w-[200px] h-[30vh] bg-white top-[9vh] right-[4vw] rounded-[20px] shadow-task `}>
               <DrawerItem url='/Assets/lightmode/home(1).png' title='Home' redAccent={false} destination={""} upcoming={false} />
-              <DrawerItem url='/Assets/lightmode/dashboard.png' title='Dashboard' redAccent={false} destination={""} upcoming={false} />
               <DrawerItem url='/Assets/lightmode/user.png' title='Profile' redAccent={false} destination={"profile"} upcoming={false} />
               <DrawerItem url='/Assets/lightmode/log-out.png' title='Sign Out' redAccent={true} destination={""} upcoming={false} />
             </div>
@@ -56,7 +55,6 @@ function NavBar() {
               <DrawerItem url='/Assets/lightmode/home(1).png' title='Home' redAccent={false} destination={""} upcoming={false} />
               <DrawerItem url='/Assets/lightmode/design.png' title='Designs' redAccent={false} destination={"/designs"} upcoming={false} />
               <DrawerItem url='/Assets/lightmode/challenge.png' title='Challenges' redAccent={false} destination={"/challenges"} upcoming={false} />
-              <DrawerItem url='/Assets/lightmode/dashboard.png' title='Dashboard' redAccent={false} destination={""} upcoming={false} />
               <DrawerItem url='/Assets/lightmode/user.png' title='Profile' redAccent={false} destination={"profile"} upcoming={false} />
               <DrawerItem url='/Assets/lightmode/icons8-bell-24.png' title='Notification' redAccent={false} destination={""} upcoming={false} />
               <DrawerItem url='/Assets/lightmode/moon.png' title='Darkmode' redAccent={false} destination={""} upcoming={true} />

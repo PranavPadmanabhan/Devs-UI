@@ -69,7 +69,7 @@ const Challenge: NextPage = (challenges) => {
                     </div>
                 </div>
             </div>
-            <Footer />
+            <Footer position='relative'/>
         </div>
     )
 }
