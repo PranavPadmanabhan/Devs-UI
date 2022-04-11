@@ -42,7 +42,7 @@ const PersonalDetails: NextPage = () => {
                         <button className={`${styles.UpdateProfileBtn} self-start ml-10 mt-5 mb-8 min-w-[100px] min-h-[35px] focus:outline-none rounded-[10px] bg-[#323c71] flex items-center justify-center text-[75%] text-white 2xl:min-w-[300px] 2xl:min-h-[75px] 2xl:text-[1vw]`}>Update Profile</button>
                     </div>
                 </div>
-                <Footer />
+                <Footer position='relative'/>
             </div>
         </div>
     )

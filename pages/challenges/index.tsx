@@ -98,14 +98,14 @@ const Challenges: NextPage = () => {
                     <div onClick={() => {
                         setFilterDrawerVisibility(!filterDrawerVisiblity);
                         setSortingDrawerVisiblity(false)
-                    }} className="relative group z-[-1] w-[35%] cursor-pointer h-[100%] bg-gray-200 flex items-center  justify-center  max-h-[50px] rounded-[8px] sm:z-[100]">
+                    }} className="relative group sm:z-[-1] w-[35%] cursor-pointer h-[100%] bg-gray-200 flex items-center  justify-center  max-h-[50px] rounded-[8px] sm:z-[100]">
                         <span className="hidden sm:block">filter by</span>
                         <FaFilter className='block sm:hidden' />
 
                         {/*--------------- filter options in Desktop view starts here ---------------*/}
 
 
-                        <div className="absolute hidden  flex-col top-[115%] right-1  w-[15vw] h-auto bg-white shadow-task overflow-hidden rounded-[10%] group-hover-none sm:group-hover:flex hover:flex ">
+                        <div className="absolute hidden  flex-col top-[115%] right-1  w-[15vw] h-auto bg-white shadow-task overflow-hidden rounded-[10%] group-hover-none sm:group-hover:flex hover:flex sm:z-[-1]">
                             {
                                 filterOptions.map((item, index) => (
                                     <OptionItems key={index} title={item} onClick={() => addFilter(item, index)} selected={filter.includes(item) ? true : false} borderEnabled={false} />
@@ -139,17 +139,17 @@ const Challenges: NextPage = () => {
             {/*--------------- challenges container starts here ---------------*/}
 
             <section className="w-screen h-[80%] mt-[-30vh] flex flex-col items-center overflow-y-scroll snap-y snap-mandatory scrollbar-hide sm:snap-none sm:grid sm:grid-cols-4 place-items-center sm:mt-[-15%] sm:h-[90%]">
-                <Card url='/Assets/images/image1.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/1"} />
-                <Card url='/Assets/images/image1.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/1"} />
-                <Card url='/Assets/images/image1.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/1"} />
-                <Card url='/Assets/images/image1.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/1"} />
-                <Card url='/Assets/images/image1.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/1"} />
+                <Card url='/Assets/images/image1.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/1"} snap='snap-center' />
+                <Card url='/Assets/images/image1.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/1"} snap='snap-center' />
+                <Card url='/Assets/images/image1.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/1"} snap='snap-center' />
+                <Card url='/Assets/images/image1.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/1"} snap='snap-center' />
+                <Card url='/Assets/images/image1.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/1"} snap='snap-center' />
                 {width < 640 && (<MiniFooter />)}
             </section>
 
             {/*--------------- challenges container ends here ---------------*/}
 
-            {width > 640 && (<Footer />)}
+            {width > 640 && (<Footer position='relative'/>)}
 
         </div>
     )

@@ -38,9 +38,9 @@ const Designs: NextPage = () => {
                 <DesignCard />
                 <DesignCard />
                 <DesignCard />
-                {width < 640 && (<Footer />)}
+                {width < 640 && (<Footer position='relative'/>)}
             </div>
-            {width > 640 && (<Footer />)}
+            {width > 640 && (<Footer position='relative'/>)}
         </div>
     )
 }
