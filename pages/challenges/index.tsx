@@ -8,6 +8,7 @@ import { FaFilter, FaSort } from 'react-icons/fa'
 import OptionItems from '../../components/OptionItems'
 import DrawerItem from '../../components/DrawerItem'
 import MiniFooter from '../../components/MiniFooter'
+import styles from '../../styles/desktop.module.css'
 
 const Challenges: NextPage = () => {
     const [width, setWidth] = useState(0);
@@ -56,7 +57,7 @@ const Challenges: NextPage = () => {
             {/*--------------- second header with search options starts here ---------------*/}
 
 
-            <div className="w-screen h-[40vh] box-border flex items-start px-[3%] justify-between sm:px-[5%]  pt-[5%] sm:pt-0 ">
+            <div className={`${styles.SmallHeader} w-screen h-[40vh] box-border flex items-start px-[3%] justify-between sm:px-[5%]  pt-[5%] sm:pt-0 `}>
                 <div className="w-[70%] h-[55%] flex items-center justify-between max-h-[50px] px-[3%]  bg-gray-200 rounded-[8px] sm:w-[50%] sm:h-[75%] sm:px-[1%]">
                     <input type="text" className="w-[90%]  h-[100%] min-h-[45px]  focus:outline-none bg-transparent" />
                     <img src="/Assets/lightmode/magnifying-glass.png" alt="" className="w-[10%] sm:max-w-[30px]" />
@@ -138,7 +139,7 @@ const Challenges: NextPage = () => {
 
             {/*--------------- challenges container starts here ---------------*/}
 
-            <section className="w-screen h-[80%] mt-[-30vh] flex flex-col items-center overflow-y-scroll snap-y snap-mandatory scrollbar-hide sm:snap-none sm:grid sm:grid-cols-4 place-items-center sm:mt-[-15%] sm:h-[90%]">
+            <section className={`${styles.ChallengesContainer} w-screen h-[80%] mt-[-30vh] flex flex-col items-center overflow-y-scroll snap-y snap-mandatory scrollbar-hide sm:snap-none sm:grid sm:grid-cols-4 place-items-center sm:mt-[-15%] sm:h-[90%]`}>
                 <Card url='/Assets/images/image1.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/1"} snap='snap-center' />
                 <Card url='/Assets/images/image1.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/1"} snap='snap-center' />
                 <Card url='/Assets/images/image1.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/1"} snap='snap-center' />

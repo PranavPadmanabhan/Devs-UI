@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
 import { Cardprops } from '../constants/types'
@@ -32,7 +31,7 @@ function Card({ url, title, description, level, destination, snap }: Cardprops) 
           {/*------ level of challenge ends here ----------*/}
 
         <h1 className={`${styles.CardTitle} self-center text-[7vw] font-semibold mb-[5px] sm:text-[1.6vw] sm:mb-[1vw]`}>{title}</h1>
-        <p className={`${styles.CardDescription} self-center text-[4vw] text-center max-w-[95%] font-semibold sm:text-[0.7vw]`}>{description}</p>
+        <p className={`${styles.CardDescription} self-center text-[4vw] text-center max-w-[95%] font-semibold sm:text-[0.7vw]`}>{description.slice(0,58)}...</p>
       </div>
   )
 }
