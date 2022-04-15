@@ -247,7 +247,8 @@
         }
 
         .input_UploadDesign {
-            min-height: 50px;
+            min-height: 45px;
+            max-height: 50px;
         }
 
         .input_uploadDesign_bio {
@@ -388,9 +389,15 @@
         .Header_Second_col img {
             height: 20%;
         }
-
+        .AuthorizeBtnImg {
+            width: 10%;
+            min-height: 20px;
+           
+        }
         /*------- Header Component ----------*/
         /*------- index.js ----------*/
+        .SiteDetails {
+        }
         .image1 {
             width: 45%;
         }
@@ -479,3 +486,12 @@
 
     }
 }
+
+
+@media screen and (max-width:400px) {
+    @media (min-height:700px){
+      .HeaderButton {
+        bottom: 80px;
+      }
+    }  
+}  
