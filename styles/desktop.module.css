@@ -366,15 +366,18 @@
             align-items: center;
             justify-content: center;
             padding-top: 0vh;
+            width: 100vw;
+            height: 100vh;
         }
 
-        .Header_First_col {
+        .Header_First_col,.Header_Second_col {
             height: 50%;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: flex-start;
-            padding-top: 2vh;
+            padding-top: 0vh;
+            width: 40%;
         }
 
         .Header_First_col img {
@@ -382,17 +385,21 @@
         }
 
         .Header_Second_col {
-            height: 50%;
-
+            margin-left: 5%;
         }
+  
 
         .Header_Second_col img {
             height: 20%;
+            order: 1;
         }
         .AuthorizeBtnImg {
             width: 10%;
             min-height: 20px;
            
+        }
+        .AuthorizeBtn {
+            order: 3;
         }
         /*------- Header Component ----------*/
         /*------- index.js ----------*/
@@ -488,10 +495,3 @@
 }
 
 
-@media screen and (max-width:400px) {
-    @media (min-height:700px){
-      .HeaderButton {
-        bottom: 80px;
-      }
-    }  
-}  
