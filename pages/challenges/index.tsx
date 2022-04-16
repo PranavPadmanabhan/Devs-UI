@@ -18,6 +18,11 @@ const Challenges: NextPage = () => {
     const [sort, setSort] = useState<Array<any>>([] as Array<any>)
     const [sortingDrawerVisiblity, setSortingDrawerVisiblity] = useState<boolean>(false)
     const [filterDrawerVisiblity, setFilterDrawerVisibility] = useState<boolean>(false)
+    const images = [
+        '/Assets/images/image1.JPG',
+        '/Assets/images/image2.JPG',
+        '/Assets/images/image3.JPG'
+    ]
 
     useEffect(() => {
         if (typeof (window) !== undefined) {
@@ -140,11 +145,11 @@ const Challenges: NextPage = () => {
             {/*--------------- challenges container starts here ---------------*/}
 
             <section className={`${styles.ChallengesContainer} w-screen h-[80%] mt-[-30vh] flex flex-col items-center overflow-y-scroll snap-y snap-mandatory scrollbar-hide sm:snap-none sm:grid sm:grid-cols-4 place-items-center sm:mt-[-15%] sm:h-[90%]`}>
-                <Card url='/Assets/images/image1.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/1"} snap='snap-center' />
-                <Card url='/Assets/images/image1.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/1"} snap='snap-center' />
-                <Card url='/Assets/images/image1.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/1"} snap='snap-center' />
-                <Card url='/Assets/images/image1.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/1"} snap='snap-center' />
-                <Card url='/Assets/images/image1.JPG' title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/1"} snap='snap-center' />
+                <Card images={images} title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/1"} snap='snap-center' />
+                <Card images={images} title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/1"} snap='snap-center' />
+                <Card images={images} title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/1"} snap='snap-center' />
+                <Card images={images} title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/1"} snap='snap-center' />
+                <Card images={images} title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/1"} snap='snap-center' />
                 {width < 640 && (<MiniFooter />)}
             </section>
 

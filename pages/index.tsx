@@ -25,21 +25,21 @@ const Home: NextPage = () => {
         {/* ---------------  second page with discord logo starts here ---------------------- */}
 
         <div className={`${styles.SiteDetails} w-screen h-screen flex flex-col items-center justify-start pt-[11vh] snap-center`}>
-          <div className={`self-center w-[95%]  h-[16%] min-h-[130px] rounded-[15px] mb-[20px] bg-discord bg-[#5965f1] bg-fit bg-no-repeat bg-center flex items-end justify-center sm:h-[30%] sm:max-h-[300px] sm:pb-[10px] sm:bg-[center_bottom_-2.5rem] sm:mb-[18vh]`}>
+          <div className={`self-center w-[95%]  h-[16vh]  rounded-[15px] mb-[2vh] border-[1px] border-black bg-discord bg-[#5965f1] bg-fit bg-no-repeat bg-center flex items-end justify-center sm:h-[30%] sm:max-h-[300px] sm:pb-[10px] sm:bg-[center_bottom_-2.5rem] sm:mb-[18vh]`}>
             <h1 className={`hidden sm:block text-white font-semibold text-[2vw] tracking-wide`}>Connect  with  1000+  people  through  Discord</h1>
           </div>
-          <div className={`flex flex-col items-center justify-start sm:flex-row sm:w-[80%]`}>
+          <div className={`flex flex-col items-center h-[65vh] pt-[2vh] justify-start sm:flex-row sm:w-[80%]`}>
             <div className={`flex flex-col items-center justify-center`}>
-              <img src="/Assets/lightmode/choose-icon.png" className={`${styles.image1} w-[20%]  sm:w-[40%]`} />
-              <span className={`${styles.image1Text} text-[20px] max-w-[60%] text-center mt-[7px] mb-[7px] sm:text-[25px] sm:max-w-[80%]`}>Choose your topic or design from us</span>
+              <img src="/Assets/lightmode/choose-icon.png" className={`${styles.image1} w-[15%]  sm:w-[40%]`} />
+              <span className={`${styles.image1Text} text-[5vw] max-w-[60%] text-center mt-[7px] mb-[7px] sm:text-[25px] sm:max-w-[80%]`}>Choose your topic or design from us</span>
             </div>
             <div className={`flex flex-col items-center justify-center`}>
-              <img src="/Assets/lightmode/design-dev.png" className={`${styles.image2} w-[22%] sm:w-[38%]`} />
-              <span className={`${styles.image2Text} text-[20px] max-w-[60%] text-center mt-[7px] mb-[7px] sm:text-[25px] sm:max-w-[60%]`}>Develop or design your item</span>
+              <img src="/Assets/lightmode/design-dev.png" className={`${styles.image2} w-[15%] sm:w-[38%]`} />
+              <span className={`${styles.image2Text} text-[5vw] max-w-[60%] text-center mt-[7px] mb-[7px] sm:text-[25px] sm:max-w-[60%]`}>Develop or design your item</span>
             </div>
             <div className={`flex flex-col items-center justify-center`}>
-              <img src="/Assets/lightmode/publish-icon.png" className={`${styles.image3} w-[19%] sm:w-[30%]`} />
-              <span className={`${styles.image3Text} text-[20px] max-w-[60%] text-center mt-[7px] mb-[7px] sm:text-[25px] sm:max-w-[80%]`}>Publish on our site and support others</span>
+              <img src="/Assets/lightmode/publish-icon.png" className={`${styles.image3} w-[14%] sm:w-[30%]`} />
+              <span className={`${styles.image3Text} text-[5vw] max-w-[60%] text-center mt-[7px] mb-[7px] sm:text-[25px] sm:max-w-[80%]`}>Publish on our site and support others</span>
             </div>
           </div>
         </div>
@@ -49,7 +49,7 @@ const Home: NextPage = () => {
         {/* ---------------  third page with top challenged starts here ---------------------- */}
 
 
-        <div className={`flex flex-col w-screen box-border h-screen items-center justify-start pt-[12vh] snap-center`}>
+        <div className={`flex flex-col w-screen box-border h-screen items-center justify-start pt-[11vh] snap-center`}>
           <h1 className={`mb-[8px]  font-bold text-[5vw] sm:text-[2vw]`}>Top Challenges</h1>
 
           {/* ------ component which contains all challenge cards ----------*/}

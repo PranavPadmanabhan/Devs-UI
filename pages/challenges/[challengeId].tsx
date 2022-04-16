@@ -8,6 +8,8 @@ import NavBar from '../../components/NavBar'
 import ItemsProvided from '../../components/ItemsProvided'
 import ChallengeButtons from '../../components/ChallengeButtons'
 import styles from '../../styles/desktop.module.css'
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
 
 const Challenge: NextPage = (challenges) => {
 
@@ -35,12 +37,14 @@ const Challenge: NextPage = (challenges) => {
                             </div>
                         </div>
                     </div>
-                    <div className={`${styles.ChallengeImgContainer} w-screen h-[100%] flex  overflow-x-scroll  snap-x snap-mandatory px-[7%] scrollbar-hide sm:h-[100%] sm:w-[100%] sm:mb-[5vh]`}>
+                    <div className={`${styles.ChallengeImgContainer} w-screen h-[100%] flex snap-center  px-[7%] scrollbar-hide sm:h-[100%] sm:w-[100%] sm:mb-[5vh]`}>
+                       <Carousel >
                         {
-                            currentElement.images.map((item) => (
-                                <img src={`/${item}`} alt="" className="w-[100%]  object-fill snap-center  scroll-ml-6 mr-[5%] rounded-[15px] " />
+                            currentElement.images.map((item,index) => (
+                                <img key={index} src={`/${item}`} alt="" className="w-[100%]  object-fill snap-center  scroll-ml-6 mr-[5%] rounded-[15px] duration-1000" />
                             ))
                         }
+                        </Carousel>
                     </div>
                 </div>
                 <div className={`${styles.ChallengeDetails} flex flex-col w-screen  box-border snap-center sm:w-[50%] `}>

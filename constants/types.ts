@@ -32,7 +32,7 @@ export type drawerProps = {
 }
 
 export interface Cardprops {
-    url: string,
+    images: Array<string>,
     title: string,
     description: string,
     level: number,

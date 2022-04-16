@@ -37,9 +37,9 @@ function Header() {
       {/*------------- second quote-text with button container starts here ----------------*/}
 
       <div className={`${styles.Header_Second_col}  flex flex-col max-h-[50%] w-[100%] sm:flex-col-reverse sm:max-h-[80%] sm:w-[40%]  sm:pt-0`}>
-        <h1 className={`self-start text-[6.5vw] my-[2%] sm:text-[3vw] sm:max-w-[95%] sm:order-2`}>Build Your Career With Us By Solving Tasks</h1>
+        <h1 className={`self-start text-[6.5vw] my-[2%] sm:text-[3vw] sm:max-w-[95%] sm:order-2 msm:mt-[5%]`}>Build Your Career With Us By Solving Tasks</h1>
         <img src="/Assets/icons/code-illustration.png" className={`self-start max-h-[50%] min-w-[85%] mb-[2%] sm:order-3 sm:max-h-[80%] `} />
-        <div onClick={navigate} className={`${styles.AuthorizeBtn} self-center   w-[80%] min-h-[45px] max-h-[55px] rounded-[25px] bg-black flex items-center justify-center mt-[5%] mb-[2%] sm:order-1 sm:self-start`}>
+        <div onClick={navigate} className={`${styles.AuthorizeBtn} self-center   w-[80%] min-h-[45px] max-h-[55px] rounded-[25px] bg-black flex items-center justify-center mt-[5%] mb-[2%] sm:order-1 sm:self-start `}>
           <span className={`text-white `}>Authorize with Github</span>
           <img src="/Assets/darkmode/git.png" alt="github" className={`${styles.AuthorizeBtnImg} w-[20px]`} />
         </div>
