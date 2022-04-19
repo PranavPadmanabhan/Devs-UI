@@ -135,7 +135,7 @@ const Profile: NextPage = () => {
 
                         {/*-------------- details and social media section starts here ---------------------*/}
                         <div className={`${styles.secondColumn} w-[50%] h-[100%] flex flex-col items-start justify-start box-border pt-5 pl-4 sm:pt-0`}>
-                            <h1 className={`text-[24px] font-semibold whitespace-nowrap  mt-3 sm:text-[32px] `}>Athul Vishnu</h1>
+                            <h1 className={`text-[2.5vh] font-semibold whitespace-nowrap  mt-3 sm:text-[32px] `}>Athul Vishnu</h1>
                             <SocialMediaItems title='Bio' url='/Assets/lightmode/cv.png' />
                             <SocialMediaItems title='Website' url='/Assets/lightmode/link.png' />
                             <SocialMediaItems title='Github' url='/Assets/lightmode/github.png' />

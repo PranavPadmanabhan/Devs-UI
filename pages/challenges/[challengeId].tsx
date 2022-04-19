@@ -18,6 +18,8 @@ const Challenge: NextPage = (challenges) => {
     const i = parseInt(challengeId as string);
     const currentElement = data[i - 1];
 
+   
+
     return (
         <div className='w-screen h-screen flex flex-col items-center justify-start pt-[10vh] box-border overflow-y-scroll snap-y snap-mandatory scrollbar-hide sm:snap-none '>
             <NavBar />
