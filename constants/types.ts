@@ -22,12 +22,14 @@ export type props = {
 
 export type theme = "light" | "dark";
 export type themeContext = { theme: theme; toggleTheme: () => void, preferredTheme: themeMode };
+export type authContext = {  signIn: () => Promise<void>, LogOut:() => void; user:any, loggedIn:boolean };
+
 
 export type drawerProps = {
     url: string,
     title: string,
     redAccent: boolean,
-    destination: string,
+    onClick: () => void,
     upcoming: boolean
 }
 

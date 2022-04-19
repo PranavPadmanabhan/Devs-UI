@@ -5,7 +5,8 @@ import Carousel from '../components/Carousel'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import NavBar from '../components/NavBar'
-import styles from '../styles/desktop.module.css'
+import styles from '../styles/desktop.module.css';
+
 
 const Home: NextPage = () => {
 

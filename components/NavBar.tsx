@@ -3,11 +3,18 @@ import { useContext, useState } from 'react';
 import { AiOutlineBell } from 'react-icons/ai';
 import DrawerItem from './DrawerItem';
 import styles from '../styles/desktop.module.css'
+import { AuthContext } from '../contexts/AuthContext';
+import { useRouter } from 'next/router';
 
 
 function NavBar() {
 
   const [drawerMode, setdrawerMode] = useState<boolean>(false);
+  const { loggedIn, LogOut, signIn } = useContext(AuthContext);
+  const router = useRouter();
+  const navigate = (destination: string) => {
+    router.push(`/${destination}`);
+  }
 
   return (
     <div className={`${styles.NavBar} fixed z-[1000] top-0 flex items-center h-[10vh] w-[100vw] justify-between box-border px-[15px] backdrop-blur-2xl`} >
@@ -33,9 +40,15 @@ function NavBar() {
             {/*----------------- mini navigation drawer of desktopmode starts here --------------*/}
 
             <div className={`${styles.DrawerDesktop} hidden group-hover:flex flex-col items-center justify-start fixed w-[15vw] min-w-[200px] h-auto bg-white top-[9vh] right-[4vw] rounded-[20px] shadow-task sm:z-[100]`}>
-              <DrawerItem url='/Assets/lightmode/home(1).png' title='Home' redAccent={false} destination={""} upcoming={false} />
-              <DrawerItem url='/Assets/lightmode/user.png' title='Profile' redAccent={false} destination={"profile"} upcoming={false} />
-              <DrawerItem url='/Assets/lightmode/log-out.png' title='Sign Out' redAccent={true} destination={""} upcoming={false} />
+              <DrawerItem url='/Assets/lightmode/home(1).png' title='Home' redAccent={false} onClick={() => navigate('')} upcoming={false} />
+              <DrawerItem url='/Assets/lightmode/user.png' title='Profile' redAccent={false} onClick={() => navigate('/profile')} upcoming={false} />
+              {
+                loggedIn ? (
+                <DrawerItem url='/Assets/lightmode/log-out.png' title='Sign Out' redAccent={true} onClick={() => LogOut()} upcoming={false} />
+                ) : (
+                <DrawerItem url='/Assets/lightmode/log-out.png' title='Sign In' redAccent={false} onClick={() => signIn()} upcoming={false} />
+                )
+              }
             </div>
 
             {/*----------------- mini navigation drawer of desktopmode ends here --------------*/}
@@ -49,20 +62,25 @@ function NavBar() {
 
         <div className="group flex items-center justify-center w-[40px] h-[37px] bg-white rounded-[5px] block sm:hidden shadow-task">
           <img onClick={() => setdrawerMode(!drawerMode)} src="/Hamburger Menu.svg" alt="" className="w-[90%] max-w-[25px] " />
-            {/*---------------- navigation drawer in mobile view starts here -------------*/}
+          {/*---------------- navigation drawer in mobile view starts here -------------*/}
           {drawerMode && (
             <div className="fixed w-[55vw] h-auto overflow-hidden bg-white top-[9vh] right-[4vw] rounded-[20px] shadow-task">
-              <DrawerItem url='/Assets/lightmode/home(1).png' title='Home' redAccent={false} destination={""} upcoming={false} />
-              <DrawerItem url='/Assets/lightmode/design.png' title='Designs' redAccent={false} destination={"/designs"} upcoming={false} />
-              <DrawerItem url='/Assets/lightmode/challenge.png' title='Challenges' redAccent={false} destination={"/challenges"} upcoming={false} />
-              <DrawerItem url='/Assets/lightmode/user.png' title='Profile' redAccent={false} destination={"profile"} upcoming={false} />
-              <DrawerItem url='/Assets/lightmode/icons8-bell-24.png' title='Notification' redAccent={false} destination={""} upcoming={false} />
-              <DrawerItem url='/Assets/lightmode/moon.png' title='Darkmode' redAccent={false} destination={""} upcoming={true} />
-              <DrawerItem url='/Assets/lightmode/log-out.png' title='Sign Out' redAccent={true} destination={""} upcoming={false} />
+              <DrawerItem url='/Assets/lightmode/home(1).png' title='Home' redAccent={false} onClick={() => navigate('')} upcoming={false} />
+              <DrawerItem url='/Assets/lightmode/design.png' title='Designs' redAccent={false} onClick={() => navigate("designs")} upcoming={false} />
+              <DrawerItem url='/Assets/lightmode/challenge.png' title='Challenges' redAccent={false} onClick={() => navigate("challenges")} upcoming={false} />
+              <DrawerItem url='/Assets/lightmode/user.png' title='Profile' redAccent={false} onClick={() => navigate("profile")} upcoming={false} />
+              <DrawerItem url='/Assets/lightmode/icons8-bell-24.png' title='Notification' redAccent={false} onClick={() => navigate('')} upcoming={false} />
+              <DrawerItem url='/Assets/lightmode/moon.png' title='Darkmode' redAccent={false} onClick={() => alert('COMING SOON')} upcoming={true} />
+              {
+                loggedIn ? (<DrawerItem url='/Assets/lightmode/log-out.png' title='Sign Out' redAccent={true} onClick={() => LogOut()} upcoming={false} />
+                ) : (
+                  <DrawerItem url='/Assets/lightmode/log-out.png' title='Sign In' redAccent={false} onClick={() => signIn()} upcoming={false} />
+                )
+              }
             </div>
           )}
 
-            {/*---------------- navigation drawer in mobile view ends here -------------*/}
+          {/*---------------- navigation drawer in mobile view ends here -------------*/}
 
         </div>
 
