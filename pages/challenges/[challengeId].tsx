@@ -40,7 +40,7 @@ const Challenge: NextPage = (challenges) => {
                         </div>
                     </div>
                     <div className={`${styles.ChallengeImgContainer} w-screen h-[100%] flex snap-center  px-[7%] scrollbar-hide sm:h-[100%] sm:w-[100%] sm:mb-[5vh]`}>
-                       <Carousel >
+                       <Carousel className=' w-[100%] h-[100%]' >
                         {
                             currentElement.images.map((item,index) => (
                                 <img key={index} src={`/${item}`} alt="" className="w-[100%]  object-fill snap-center  scroll-ml-6 mr-[5%] rounded-[15px] duration-1000" />
