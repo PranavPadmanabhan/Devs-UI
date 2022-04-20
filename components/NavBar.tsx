@@ -14,6 +14,7 @@ function NavBar() {
   const router = useRouter();
   const navigate = (destination: string) => {
     router.push(`/${destination}`);
+    setdrawerMode(false)
   }
 
   return (
