@@ -1,6 +1,6 @@
 import { createContext, useState } from "react";
 import { authContext, props } from "../constants/types";
-import auth, { getAuth, GithubAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth'
+import auth, { getAuth, GithubAuthProvider, onAuthStateChanged, signInWithPopup, signInWithRedirect, signOut } from 'firebase/auth'
 import app from "../config/firebase";
 
 export const AuthContext = createContext<authContext>({} as authContext)
@@ -31,7 +31,11 @@ const AuthContextProvider = (props: props) => {
     })
 
     const signIn = async () => {
-        return await signInWithPopup(authentication, githubProvider).then((res: any) => {
+        // return await signInWithPopup(authentication, githubProvider).then((res: any) => {
+        //     return res;
+        // }).catch((err) => console.log(err)
+        // )
+        return await signInWithRedirect(authentication,githubProvider).then((res:any) => {
             return res;
         }).catch((err) => console.log(err)
         )
