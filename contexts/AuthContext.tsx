@@ -31,14 +31,14 @@ const AuthContextProvider = (props: props) => {
     })
 
     const signIn = async () => {
-        return await signInWithPopup(authentication, githubProvider).then((res: any) => {
-            return res;
-        }).catch((err) => console.log(err)
-        )
-        // return await signInWithRedirect(authentication,githubProvider).then((res:any) => {
+        // return await signInWithPopup(authentication, githubProvider).then((res: any) => {
         //     return res;
         // }).catch((err) => console.log(err)
         // )
+        return await signInWithRedirect(authentication,githubProvider).then((res:any) => {
+            return res;
+        }).catch((err) => console.log(err)
+        )
     }
     const LogOut = async () => {
         await signOut(Auth);
