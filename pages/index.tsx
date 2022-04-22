@@ -1,6 +1,5 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import { useEffect, useState } from 'react'
 import Carousel from '../components/Carousel'
 import Footer from '../components/Footer'
 import Header from '../components/Header'

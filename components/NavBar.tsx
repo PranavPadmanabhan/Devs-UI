@@ -10,11 +10,16 @@ import { useRouter } from 'next/router';
 function NavBar() {
 
   const [drawerMode, setdrawerMode] = useState<boolean>(false);
-  const { loggedIn, LogOut, signIn } = useContext(AuthContext);
+  const { LogOut, signIn, user } = useContext(AuthContext);
   const router = useRouter();
   const navigate = (destination: string) => {
     router.push(`/${destination}`);
     setdrawerMode(false)
+  }
+
+
+  const navigateBack = () => {
+    router.replace('/')
   }
 
   return (
@@ -36,18 +41,20 @@ function NavBar() {
           <Link href={"/"}><span className={`${styles.NavBarItems} cursor-pointer`}>About Us</span></Link>
           <AiOutlineBell className={`${styles.BellIcon} cursor-pointer`} size={25} />
           <div className="group flex flex-col items-center justify-center cursor-pointer">
-            <img src="/Assets/icons/avatar.png" alt="" className={`${styles.Avatar} max-w-[50px] cursor-pointer`} />
+            <img src={user?.photoURL ?? "/Assets/icons/avatar.png"} alt="" className={`${styles.Avatar} w-[40px] h-[40px] object-cover max-w-[50px] rounded-[100%] cursor-pointer`} />
 
             {/*----------------- mini navigation drawer of desktopmode starts here --------------*/}
 
             <div className={`${styles.DrawerDesktop} hidden group-hover:flex flex-col items-center justify-start fixed w-[15vw] min-w-[200px] h-auto bg-white top-[9vh] right-[4vw] rounded-[20px] shadow-task sm:z-[100]`}>
               <DrawerItem url='/Assets/lightmode/home(1).png' title='Home' redAccent={false} onClick={() => navigate('')} upcoming={false} />
-              <DrawerItem url='/Assets/lightmode/user.png' title='Profile' redAccent={false} onClick={() => navigate('/profile')} upcoming={false} />
               {
-                loggedIn ? (
-                <DrawerItem url='/Assets/lightmode/log-out.png' title='Sign Out' redAccent={true} onClick={() => LogOut()} upcoming={false} />
+                user ? (
+                  <>
+                    <DrawerItem url='/Assets/lightmode/user.png' title='Profile' redAccent={false} onClick={() => navigate('profile')} upcoming={false} />
+                    <DrawerItem url='/Assets/lightmode/log-out.png' title='Sign Out' redAccent={true} onClick={() => { LogOut(); navigateBack(); }} upcoming={false} />
+                  </>
                 ) : (
-                <DrawerItem url='/Assets/lightmode/log-out.png' title='Sign In' redAccent={false} onClick={() => signIn()} upcoming={false} />
+                  <DrawerItem url='/Assets/lightmode/log-out.png' title='Sign In' redAccent={false} onClick={() => signIn()} upcoming={false} />
                 )
               }
             </div>
@@ -69,11 +76,14 @@ function NavBar() {
               <DrawerItem url='/Assets/lightmode/home(1).png' title='Home' redAccent={false} onClick={() => navigate('')} upcoming={false} />
               <DrawerItem url='/Assets/lightmode/design.png' title='Designs' redAccent={false} onClick={() => navigate("designs")} upcoming={false} />
               <DrawerItem url='/Assets/lightmode/challenge.png' title='Challenges' redAccent={false} onClick={() => navigate("challenges")} upcoming={false} />
-              <DrawerItem url='/Assets/lightmode/user.png' title='Profile' redAccent={false} onClick={() => navigate("profile")} upcoming={false} />
-              <DrawerItem url='/Assets/lightmode/icons8-bell-24.png' title='Notification' redAccent={false} onClick={() => navigate('')} upcoming={false} />
+              <DrawerItem url='/Assets/lightmode/icons8-bell-24.png' title='Notification' redAccent={false} onClick={() => navigate('/profile')} upcoming={false} />
               <DrawerItem url='/Assets/lightmode/moon.png' title='Darkmode' redAccent={false} onClick={() => alert('COMING SOON')} upcoming={true} />
               {
-                loggedIn ? (<DrawerItem url='/Assets/lightmode/log-out.png' title='Sign Out' redAccent={true} onClick={() => LogOut()} upcoming={false} />
+                user ? (
+                  <>
+                    <DrawerItem url='/Assets/lightmode/user.png' title='Profile' redAccent={false} onClick={() => navigate("profile")} upcoming={false} />
+                    <DrawerItem url='/Assets/lightmode/log-out.png' title='Sign Out' redAccent={true} onClick={() => LogOut()} upcoming={false} />
+                  </>
                 ) : (
                   <DrawerItem url='/Assets/lightmode/log-out.png' title='Sign In' redAccent={false} onClick={() => signIn()} upcoming={false} />
                 )

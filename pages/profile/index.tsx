@@ -1,23 +1,19 @@
+import useLocalStorage from '@rehooks/local-storage'
 import { NextPage } from 'next'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useSwipeable } from 'react-swipeable'
 import Card from '../../components/Card'
 import Footer from '../../components/Footer'
 import NavBar from '../../components/NavBar'
 import SocialMediaItems from '../../components/SocialMediaItems'
-import { CurrentTab } from '../../constants/types'
+import { CurrentTab, User } from '../../constants/types'
+import { AuthContext } from '../../contexts/AuthContext'
+import { SearchUserData } from '../../services/Services'
 import styles from '../../styles/desktop.module.css'
 
 const Profile: NextPage = () => {
-
-
-    // useEffect(() => {
-    //   if(typeof(window) !== undefined){
-    //       alert(`${window.innerHeight}  ${window.innerWidth}`)
-    //   }
-    // }, [])
 
     const router = useRouter()
     const images = [
@@ -33,6 +29,24 @@ const Profile: NextPage = () => {
         rotationAngle: 0,
     }
     const [currentTab, setCurrentTab] = useState<CurrentTab>("My Designs");
+    const [currentUser, setcurrentUser] = useState<User>({} as User);
+    const { user } = useContext(AuthContext)
+
+    const fetchUserData = async () => {
+        if (user) {
+            const userData = await SearchUserData(user?.uid)
+            setcurrentUser(userData)
+        }
+        else {
+            setcurrentUser({})
+        }
+    }
+
+    useEffect(() => {
+        fetchUserData();
+    }, [user])
+
+
     const handlers = useSwipeable({
         onSwipedLeft: (eventData) => {
             if (currentTab === "My Designs") {
@@ -86,7 +100,7 @@ const Profile: NextPage = () => {
                     <Card snap='snap-start' images={images} title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/2"} />
                     <Card snap='snap-start' images={images} title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={3} destination={"challenges/1"} />
                     <Card snap='snap-start' images={images} title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={3} destination={"challenges/1"} />
-                
+
                 </div>
             )
         }
@@ -107,10 +121,10 @@ const Profile: NextPage = () => {
                     <div className={` w-[100%] h-[80%] flex `}>
                         {/*---------------- first column with image and follow section starts here -----------------------*/}
                         <div className={`${styles.FirstColumn} w-[55%] h-[100%] flex flex-col items-center justify-start box-border mt-5 pt-7 sm:w-[40%] sm:pt-2 `}>
-                            <div className={`${styles.LogoContainer}  w-[100%] h-[50%] flex flex-col items-center justify-center pt-2 mr-3 mb-0 sm:mb-5 `}>
-                                <img src="/Assets/icons/avatar.png" alt="" className={`${styles.ProfileAvatar} w-[60%] sm:w-[45%] mt-0 sm:mt-7`} />
+                            <div className={`${styles.LogoContainer}  w-[100%] h-[50%] flex flex-col items-center justify-center mt-3 pt-2 mr-3 mb-0 sm:mb-5 `}>
+                                <img src={user?.photoURL ?? "/Assets/icons/avatar.png"} alt="" className={`${styles.ProfileAvatar} w-[60%] rounded-[100%] sm:w-[45%] mt-0 sm:mt-7`} />
                                 {/*-------- update profile image button starts here ------*/}
-                                <div onClick={() => router.push('/personalDetails')} className={`${styles.EditProfileBtn} w-[50%] h-[15%] rounded-[10px] bg-[#323c71] min-h-[32px] flex items-center justify-center cursor-pointer mb-5 sm:w-[30%] sm:h-[20%] sm:mb-[1vh]`}>
+                                <div onClick={() => router.push('/personalDetails')} className={`${styles.EditProfileBtn} w-[50%] h-[15%] rounded-[10px] bg-[#323c71] min-h-[32px] flex items-center justify-center cursor-pointer mb-5 mt-2 sm:w-[30%] sm:h-[20%] sm:mb-[1vh]`}>
                                     <span className={`text-white text-[4vw] sm:text-[1.5vw] `}>Edit profile</span>
                                 </div>
                                 {/*-------- update profile image button starts here ------*/}
@@ -119,15 +133,15 @@ const Profile: NextPage = () => {
                             <div className={`${styles.FollowerSection} w-[100%] h-[20%] flex items-center justify-evenly box-border box-border pl-9 mt-9 sm:mt-[12vh] `}>
                                 <div className={`w-[25%] h-[100%] flex flex-col items-center justify-center  mr-7`}>
                                     <span className={`mb-2 text-[12px] font-light sm:text-[18px]`}>contributions</span>
-                                    <span className={` text-[22px] font-light`}>20</span>
+                                    <span className={` text-[22px] font-light`}>{currentUser.contributions ?? 0}</span>
                                 </div>
                                 <div className={`w-[25%] h-[100%] flex flex-col items-center justify-center mr-5 `}>
                                     <span className={`mb-2 text-[12px] font-light sm:text-[18px]`}>Followers</span>
-                                    <span className={`text-[22px] font-light`}>5K</span>
+                                    <span className={`text-[22px] font-light`}>{currentUser.followers ?? 0}</span>
                                 </div>
                                 <div className={`w-[25%] h-[100%] flex flex-col items-center justify-center mr-5`}>
                                     <span className={`mb-2 text-[12px] font-light sm:text-[18px]`}>Following</span>
-                                    <span className={`text-[22px] font-light`}>117</span>
+                                    <span className={`text-[22px] font-light`}>{currentUser.following ?? 0}</span>
                                 </div>
                             </div>
                         </div>
@@ -135,8 +149,8 @@ const Profile: NextPage = () => {
 
                         {/*-------------- details and social media section starts here ---------------------*/}
                         <div className={`${styles.secondColumn} w-[50%] h-[100%] flex flex-col items-start justify-start box-border pt-5 pl-4 sm:pt-0`}>
-                            <h1 className={`text-[2.5vh] font-semibold whitespace-nowrap  mt-3 sm:text-[32px] `}>Athul Vishnu</h1>
-                            <SocialMediaItems title='Bio' url='/Assets/lightmode/cv.png' />
+                            <h1 className={`text-[2.5vh] font-semibold whitespace-nowrap  mt-3 sm:text-[32px] `}>{currentUser.name ?? '########'}</h1>
+                            <SocialMediaItems title={currentUser.bio == '' ? 'Not Available' : currentUser.bio} url='/Assets/lightmode/cv.png' />
                             <SocialMediaItems title='Website' url='/Assets/lightmode/link.png' />
                             <SocialMediaItems title='Github' url='/Assets/lightmode/github.png' />
                             <SocialMediaItems title='Twitter' url='/Assets/lightmode/twitter.png' />
@@ -166,7 +180,7 @@ const Profile: NextPage = () => {
                     </div>
                     <RenderTabs />
                 </section>
-                <Footer position='relative'/>
+                <Footer position='relative' />
 
             </div>
 

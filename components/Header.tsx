@@ -1,8 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import Theme from '../constants/ColorMode';
 import { ThemeContext } from '../contexts/ThemeContext';
-import NavBar from './NavBar'
-import { backgroundImage, PreferredTheme } from '../constants/types'
 import { useRouter } from 'next/router';
 import styles from '../styles/desktop.module.css';
 import { AuthContext } from '../contexts/AuthContext';
@@ -12,11 +10,11 @@ import { AuthContext } from '../contexts/AuthContext';
 function Header() {
 
   const { theme, toggleTheme, preferredTheme } = useContext(ThemeContext);
-  const {signIn, LogOut, user,loggedIn } = useContext(AuthContext)
+  const {signIn, user } = useContext(AuthContext)
   const router = useRouter();
 
   useEffect(() => {
-    console.log(user);
+    // console.log(user.photoURL);
 
   }, [])
 
@@ -42,7 +40,7 @@ function Header() {
         <h1 className={`self-start text-[6.5vw] my-[2%] sm:text-[3vw] sm:max-w-[95%] sm:order-2 msm:mt-[5%]`}>Build Your Career With Us By Solving Tasks</h1>
         <img src="/Assets/icons/code-illustration.png" className={`self-start max-h-[50%] min-w-[85%] mb-[2%] sm:order-3 sm:max-h-[80%] `} />
         {
-          !loggedIn && (<div onClick={authenticateWithGithub} className={`${styles.AuthorizeBtn} self-center cursor-pointer  w-[80%] min-h-[45px] max-h-[55px] rounded-[25px] bg-black flex items-center justify-center mt-[5%] mb-[2%]  sm:order-1 sm:self-start `}>
+          !user && (<div onClick={authenticateWithGithub} className={`${styles.AuthorizeBtn} self-center cursor-pointer  w-[80%] min-h-[45px] max-h-[55px] rounded-[25px] bg-black flex items-center justify-center mt-[5%] mb-[2%]  sm:order-1 sm:self-start `}>
           <span className={`text-white mr-1 sm:mr-2`}>Authorize with Github</span>
           <img src="/Assets/darkmode/git.png" alt="github" className={`${styles.AuthorizeBtnImg} w-[20px]`} />
         </div>)
