@@ -121,16 +121,16 @@ const Profile: NextPage = () => {
                     <div className={` w-[100%] h-[80%] flex `}>
                         {/*---------------- first column with image and follow section starts here -----------------------*/}
                         <div className={`${styles.FirstColumn} w-[55%] h-[100%] flex flex-col items-center justify-start box-border mt-5 pt-7 sm:w-[40%] sm:pt-2 `}>
-                            <div className={`${styles.LogoContainer}  w-[100%] h-[50%] flex flex-col items-center justify-center mt-3 pt-2 mr-3 mb-0 sm:mb-5 `}>
-                                <img src={user?.photoURL ?? "/Assets/icons/avatar.png"} alt="" className={`${styles.ProfileAvatar} w-[60%] rounded-[100%] sm:w-[45%] mt-0 sm:mt-7`} />
+                            <div className={`${styles.LogoContainer}  w-[100%] h-[70%] flex flex-col items-center justify-center -mt-3 pt-2 mr-3 mb-0 sm:mb-5 `}>
+                                <img src={user?.photoURL ?? "/Assets/icons/avatar.png"} alt="" className={`${styles.ProfileAvatar} w-[150px] min-h-[150px] sm:w-[180px] sm:min-h-[180px] object-cover rounded-[100%]`} />
                                 {/*-------- update profile image button starts here ------*/}
-                                <div onClick={() => router.push('/personalDetails')} className={`${styles.EditProfileBtn} w-[50%] h-[15%] rounded-[10px] bg-[#323c71] min-h-[32px] flex items-center justify-center cursor-pointer mb-5 mt-2 sm:w-[30%] sm:h-[20%] sm:mb-[1vh]`}>
+                                <div onClick={() => router.push('/personalDetails')} className={`${styles.EditProfileBtn} w-[50%]  h-[15%] rounded-[10px] bg-[#323c71] min-h-[32px] flex items-center justify-center cursor-pointer mb-5 mt-2 sm:w-[30%] sm:h-[20%] sm:mb-[1vh]`}>
                                     <span className={`text-white text-[4vw] sm:text-[1.5vw] `}>Edit profile</span>
                                 </div>
                                 {/*-------- update profile image button starts here ------*/}
 
                             </div>
-                            <div className={`${styles.FollowerSection} w-[100%] h-[20%] flex items-center justify-evenly box-border box-border pl-9 mt-9 sm:mt-[12vh] `}>
+                            <div className={`${styles.FollowerSection} w-[100%] h-[20%] flex items-center justify-evenly mt-[10px] box-border box-border pl-9 mt-9 sm:mt-[5vh] `}>
                                 <div className={`w-[25%] h-[100%] flex flex-col items-center justify-center  mr-7`}>
                                     <span className={`mb-2 text-[12px] font-light sm:text-[18px]`}>contributions</span>
                                     <span className={` text-[22px] font-light`}>{currentUser.contributions ?? 0}</span>

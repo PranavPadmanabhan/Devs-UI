@@ -5,10 +5,9 @@ import Footer from '../../components/Footer'
 import NavBar from '../../components/NavBar'
 import { User } from '../../constants/types'
 import { AuthContext } from '../../contexts/AuthContext'
-import { createorUpdateUserDoc, SearchUserData } from '../../services/Services'
+import { SearchUserData, uploadData, uploadImage } from '../../services/Services'
 import styles from '../../styles/desktop.module.css'
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { updateProfile} from 'firebase/auth'
+import { getStorage, ref } from "firebase/storage";
 
 
 const PersonalDetails: NextPage = () => {
@@ -17,12 +16,14 @@ const PersonalDetails: NextPage = () => {
     const { user } = useContext(AuthContext);
     const [loading, setloading] = useState<boolean>(false);
     const [uploading, setuploading] = useState<boolean>(false);
-    const [Avatar, setAvatar] = useState<string | undefined>()
+    const [Avatar, setAvatar] = useState<string | undefined>();
+    const storage = getStorage();
+
     const handleImageAsFile = (e: any) => {
         const image = e.target.files[0];
-        // console.log(image.name);
-        if(!image) return;
-        uploadImage(image, user.uid)
+        if (!image) return;
+        const storageRef = ref(storage, `profileImages/${user?.uid}/${image.name}.png`);
+        uploadImage({ file: image, storageRef, setloading, fetchUserData, setuploading, currentUser, user });
     }
 
     const fetchUserData = async () => {
@@ -32,7 +33,6 @@ const PersonalDetails: NextPage = () => {
             setcurrentUser(userData);
             setloading(false);
             setAvatar(userData.photoURL)
-
         }
         else {
             setcurrentUser({});
@@ -41,72 +41,12 @@ const PersonalDetails: NextPage = () => {
         }
     }
 
-    const uploadData = (photoURL?:string) => {
-        setuploading(true)
-       if(!photoURL){
-        const state = createorUpdateUserDoc({
-            updating: true,
-            bio: currentUser.bio ?? '',
-            dribble: currentUser.dribble ?? '',
-            facebook: currentUser.facebook ?? '',
-            github: currentUser.github ?? '',
-            linkedIn: currentUser.linkedIn ?? '',
-            name: currentUser.name ?? user.displayName,
-            twitter: currentUser.twitter ?? '',
-            website: currentUser.website ?? "",
-            instagram: currentUser.instagram ?? '',
-            photoURL:user?.photoURL ?? currentUser.photoURL,
-            setloading: setloading,
-            fetchUserData:fetchUserData
-        });
-       }
-       else {
-        const state = createorUpdateUserDoc({
-            updating: true,
-            bio: currentUser.bio ?? '',
-            dribble: currentUser.dribble ?? '',
-            facebook: currentUser.facebook ?? '',
-            github: currentUser.github ?? '',
-            linkedIn: currentUser.linkedIn ?? '',
-            name: currentUser.name ?? user.displayName,
-            twitter: currentUser.twitter ?? '',
-            website: currentUser.website ?? "",
-            instagram: currentUser.instagram ?? '',
-            photoURL:photoURL??currentUser.photoURL,
-            setloading: setloading,
-            fetchUserData:fetchUserData
-        });
-       }
-       setloading(false)
-    }
+
 
     useEffect(() => {
         fetchUserData();
-        console.log(currentUser);
-
+        // console.log(currentUser);
     }, [user]);
-
-
-
-
-    const uploadImage = (file: any, uid: string) => {
-        setloading(true)
-        setuploading(true)
-        const storage = getStorage();
-        const storageRef = ref(storage, `profileImages/${uid}/${file.name}.png`);
-        if (!file) return;
-        uploadBytes(storageRef, file).then((snapshot) => {
-            // console.log(snapshot);
-            setloading(false);
-        }).then(() => {
-            getDownloadURL(storageRef).then(async(res) =>{
-                uploadData(res);
-                fetchUserData();
-                setuploading(false)
-                updateProfile(user,{photoURL:res})
-            })
-        });
-    }
 
 
     return (
@@ -122,15 +62,15 @@ const PersonalDetails: NextPage = () => {
                 <div className={` w-[100%] z-[1] sm:z-[10] flex flex-col sm:items-start sm:flex-row-reverse  sm:justify-center sm:items-start sm:w-[90%] 2xl:min-h-[65vh] ds:min-h-[70vh]`}>
                     <div className={`${styles.ImageContainer} flex flex-col items-center justify-center mb-2 sm:mr-10`}>
                         <img src={user?.photoURL ?? "/Assets/icons/avatar.png"} alt="" className={`w-[5vh] object-cover h-[5vh] sm:min-w-[230px] sm:min-h-[230px]  sm:h-[10vh] w-[10vh] min-w-[200px] min-h-[200px] rounded-[100%] 2xl:w-[50vh] 2xl:h-[40vh] 2xl:min-h-[650px] 2xl:min-w-[650px] 2xl:z-[-1]`} />
-                        <button className={`${styles.UpdateImageBtn}  relative min-w-[100px] my-3 cursor-pointer min-h-[30px] max-h-[40px] focus:outline-none bg-[#323c71] rounded-[10px] sm:min-w-[120px] sm:min-h-[35px] sm:mt-5 flex items-center justify-center text-white text-[70%] sm:text-[80%]  2xl:min-w-[500px] 2xl:min-h-[95px] 2xl:text-[1vw] `}>
+                        <button className={`${styles.UpdateImageBtn} box-border pt-[1%] relative min-w-[100px] my-1 cursor-pointer min-h-[30px] max-h-[40px] focus:outline-none bg-[#323c71] rounded-[10px] sm:min-w-[120px] sm:min-h-[35px] sm:mt-5 flex items-center justify-center text-white text-[70%] sm:text-[80%]  2xl:min-w-[500px] 2xl:min-h-[95px] 2xl:text-[1vw] `}>
                             <input accept='image/jpeg , image/png' title='upload' id='upload' className='z-[100] cursor-pointer absolute opacity-0' type={'file'} onChange={(e) => handleImageAsFile(e)} />
                             uploadImage
                         </button>
                     </div>
                     {
                         loading ? (
-                            <div className='w-[100%] pt-[15vh] mi-h-[50vh] flex items-center justify-center'>
-                                {uploading?"Uploading Please wait...":"Synchronising..."}
+                            <div className='w-[100%] pt-[15vh] mi-h-[50vh] flex items-center font-bold italic justify-center'>
+                                {uploading ? "Uploading Please wait..." : "Synchronising..."}
                             </div>
                         ) : (
                             <div className={`${styles.InputContainer} w-[100%] flex flex-col sm:box-border sm:pl-5`}>
@@ -143,7 +83,7 @@ const PersonalDetails: NextPage = () => {
                                 <input value={currentUser.linkedIn} onChange={(e) => setcurrentUser({ ...AuthContext, linkedIn: e.target.value })} type="text" placeholder='Linkedin' className={`self-center focus:outline-none w-[80%] min-h-[40px] bg-gray-200 rounded-[10px] my-2 pl-4 sm:self-start sm:w-[60%] 2xl:w-[40%] 2xl:w-[40%] 2xl:min-h-[80px] 2xl:placeholder:text-[30px] 2xl:my-5 ${styles.input} `} />
                                 <input value={currentUser.dribble} onChange={(e) => setcurrentUser({ ...AuthContext, dribble: e.target.value })} type="text" placeholder='Dribble' className={`self-center focus:outline-none w-[80%] min-h-[40px] bg-gray-200 rounded-[10px] my-2 pl-4 sm:self-start sm:w-[60%] 2xl:w-[40%] 2xl:w-[40%] 2xl:min-h-[80px] 2xl:placeholder:text-[30px] 2xl:my-5 ${styles.input} `} />
                                 <input value={currentUser.instagram} onChange={(e) => setcurrentUser({ ...AuthContext, instagram: e.target.value })} type="text" placeholder='Instagram' className={`self-center focus:outline-none w-[80%] min-h-[40px] bg-gray-200 rounded-[10px] my-2 pl-4 sm:self-start sm:w-[60%] 2xl:w-[40%] 2xl:w-[40%] 2xl:min-h-[80px] 2xl:placeholder:text-[30px] 2xl:my-5 ${styles.input} `} />
-                                <button onClick={() => uploadData()} className={`${styles.UpdateProfileBtn} self-start ml-10 mt-5 mb-8 min-w-[100px] min-h-[35px] focus:outline-none rounded-[10px] bg-[#323c71] flex items-center justify-center text-[75%] text-white sm:ml-0 2xl:min-w-[300px] 2xl:min-h-[75px] 2xl:text-[1vw]`}>Update Profile</button>
+                                <button onClick={() => uploadData({ currentUser, setloading, fetchUserData, setuploading, user })} className={`${styles.UpdateProfileBtn} self-start ml-10 mt-5 mb-8 min-w-[100px] min-h-[35px] focus:outline-none rounded-[10px] bg-[#323c71] flex items-center justify-center text-[75%] text-white sm:ml-0 2xl:min-w-[300px] 2xl:min-h-[75px] 2xl:text-[1vw]`}>Update Profile</button>
                             </div>
 
                         )

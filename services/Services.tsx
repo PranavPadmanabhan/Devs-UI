@@ -1,8 +1,9 @@
-import { getAuth, GithubAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from "firebase/auth";
+import { getAuth, GithubAuthProvider, onAuthStateChanged, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import app from "../config/firebase";
-import { createDocProps, User } from "../constants/types";
-import { doc, getDoc, getFirestore, onSnapshot, setDoc } from 'firebase/firestore'
+import { createDocProps, UploadData, UploadImage, User } from "../constants/types";
+import { doc, getDoc, getFirestore, setDoc } from 'firebase/firestore'
 import { writeStorage, deleteFromStorage } from '@rehooks/local-storage';
+import { getDownloadURL, uploadBytes } from "firebase/storage";
 
 
 
@@ -25,22 +26,10 @@ export const LogOut = async () => {
 
 export async function SearchUserData(uid?: string | null) {
     const snapshot = await getDoc(doc(getFirestore(), 'users', `${currentUser?.uid ?? uid}`));
-    // console.log(snapshot.exists());
     if (snapshot.exists()) {
         userData = snapshot.data();
-        // console.log(userData);
         writeStorage('uid', snapshot.data().uid);
     }
-
-    // onSnapshot(doc(getFirestore(), 'users', `${currentUser?.uid??uid}`),(doc) => {
-    //     if (doc.exists()) {
-    //     userData = doc.data();
-    //     // console.log(userData);
-    //     setUser(userData)
-    //     writeStorage('uid', doc.data().uid);
-    // }
-    // })
-
     return userData;
 }
 
@@ -123,4 +112,60 @@ export const AuthState = (setUser: any) => {
             setUser(null)
         }
     })
+}
+
+export const uploadImage = ({ fetchUserData,file,setloading,setuploading,storageRef,currentUser,user}:UploadImage) => {
+    setloading(true)
+    setuploading(true)
+    if (!file) return;
+    uploadBytes(storageRef, file).then((snapshot) => {
+        // console.log(snapshot);
+        setloading(false);
+    }).then(() => {
+        getDownloadURL(storageRef).then(async(res) =>{
+            uploadData({photoURL:res,currentUser:currentUser,fetchUserData,setloading,setuploading,user});
+            fetchUserData();
+            setuploading(false)
+            updateProfile(user,{photoURL:res})
+        })
+    });
+}
+
+export const uploadData = ({ currentUser, fetchUserData, photoURL, setloading, setuploading, user}:UploadData) => {
+    setuploading(true)
+    if (!photoURL) {
+        const state = createorUpdateUserDoc({
+            updating: true,
+            bio: currentUser?.bio ?? '',
+            dribble: currentUser?.dribble ?? '',
+            facebook: currentUser?.facebook ?? '',
+            github: currentUser?.github ?? '',
+            linkedIn: currentUser?.linkedIn ?? '',
+            name: currentUser?.name ?? user?.displayName,
+            twitter: currentUser?.twitter ?? '',
+            website: currentUser?.website ?? "",
+            instagram: currentUser?.instagram ?? '',
+            photoURL: user?.photoURL ?? currentUser?.photoURL,
+            setloading: setloading,
+            fetchUserData: fetchUserData
+        });
+    }
+    else {
+        const state = createorUpdateUserDoc({
+            updating: true,
+            bio: currentUser?.bio ?? '',
+            dribble: currentUser?.dribble ?? '',
+            facebook: currentUser?.facebook ?? '',
+            github: currentUser?.github ?? '',
+            linkedIn: currentUser?.linkedIn ?? '',
+            name: currentUser?.name ?? user.displayName,
+            twitter: currentUser?.twitter ?? '',
+            website: currentUser?.website ?? "",
+            instagram: currentUser?.instagram ?? '',
+            photoURL: photoURL ?? currentUser?.photoURL,
+            setloading: setloading,
+            fetchUserData: fetchUserData
+        });
+    }
+    setloading(false)
 }

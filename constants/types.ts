@@ -1,3 +1,4 @@
+import { StorageReference } from "firebase/storage";
 import { AppProps } from "next/dist/shared/lib/router/router";
 import { type } from "os";
 import React, { ReactElement } from "react";
@@ -121,8 +122,33 @@ export type createDocProps = {
     linkedIn?: string,
     dribble?: string,
     facebook?: string,
-    setloading?:any,
-    photoURL?:string,
-    fetchUserData?:any
+    setloading?: any,
+    photoURL?: string,
+    fetchUserData?: any
 }
 
+export type UploadData = {
+    photoURL?: string,
+    currentUser?: User,
+    setloading?: any,
+    fetchUserData?: () => Promise<void>,
+    setuploading?: any,
+    user?: any
+}
+
+export type UploadImage = {
+    file: any,
+    storageRef: StorageReference,
+    setloading: React.Dispatch<React.SetStateAction<boolean>>,
+    fetchUserData: () => Promise<void>,
+    setuploading: React.Dispatch<React.SetStateAction<boolean>>,
+    currentUser?: User,
+    user?: any
+}
+
+export type etchUserData = {
+    setloading:React.Dispatch<React.SetStateAction<boolean>>,
+    setcurrentUser:React.Dispatch<React.SetStateAction<User>>,
+    setAvatar:React.Dispatch<React.SetStateAction<string | undefined>>
+    user:any
+}
