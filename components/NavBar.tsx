@@ -1,20 +1,31 @@
 import Link from 'next/link';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { AiOutlineBell } from 'react-icons/ai';
 import DrawerItem from './DrawerItem';
 import styles from '../styles/desktop.module.css'
 import { AuthContext } from '../contexts/AuthContext';
 import { useRouter } from 'next/router';
+import { fetchData, LogOut, signIn } from '../services/Services';
 
 
 function NavBar() {
 
   const [drawerMode, setdrawerMode] = useState<boolean>(false);
-  const { LogOut, signIn, user } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
+  const [userData, setuserData] = useState({})
   const router = useRouter();
   const navigate = (destination: string) => {
     router.push(`/${destination}`);
     setdrawerMode(false)
+  }
+
+ useEffect(() => {
+   fetchData(user,setuserData);
+ }, [])
+ 
+
+  const navigateToRole = () => {
+    router.replace('/role')
   }
 
 
@@ -45,16 +56,16 @@ function NavBar() {
 
             {/*----------------- mini navigation drawer of desktopmode starts here --------------*/}
 
-            <div className={`${styles.DrawerDesktop} hidden group-hover:flex flex-col items-center justify-start fixed w-[15vw] min-w-[200px] h-auto bg-white top-[9vh] right-[4vw] rounded-[20px] shadow-task sm:z-[100]`}>
+            <div className={`${styles.DrawerDesktop} hidden group-hover:flex flex-col items-center justify-start fixed w-[15vw] min-w-[200px] h-auto bg-white top-[8vh] right-[4vw] rounded-[20px] shadow-task sm:z-[100]`}>
               <DrawerItem url='/Assets/lightmode/home(1).png' title='Home' redAccent={false} onClick={() => navigate('')} upcoming={false} />
               {
                 user ? (
                   <>
                     <DrawerItem url='/Assets/lightmode/user.png' title='Profile' redAccent={false} onClick={() => navigate('profile')} upcoming={false} />
-                    <DrawerItem url='/Assets/lightmode/log-out.png' title='Sign Out' redAccent={true} onClick={() => { LogOut(); navigateBack(); }} upcoming={false} />
+                    <DrawerItem url='/Assets/lightmode/log-out.png' title='Sign Out' redAccent={true} onClick={() => { LogOut({callback:navigateBack}); }} upcoming={false} />
                   </>
                 ) : (
-                  <DrawerItem url='/Assets/lightmode/log-out.png' title='Sign In' redAccent={false} onClick={() => signIn()} upcoming={false} />
+                  <DrawerItem url='/Assets/lightmode/log-out.png' title='Sign In' redAccent={false} onClick={() => signIn({callback:navigateToRole,userData})} upcoming={false} />
                 )
               }
             </div>
@@ -82,10 +93,10 @@ function NavBar() {
                 user ? (
                   <>
                     <DrawerItem url='/Assets/lightmode/user.png' title='Profile' redAccent={false} onClick={() => navigate("profile")} upcoming={false} />
-                    <DrawerItem url='/Assets/lightmode/log-out.png' title='Sign Out' redAccent={true} onClick={() => LogOut()} upcoming={false} />
+                    <DrawerItem url='/Assets/lightmode/log-out.png' title='Sign Out' redAccent={true} onClick={() => LogOut({callback:navigateBack})} upcoming={false} />
                   </>
                 ) : (
-                  <DrawerItem url='/Assets/lightmode/log-out.png' title='Sign In' redAccent={false} onClick={() => signIn()} upcoming={false} />
+                  <DrawerItem url='/Assets/lightmode/log-out.png' title='Sign In' redAccent={false} onClick={() => signIn({callback:navigateToRole,userData})} upcoming={false} />
                 )
               }
             </div>

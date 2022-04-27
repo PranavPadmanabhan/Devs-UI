@@ -24,7 +24,7 @@ export type props = {
 
 export type theme = "light" | "dark";
 export type themeContext = { theme: theme; toggleTheme: () => void, preferredTheme: themeMode };
-export type authContext = { signIn: () => Promise<void>, LogOut: () => void; user: any };
+export type authContext = { user: any };
 
 
 export type drawerProps = {
@@ -41,7 +41,19 @@ export interface Cardprops {
     description: string,
     level: number,
     destination: string,
-    snap: 'snap-start' | 'snap-center' | 'snap-end' | 'snap-none'
+    snap: 'snap-start' | 'snap-center' | 'snap-end' | 'snap-none',
+    uid?:string
+}
+
+
+export type designCards = {
+    images:Array<string>,
+    destination:string,
+    profileURL:string,
+    designName:string,
+    lightenings?:number,
+    comments?:Array<Object>,
+    shares?:Array<any>,
 }
 
 export interface optionProps {
@@ -52,7 +64,7 @@ export interface optionProps {
 }
 
 export type buttonProps = {
-    title: string
+    title: string,
 }
 
 export type providedItemProps = {
@@ -109,6 +121,16 @@ export type User = {
     linkedIn?: string,
     dribble?: string,
     facebook?: string,
+    role?:'designer'| 'developer'|'both'|null
+}
+
+export type SignIn = {
+    callback:() => void,
+    userData:User
+}
+
+export type LogOutProps = {
+    callback:() => void
 }
 
 export type createDocProps = {
@@ -124,7 +146,12 @@ export type createDocProps = {
     facebook?: string,
     setloading?: any,
     photoURL?: string,
-    fetchUserData?: any
+    fetchUserData?: any,
+    contributions?:number,
+    followers?:number,
+    following?:number,
+    role?:'designer'| 'developer'|'both'|null
+
 }
 
 export type UploadData = {
@@ -146,9 +173,86 @@ export type UploadImage = {
     user?: any
 }
 
-export type etchUserData = {
-    setloading:React.Dispatch<React.SetStateAction<boolean>>,
-    setcurrentUser:React.Dispatch<React.SetStateAction<User>>,
-    setAvatar:React.Dispatch<React.SetStateAction<string | undefined>>
-    user:any
+
+export type Design = {
+    name?: string,
+    description?: string,
+    images?: Array<string>,
+    completed?: check,
+    levels?: check,
+    figmaFileURL?: string,
+    sketchFileURL?: string,
+    ImageAssetsURL?: string,
+    isCompleted: boolean,
+    toolsUsed?: Array<ToolsUsed> | undefined,
+    lightenings?:number,
+    comments?:Array<object>,
+    shares?:Array<any>
+
+}
+
+export type UploadDesign = {
+
+    designName?: string,
+    description?: string,
+    images?: Array<string | null>,
+    completed?: check,
+    levels?: check,
+    figmaFileURL?: string,
+    sketchFileURL?: string,
+    ImageAssetsURL?: string,
+    isCompleted: boolean,
+    toolsUsed?: Array<ToolsUsed> | undefined,
+    setloading: React.Dispatch<React.SetStateAction<boolean>>,
+    userData:any,
+    fetchUserData:any,
+    user?: any
+}
+
+export type UploadImages = {
+    files: any,
+    setloading: React.Dispatch<React.SetStateAction<boolean>>,
+    fetchUserData?: () => Promise<void>,
+    setuploading: React.Dispatch<React.SetStateAction<boolean>>,
+    user?: any,
+    design: Design,
+    setprogress: React.Dispatch<React.SetStateAction<number>>,
+}
+
+export type UploadFiles = {
+    file: any,
+    setloading: React.Dispatch<React.SetStateAction<boolean>>,
+    fetchUserData?: () => Promise<void>,
+    setuploading: React.Dispatch<React.SetStateAction<boolean>>,
+    setprogress: React.Dispatch<React.SetStateAction<number>>
+    user?: any,
+    design: Design,
+    setDesignFileURL:React.Dispatch<React.SetStateAction<string>>,
+}
+
+export type HandleDesignFiles = {
+    e: any,
+    setloading: React.Dispatch<React.SetStateAction<boolean>>,
+    setuploading: React.Dispatch<React.SetStateAction<boolean>>,
+    setDesign: React.Dispatch<React.SetStateAction<Design>>,
+    setprogress: React.Dispatch<React.SetStateAction<number>>,
+    setFigmaFileURL:React.Dispatch<React.SetStateAction<any>>,
+    setSketchFileURL:React.Dispatch<React.SetStateAction<any>>,
+    setImageAssetURL:React.Dispatch<React.SetStateAction<any>>,
+    item:string,
+    design: Design,
+    user: any
+}
+
+export type UploadFileManage = {
+    item: string,
+    setFigmaFileURL:React.Dispatch<React.SetStateAction<string>>,
+    setSketchFileURL:React.Dispatch<React.SetStateAction<string>>,
+    setImageAssetURL:React.Dispatch<React.SetStateAction<string>>,
+    file: any,
+    setloading: React.Dispatch<React.SetStateAction<boolean>>,
+    setuploading: React.Dispatch<React.SetStateAction<boolean>>,
+    setprogress: React.Dispatch<React.SetStateAction<number>>
+    user?: any,
+    design: Design,
 }

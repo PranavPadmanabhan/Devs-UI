@@ -9,8 +9,9 @@ export const AuthContext = createContext<authContext>({} as authContext)
 const AuthContextProvider = (props: props) => {
 
     const [user, setUser] = useState<any>({})
-     AuthState(setUser);       
-    const value = { signIn, LogOut, user }
+     AuthState(setUser);    
+        
+    const value = { user }
 
 
     return (

@@ -1,25 +1,35 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Theme from '../constants/ColorMode';
 import { ThemeContext } from '../contexts/ThemeContext';
 import { useRouter } from 'next/router';
 import styles from '../styles/desktop.module.css';
 import { AuthContext } from '../contexts/AuthContext';
+import { fetchData, SearchUserData, signIn } from '../services/Services';
 
 
 
 function Header() {
 
   const { theme, toggleTheme, preferredTheme } = useContext(ThemeContext);
-  const {signIn, user } = useContext(AuthContext)
+  const { user } = useContext(AuthContext)
   const router = useRouter();
+  const [userData, setuserData] = useState({})
+
 
   useEffect(() => {
-    // console.log(user.photoURL);
+    fetchData(user,setuserData);
 
-  }, [])
+    return () => {
+       null;
+    }
+  }, [user])
+
+  const navigate = () => {
+    router.replace('/role')
+  }
 
   const authenticateWithGithub = () => {
-        signIn();
+        signIn({callback:navigate,userData});
   }
 
   return (

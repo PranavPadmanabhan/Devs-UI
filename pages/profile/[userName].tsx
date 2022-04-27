@@ -1,10 +1,8 @@
 import useLocalStorage from '@rehooks/local-storage'
-import { collection, getFirestore, onSnapshot, query, where } from 'firebase/firestore'
 import { NextPage } from 'next'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import React, { useContext, useEffect, useState } from 'react'
-import { useSwipeable } from 'react-swipeable'
 import Card from '../../components/Card'
 import Footer from '../../components/Footer'
 import NavBar from '../../components/NavBar'
@@ -22,21 +20,16 @@ const Profile: NextPage = () => {
         '/Assets/images/image2.JPG',
         '/Assets/images/image3.JPG'
     ]
-
+    const config = {
+        delta: 10,
+        preventDefaultTouchmoveEvent: true,
+        trackTouch: true,
+        trackMouse: false,
+        rotationAngle: 0,
+    }
     const [currentTab, setCurrentTab] = useState<CurrentTab>("My Designs");
     const [currentUser, setcurrentUser] = useState<User>({} as User);
     const { user } = useContext(AuthContext)
-    const [width, setwidth] = useState(0)
-    const [designs, setDesigns] = useState<Array<any>>([]);
-
-    const q = query(collection(getFirestore(), "Designs"), where('uid', '==', `${user.uid}`));
-    onSnapshot(q, (querySnapshot) => {
-        setDesigns(querySnapshot.docs);
-        // querySnapshot.forEach((doc) => {
-        //     // setDesigns([...designs, doc.data()])
-        // });
-
-    });
 
     const fetchUserData = async () => {
         if (user) {
@@ -49,82 +42,25 @@ const Profile: NextPage = () => {
     }
 
     useEffect(() => {
-        if(typeof(window !== undefined)){
-            setwidth(window.innerWidth)
-        }
         fetchUserData();
     }, [user])
 
-    const config = {
-        delta: 10,
-        preventDefaultTouchmoveEvent: true,
-        trackTouch: true,
-        trackMouse: false,
-        rotationAngle: 0,
-    }
 
-    const handlers = useSwipeable({
-        onSwipedLeft: (eventData) => {
-            if (currentTab === "My Designs") {
-                setCurrentTab("Task In Progress")
-            }
-            else if (currentTab === "Task In Progress") {
-                setCurrentTab("Task Completed")
-            }
-            else {
-                setCurrentTab("Task Completed")
-            }
-        },
-        onSwipedRight: (eventData) => {
-            if (currentTab === "Task Completed") {
-                setCurrentTab("Task In Progress")
-            }
-            else if (currentTab === "Task In Progress") {
-                setCurrentTab("My Designs")
-            }
-            else {
-                setCurrentTab("My Designs")
-            }
-        },
-        ...config,
-    });
+ 
 
     const RenderTabs = () => {
-        if (currentTab === 'My Designs') {
             return (
-                <div {...handlers} className={`${styles.singleTab} w-[100%] h-[100%] flex flex-col items-center overflow-y-scroll snap-y snap-mandatory scrollbar-hide sm:grid sm:grid-cols-4 sm:place-items-center sm:gap-y-5 sm:snap-none `}>
-                    {
-                        designs.map((item, index) => (
-                            <Card images={item.data().images} title={item.data().name} description={item.data().description} level={item.data().levels} destination={`challenges/${item.data().name}`} snap={width < 640 ? 'snap-start' : "snap-none"} uid={item.data().uid} />
-                        ))
-                    }
-                    {/* <Card snap='snap-start' images={images} title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/1"} />
+                <div className={`${styles.singleTab} w-[100%] h-[100%] flex flex-col items-center overflow-y-scroll snap-y snap-mandatory scrollbar-hide sm:grid sm:grid-cols-4 sm:place-items-center sm:gap-y-5 sm:snap-none `}>
+                    <Card snap='snap-start' images={images} title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/1"} />
                     <Card snap='snap-start' images={images} title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/2"} />
                     <Card snap='snap-start' images={images} title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/3"} />
                     <Card snap='snap-start' images={images} title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/1"} />
                     <Card snap='snap-start' images={images} title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/2"} />
-                    <Card snap='snap-start' images={images} title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/3"} /> */}
+                    <Card snap='snap-start' images={images} title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/3"} />
                 </div>
             )
-        }
-        else if (currentTab === 'Task In Progress') {
-            return (
-                <div {...handlers} className={`${styles.singleTab} w-[100%] h-[100%] flex flex-col items-center overflow-y-scroll snap-y snap-mandatory scrollbar-hide sm:grid sm:grid-cols-4 sm:place-items-center sm:gap-y-5 sm:snap-none pt-1`}>
-                    <Card snap='snap-start' images={images} title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={3} destination={"challenges/1"} />
-                </div>
-            )
-        }
-        else {
-            return (
-                <div {...handlers} className={`${styles.singleTab} w-[100%] h-[100%] flex flex-col items-center overflow-y-scroll snap-y snap-mandatory scrollbar-hide sm:grid sm:grid-cols-4 sm:place-items-center sm:gap-y-5 sm:snap-none`}>
-                    <Card snap='snap-start' images={images} title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={2} destination={"challenges/1"} />
-                    <Card snap='snap-start' images={images} title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/2"} />
-                    <Card snap='snap-start' images={images} title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={3} destination={"challenges/1"} />
-                    <Card snap='snap-start' images={images} title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={3} destination={"challenges/1"} />
-
-                </div>
-            )
-        }
+        
+       
     }
 
     return (
@@ -170,15 +106,16 @@ const Profile: NextPage = () => {
 
                         {/*-------------- details and social media section starts here ---------------------*/}
                         <div className={`${styles.secondColumn} w-[50%] h-[100%] flex flex-col items-start justify-start box-border pt-5 pl-4 sm:pt-0`}>
-                            <h1 className={`text-[2.5vh] font-semibold whitespace-nowrap  mt-3 sm:text-[32px] `}>{currentUser.name ?? `${currentUser.email?.slice(0, 10)}..`}</h1>
+                            <h1 className={`text-[2.5vh] font-semibold whitespace-nowrap  mt-3 sm:text-[32px] `}>{currentUser.name ?? '########'}</h1>
                             <SocialMediaItems title={currentUser.bio == '' ? 'Not Available' : currentUser.bio} url='/Assets/lightmode/cv.png' />
-                            <SocialMediaItems title={currentUser.website == '' ? 'Not Available' : currentUser.website} url='/Assets/lightmode/link.png' />
-                            <SocialMediaItems title={currentUser.github == '' ? 'Not Available' : currentUser.github} url='/Assets/lightmode/github.png' />
-                            <SocialMediaItems title={currentUser.twitter == '' ? 'Not Available' : currentUser.twitter} url='/Assets/lightmode/twitter.png' />
-                            <SocialMediaItems title={currentUser.facebook == '' ? 'Not Available' : currentUser.facebook} url='/Assets/lightmode/facebook.png' />
-                            <SocialMediaItems title={currentUser.dribble == '' ? 'Not Available' : currentUser.dribble} url='/Assets/lightmode/dribble.png' />
-                            <SocialMediaItems title={currentUser.linkedIn == '' ? 'Not Available' : currentUser.linkedIn} url='/Assets/lightmode/linkedin.png' />
-                            <SocialMediaItems title={currentUser.instagram == '' ? 'Not Available' : currentUser.instagram} url='/Assets/lightmode/instagram.png' />
+                            <SocialMediaItems title='Website' url='/Assets/lightmode/link.png' />
+                            <SocialMediaItems title='Github' url='/Assets/lightmode/github.png' />
+                            <SocialMediaItems title='Twitter' url='/Assets/lightmode/twitter.png' />
+                            <SocialMediaItems title='Behance' url='/Assets/lightmode/behance.png' />
+                            <SocialMediaItems title='Facebook' url='/Assets/lightmode/facebook.png' />
+                            <SocialMediaItems title='Dribble' url='/Assets/lightmode/dribble.png' />
+                            <SocialMediaItems title='LinkedIn' url='/Assets/lightmode/linkedin.png' />
+                            <SocialMediaItems title='Instagram' url='/Assets/lightmode/instagram.png' />
                         </div>
                         {/*-------------- details and social media section ends here ---------------------*/}
 
@@ -194,9 +131,7 @@ const Profile: NextPage = () => {
 
                 <section className={`${styles.Content} w-[100%] h-screen  snap-start box-border pb-[10vh] sm:mt-[6vh] `}>
                     <div className={`${styles.TabsContainer} flex w-[100%] h-[5%] items-center justify-between box-border px-3 mb-[2vh] sm:px-[10%] sm:mt-[2vh] `}>
-                        <span onClick={() => setCurrentTab("My Designs")} className={`${currentTab === "My Designs" ? `border-b-4 border-[#323c71] text-[#323c71] font-bold text-[18px] ${styles.TabActive}` : `border-none text-black font-light text-[14px] ${styles.Tab}`} duration-1000 py-2 cursor-pointer `}>My Designs</span>
-                        <span onClick={() => setCurrentTab("Task In Progress")} className={`${currentTab === "Task In Progress" ? `border-b-4 border-[#323c71] text-[#323c71] font-bold text-[18px] ${styles.TabActive}` : `border-none text-black font-light text-[14px] ${styles.Tab}`} duration-1000 py-2 cursor-pointer`}>Task In Progress</span>
-                        <span onClick={() => setCurrentTab("Task Completed")} className={`${currentTab === "Task Completed" ? `border-b-4 border-[#323c71] text-[#323c71] font-bold text-[18px] ${styles.TabActive}` : `border-none text-black font-light text-[14px] ${styles.Tab}`} duration-1000 py-2 cursor-pointer`}>Task Completed</span>
+                        <span onClick={() => setCurrentTab("My Designs")} className={`${currentTab === "My Designs" ? `border-b-4 border-[#323c71] text-[#323c71] font-bold text-[18px] ${styles.TabActive}` : `border-none text-black font-light text-[14px] ${styles.Tab}`} duration-1000 py-2 cursor-pointer `}>Designs</span>
                     </div>
                     <RenderTabs />
                 </section>
