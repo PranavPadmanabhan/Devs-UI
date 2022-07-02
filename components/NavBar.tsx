@@ -96,7 +96,7 @@ function NavBar() {
                     <DrawerItem url='/Assets/lightmode/log-out.png' title='Sign Out' redAccent={true} onClick={() => LogOut({callback:navigateBack})} upcoming={false} />
                   </>
                 ) : (
-                  <DrawerItem url='/Assets/lightmode/log-out.png' title='Sign In' redAccent={false} onClick={() => signIn({callback:navigateToRole,userData})} upcoming={false} />
+                  <DrawerItem url='/Assets/lightmode/log-out.png' title='Sign In' redAccent={false} onClick={() => signIn({callback:navigateToRole})} upcoming={false} />
                 )
               }
             </div>
