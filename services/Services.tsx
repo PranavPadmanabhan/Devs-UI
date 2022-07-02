@@ -13,10 +13,12 @@ export const authentication = getAuth(app);
 let userData: User = {};
 let currentUser: any;
 
-export const signIn = async ({ callback, userData }: SignIn) => {
+export const signIn = async ({ callback }: SignIn) => {
     return await signInWithPopup(authentication, githubProvider).then(async (res: any) => {
         // createorUpdateUserDoc({ updating: false });
-        if (!userData.role) {
+        const data = await SearchUserData(res.user.uid);
+
+        if (!data.role) {
             callback();
         }
         else return;
@@ -76,14 +78,14 @@ export const createorUpdateUserDoc = ({ updating, bio, dribble, facebook, github
                 followers: followers ?? userData.followers,
                 following: following ?? userData.following,
                 contributions: contributions ?? userData.contributions,
-                bio: bio == '' ? userData.bio : bio,
-                twitter: twitter == '' ? userData.twitter : twitter,
-                website: website == '' ? userData.website : website,
-                github: github == '' ? userData.github : github,
-                linkedIn: linkedIn == '' ? userData.linkedIn : linkedIn,
-                instagram: instagram == '' ? userData.instagram : instagram,
-                facebook: facebook == '' ? userData.facebook : facebook,
-                dribble: dribble == '' ? userData.dribble : dribble,
+                bio: bio,
+                twitter: twitter,
+                website: website,
+                github: github,
+                linkedIn: linkedIn,
+                instagram: instagram,
+                facebook: facebook,
+                dribble: dribble,
 
             }).then(() => { setloading(false); updateProfile(currentUser, { displayName: userData.name }); fetchUserData(); toast.success('Done') }).catch((err) => notify("something went wrong"));
 
@@ -128,19 +130,19 @@ export const AuthState = (setUser: any) => {
 }
 
 export const uploadImage = ({ fetchUserData, file, setloading, setuploading, storageRef, currentUser, user }: UploadImage) => {
+    setuploading(true);
     setloading(true)
-    setuploading(true)
     if (!file) return;
     uploadBytesResumable(storageRef, file).then((snapshot) => {
         // console.log(snapshot);
-        setloading(false);
     }).then(() => {
         getDownloadURL(storageRef).then(async (res) => {
             uploadData({ photoURL: res, currentUser: currentUser, fetchUserData, setloading, setuploading, user });
             fetchUserData();
+            setloading(false)
             setuploading(false)
             updateProfile(user, { photoURL: res })
-        })
+        }).then(() => toast.success('Done')).catch((err) => notify("something went wrong"));
     });
 }
 
@@ -179,11 +181,13 @@ export const uploadData = ({ currentUser, fetchUserData, photoURL, setloading, s
             setloading: setloading,
             fetchUserData: fetchUserData
         });
+        console.log(currentUser?.github);
+        
     }
     setloading(false)
 }
 
-export const uploadDesign = ({ designName, description, completed, images, levels, figmaFileURL, sketchFileURL, ImageAssetsURL, toolsUsed, isCompleted, user, setloading, userData, fetchUserData }: UploadDesign) => {
+export const uploadDesign = ({ designName, description, completed, images, levels, figmaFileURL, sketchFileURL, ImageAssetsURL, toolsUsed, isCompleted, user, setloading, userData, fetchUserData, callback }: UploadDesign) => {
     setloading(true)
     const { bio, dribble, facebook, github, instagram, linkedIn, name, twitter, website, photoURL, followers, following, contributions } = userData;
     const contribution = contributions + 1;
@@ -206,7 +210,7 @@ export const uploadDesign = ({ designName, description, completed, images, level
         userPhotoURL: user.photoURL
     }).then(() => {
         setloading(false);
-        toast.success("Done");
+        callback()
         createorUpdateUserDoc({ updating: true, bio, dribble, facebook, github, instagram, linkedIn, name, photoURL: user.photoURL, setloading, twitter, website, contributions: contribution, followers, following, fetchUserData })
     })
 };

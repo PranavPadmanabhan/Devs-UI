@@ -12,14 +12,7 @@ const Designs: NextPage = () => {
     const [width, setWidth] = useState(0);
     const [designs, setDesigns] = useState<Array<any>>([]);
 
-    const q = query(collection(getFirestore(), "Designs"));
-    onSnapshot(q, (querySnapshot) => {
-        setDesigns(querySnapshot.docs);
-        // querySnapshot.forEach((doc) => {
-        //     // setDesigns([...designs, doc.data()])
-        // });
-
-    });
+  
 
 
     useEffect(() => {
@@ -27,6 +20,18 @@ const Designs: NextPage = () => {
             setWidth(window.innerWidth);
         }
         // console.log(width);    
+        try {
+            const q = query(collection(getFirestore(), "Designs"));
+            onSnapshot(q, (querySnapshot) => {
+                setDesigns(querySnapshot.docs);
+                // querySnapshot.forEach((doc) => {
+                //     // setDesigns([...designs, doc.data()])
+                // });
+        
+            });
+        } catch (error) {
+            console.log(error)
+        }
     }, [])
 
     const images = [
@@ -48,7 +53,7 @@ const Designs: NextPage = () => {
             <div className={`${styles.DesignCardContainer} flex flex-col w-screen items-center box-border  border-2 sm:grid sm:grid-cols-4 sm:place-items-center sm:px-[3%] gap-y-[50px] sm:pt-[3vh] sm:pb-[7vh] sm:pt-[5vh]`}>
                 {
                     designs.map((item,index) =>(
-                        <DesignCard destination='' images={item.data().images} designName={item.data().name} profileURL={item.data().userPhotoURL} />
+                        <DesignCard key={index} destination='' images={item.data().images} designName={item.data().name} profileURL={item.data().userPhotoURL} />
                     ))
                 }
                 {/* <DesignCard destination='' images={images} designName='Dream job finder' profileURL='/Assets/icons/avatar.png' />

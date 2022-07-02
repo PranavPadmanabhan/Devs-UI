@@ -13,6 +13,7 @@ import { getStorage, ref } from 'firebase/storage'
 import { AuthContext } from '../../contexts/AuthContext';
 import toast, { Toaster } from 'react-hot-toast';
 import { addCompletedStatus, addFileType, addLevelCheckMark, addTool, createorUpdateUserDoc, handleDesignFiles, handleFiles, notify, SearchUserData, uploadDesign, uploadDesignFiles } from '../../services/Services'
+import { useRouter } from 'next/router';
 
 const UploadDesign: NextPage = () => {
   const [uploadedDetails, setUploadedDetails] = useState<Array<string>>([] as Array<string>);
@@ -26,6 +27,7 @@ const UploadDesign: NextPage = () => {
   const [sketchFileURL, setSketchFileURL] = useState<string>()
   const [ImageAssetsURL, setImageAssetURL] = useState<string>();
   const [userData, setuserData] = useState<any>({})
+  const router = useRouter()
 
   const fetchUserData = async () => {
     if (user) {
@@ -34,15 +36,20 @@ const UploadDesign: NextPage = () => {
     }
 }
 
-useEffect(() => {
-  fetchUserData();
-},[])
+    useEffect(() => {
+      fetchUserData();
+    },[])
+
+    const callback = () => {
+      router.replace('/profile')
+    }
+
 
   const uploadTask = async() => {
     const { name, description, images, levels, completed } = design;
     if (!name || !description || !images || !levels || !completed || !toolsUsed || !ImageAssetsURL) notify('Fill every fields and try again');
     else {
-      uploadDesign({ designName:name, description, images, levels, completed, figmaFileURL, sketchFileURL, ImageAssetsURL, toolsUsed, user, isCompleted: completed == "100%" ? true : false ,setloading,userData,fetchUserData});
+      uploadDesign({ designName:name, description, images, levels, completed, figmaFileURL, sketchFileURL, ImageAssetsURL, toolsUsed, user, isCompleted: completed == "100%" ? true : false ,setloading,userData,fetchUserData,callback});
       setDesign({name:'',description:'',levels:null,images:[],figmaFileURL:'',ImageAssetsURL:'',sketchFileURL:'',toolsUsed:[],completed:null, isCompleted:false})
       
     }
@@ -65,7 +72,7 @@ useEffect(() => {
           ) : (
             <div className={`${styles.PageContent} w-[100%] flex flex-col box-border px-5 sm:px-[45px] lg:px-[55px]`}>
               <h1 className={`${styles.heading_UploadDesign} text-[8vw] mt-3 esm:text-[6.8vw] asm:text-[7vw] sm:text-[2vw] md:text-[3vw] lg:text-[2vw] xl:text-[2.2vw]`}>Upload Design</h1>
-              <h1 className="text-[0.8vw] text-gray-500 -mb-2 mt-4 ml-3">* please fill the fields in the given order</h1>
+              <h1 className="text-[3vw] sm:text-[0.8vw] text-gray-500 -mb-2 mt-4 ml-3">* please fill the fields in the given order</h1>
               <input
                 value={design.name}
                 onChange={(e) => setDesign({ ...design, name: e.target.value })}

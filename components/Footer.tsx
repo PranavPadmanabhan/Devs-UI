@@ -14,12 +14,12 @@ function Footer({position = 'relative'}:FooterProps) {
 
 
   return (
-    <footer className={`${styles.footer} bottom-0 w-screen h-[40vh] z-[-1] box-border bg-footer-mesh bg-no-repeat bg-cover bg-center snap-center flex flex-col items-center justify-center sm:relative sm:flex-row sm:items-start sm:justify-end sm:pt-[10vh]`} style={{position:position}}>
+    <footer className={`${styles.footer} bottom-0 w-screen min-h-[45vh] z-[-1] box-border bg-footer-mesh bg-no-repeat bg-cover bg-center snap-center flex flex-col items-center justify-center sm:relative sm:flex-row sm:items-start sm:justify-end sm:pt-[10vh]`} style={{position:position}}>
           <div className="w-screen max-w-[200px] h-[25%] flex flex-col items-center justify-start my-[15px] sm:mt-[5vh]">
             <p className="text-left">ofifiuahfuafihafu</p>
             <p className="text-left">ofifiuajkbafbjkbafkhfuafihafu</p>
             <p className="text-left">ofifiuajajfffjkbkfhfuafihafu</p>
-            <div className="flex w-[70%] items-center justify-evenly mt-[20px] sm:hidden ">
+            <div className="flex w-[70%] items-center justify-evenly mt-[10px] sm:hidden ">
               <img src="/Assets/lightmode/instagram.png" alt="instagram" className="w-[15%] min-w-[30px]" />
               <img src="/Assets/lightmode/twitter.png" alt="twitter" className="w-[15%] min-w-[30px]" />
             </div>

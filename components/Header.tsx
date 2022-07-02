@@ -13,23 +13,14 @@ function Header() {
   const { theme, toggleTheme, preferredTheme } = useContext(ThemeContext);
   const { user } = useContext(AuthContext)
   const router = useRouter();
-  const [userData, setuserData] = useState({})
 
-
-  useEffect(() => {
-    fetchData(user,setuserData);
-
-    return () => {
-       null;
-    }
-  }, [user])
 
   const navigate = () => {
     router.replace('/role')
   }
 
   const authenticateWithGithub = () => {
-        signIn({callback:navigate,userData});
+        signIn({callback:navigate});
   }
 
   return (

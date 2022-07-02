@@ -126,7 +126,6 @@ export type User = {
 
 export type SignIn = {
     callback:() => void,
-    userData:User
 }
 
 export type LogOutProps = {
@@ -206,7 +205,8 @@ export type UploadDesign = {
     setloading: React.Dispatch<React.SetStateAction<boolean>>,
     userData:any,
     fetchUserData:any,
-    user?: any
+    user?: any,
+    callback:() => void
 }
 
 export type UploadImages = {

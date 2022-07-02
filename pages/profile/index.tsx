@@ -1,11 +1,11 @@
 import useLocalStorage from '@rehooks/local-storage'
-import { collection, getFirestore, onSnapshot, query, where } from 'firebase/firestore'
+import { collection, getDocs, getFirestore, onSnapshot, query, where } from 'firebase/firestore'
 import { NextPage } from 'next'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useSwipeable } from 'react-swipeable'
-import Card from '../../components/Card'
+import Card, { UseIntersection } from '../../components/Card'
 import Footer from '../../components/Footer'
 import NavBar from '../../components/NavBar'
 import SocialMediaItems from '../../components/SocialMediaItems'
@@ -21,22 +21,37 @@ const Profile: NextPage = () => {
         '/Assets/images/image1.JPG',
         '/Assets/images/image2.JPG',
         '/Assets/images/image3.JPG'
-    ]
+    ];
 
     const [currentTab, setCurrentTab] = useState<CurrentTab>("My Designs");
     const [currentUser, setcurrentUser] = useState<User>({} as User);
     const { user } = useContext(AuthContext)
-    const [width, setwidth] = useState(0)
+    const [Width, setwidth] = useState(0)
     const [designs, setDesigns] = useState<Array<any>>([]);
+    const [completedDesigns, setCompletedDesigns] = useState<Array<any>>([])
+    const [incompletedDesigns, setIncompletedDesigns] = useState<Array<any>>([])
+    const ref2 = useRef<HTMLDivElement>(null)
+    const [intersecting, width] = UseIntersection({ ref: ref2, options: { rootMargin: '100px', threshold: 1 } })
 
-    const q = query(collection(getFirestore(), "Designs"), where('uid', '==', `${user.uid}`));
-    onSnapshot(q, (querySnapshot) => {
-        setDesigns(querySnapshot.docs);
-        // querySnapshot.forEach((doc) => {
-        //     // setDesigns([...designs, doc.data()])
-        // });
 
-    });
+//     const q = query(collection(getFirestore(), "Designs"), where('uid', '==', `${user.uid}`));
+//    const unsub =  onSnapshot(q, (querySnapshot) => {
+//         setDesigns(querySnapshot.docs);
+//         // querySnapshot.forEach((doc) => {
+//         //     // setDesigns([...designs, doc.data()])
+//         // });
+//         // console.log(querySnapshot.docs[0].data())
+
+//     });
+      const fetch = () => {
+        getDocs(collection(getFirestore(),'Designs')).then((res) => {
+            setDesigns(res.docs.filter((items) => items.data().uid == user.uid));
+            setCompletedDesigns(res.docs.filter((item) => item.data().isCompleted == true))
+            setIncompletedDesigns(res.docs.filter((item) => item.data().isCompleted == false))
+
+        })
+      }
+
 
     const fetchUserData = async () => {
         if (user) {
@@ -53,6 +68,7 @@ const Profile: NextPage = () => {
             setwidth(window.innerWidth)
         }
         fetchUserData();
+        fetch();
     }, [user])
 
     const config = {
@@ -92,12 +108,13 @@ const Profile: NextPage = () => {
     const RenderTabs = () => {
         if (currentTab === 'My Designs') {
             return (
-                <div {...handlers} className={`${styles.singleTab} w-[100%] h-[100%] flex flex-col items-center overflow-y-scroll snap-y snap-mandatory scrollbar-hide sm:grid sm:grid-cols-4 sm:place-items-center sm:gap-y-5 sm:snap-none `}>
+                <div {...handlers} className={`${styles.singleTab} w-[100%] h-[100%] flex flex-col items-center overflow-y-scroll snap-y snap-mandatory box-border pb-[15%] scrollbar-hide sm:grid sm:grid-cols-4 sm:place-items-center sm:gap-y-5 sm:snap-none `}>
                     {
                         designs.map((item, index) => (
-                            <Card images={item.data().images} title={item.data().name} description={item.data().description} level={item.data().levels} destination={`challenges/${item.data().name}`} snap={width < 640 ? 'snap-start' : "snap-none"} uid={item.data().uid} />
+                            <Card key={index} images={item.data().images} title={item.data().name} description={item.data().description} level={item.data().levels} destination={`challenges/${item.data().name}`} snap={width < 640 ? 'snap-center' : "snap-none"} uid={item.data().uid} />
                         ))
                     }
+                    {designs.length == 0??(<h1>No Data</h1>)}
                     {/* <Card snap='snap-start' images={images} title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/1"} />
                     <Card snap='snap-start' images={images} title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/2"} />
                     <Card snap='snap-start' images={images} title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/3"} />
@@ -110,18 +127,24 @@ const Profile: NextPage = () => {
         else if (currentTab === 'Task In Progress') {
             return (
                 <div {...handlers} className={`${styles.singleTab} w-[100%] h-[100%] flex flex-col items-center overflow-y-scroll snap-y snap-mandatory scrollbar-hide sm:grid sm:grid-cols-4 sm:place-items-center sm:gap-y-5 sm:snap-none pt-1`}>
-                    <Card snap='snap-start' images={images} title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={3} destination={"challenges/1"} />
+ {
+                        incompletedDesigns.map((item, index) => (
+                            <Card key={index} images={item.data().images} title={item.data().name} description={item.data().description} level={item.data().levels} destination={`challenges/${item.data().name}`} snap={width < 640 ? 'snap-center' : "snap-none"} uid={item.data().uid} />
+                        ))
+                    }       
+                 {incompletedDesigns.length == 0??(<h1>No Data</h1>)}
                 </div>
             )
         }
         else {
             return (
                 <div {...handlers} className={`${styles.singleTab} w-[100%] h-[100%] flex flex-col items-center overflow-y-scroll snap-y snap-mandatory scrollbar-hide sm:grid sm:grid-cols-4 sm:place-items-center sm:gap-y-5 sm:snap-none`}>
-                    <Card snap='snap-start' images={images} title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={2} destination={"challenges/1"} />
-                    <Card snap='snap-start' images={images} title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/2"} />
-                    <Card snap='snap-start' images={images} title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={3} destination={"challenges/1"} />
-                    <Card snap='snap-start' images={images} title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={3} destination={"challenges/1"} />
-
+                     {
+                        completedDesigns.map((item, index) => (
+                            <Card key={index} images={item.data().images} title={item.data().name} description={item.data().description} level={item.data().levels} destination={`challenges/${item.data().name}`} snap={width < 640 ? 'snap-center' : "snap-none"} uid={item.data().uid} />
+                        ))
+                    }
+                    {completedDesigns.length == 0??(<h1>No Data</h1>)}
                 </div>
             )
         }
@@ -169,22 +192,23 @@ const Profile: NextPage = () => {
                         {/*---------------- first column with image and follow section ends here -----------------------*/}
 
                         {/*-------------- details and social media section starts here ---------------------*/}
-                        <div className={`${styles.secondColumn} w-[50%] h-[100%] flex flex-col items-start justify-start box-border pt-5 pl-4 sm:pt-0`}>
-                            <h1 className={`text-[2.5vh] font-semibold whitespace-nowrap  mt-3 sm:text-[32px] `}>{currentUser.name ?? `${currentUser.email?.slice(0, 10)}..`}</h1>
-                            <SocialMediaItems title={currentUser.bio == '' ? 'Not Available' : currentUser.bio} url='/Assets/lightmode/cv.png' />
-                            <SocialMediaItems title={currentUser.website == '' ? 'Not Available' : currentUser.website} url='/Assets/lightmode/link.png' />
-                            <SocialMediaItems title={currentUser.github == '' ? 'Not Available' : currentUser.github} url='/Assets/lightmode/github.png' />
-                            <SocialMediaItems title={currentUser.twitter == '' ? 'Not Available' : currentUser.twitter} url='/Assets/lightmode/twitter.png' />
-                            <SocialMediaItems title={currentUser.facebook == '' ? 'Not Available' : currentUser.facebook} url='/Assets/lightmode/facebook.png' />
-                            <SocialMediaItems title={currentUser.dribble == '' ? 'Not Available' : currentUser.dribble} url='/Assets/lightmode/dribble.png' />
-                            <SocialMediaItems title={currentUser.linkedIn == '' ? 'Not Available' : currentUser.linkedIn} url='/Assets/lightmode/linkedin.png' />
-                            <SocialMediaItems title={currentUser.instagram == '' ? 'Not Available' : currentUser.instagram} url='/Assets/lightmode/instagram.png' />
+                        <div className={`${styles.secondColumn} w-[50%] h-[100%] flex flex-col items-start justify-start box-border pt-5  sm:pt-0`}>
+                            <h1 className={`block text-[2.5vh] font-semibold whitespace-nowrap  mt-3 sm:text-[32px] sm:hidden`}>{currentUser.name?.slice(0, 8) ?? `${currentUser.email?.slice(0, 10)}`}..</h1>
+                            <h1 className={`hidden sm:block text-[2.5vh] font-semibold whitespace-nowrap  mt-3 sm:text-[32px] `}>{currentUser.name ?? `${currentUser.email?.slice(0, 10)}`}</h1>
+                            <SocialMediaItems title={currentUser.bio == ''  ? 'Not Available' : currentUser.bio} url='/Assets/lightmode/cv.png' />
+                            <SocialMediaItems title={currentUser.website == ''  ? 'Not Available' : currentUser.website} url='/Assets/lightmode/link.png' />
+                            <SocialMediaItems title={currentUser.github == ''  ? 'Not Available' : currentUser.github} url='/Assets/lightmode/github.png' />
+                            <SocialMediaItems title={currentUser.twitter == ''  ? 'Not Available' : currentUser.twitter} url='/Assets/lightmode/twitter.png' />
+                            <SocialMediaItems title={currentUser.facebook == ''  ? 'Not Available' : currentUser.facebook} url='/Assets/lightmode/facebook.png' />
+                            <SocialMediaItems title={currentUser.dribble == ''  ? 'Not Available' : currentUser.dribble} url='/Assets/lightmode/dribble.png' />
+                            <SocialMediaItems title={currentUser.linkedIn == ''  ? 'Not Available' : currentUser.linkedIn} url='/Assets/lightmode/linkedin.png' />
+                            <SocialMediaItems title={currentUser.instagram == ''  ? 'Not Available' : currentUser.instagram} url='/Assets/lightmode/instagram.png' />
                         </div>
                         {/*-------------- details and social media section ends here ---------------------*/}
 
                     </div>
                     {/*----------------- design upload button starts here-------------*/}
-                    <div onClick={() => router.push('/uploadDesign')} className={`w-[35%] h-[5%] min-h-[35px] rounded-[25px] bg-[#323c71] mr-0 flex items-center justify-center my-4 cursor-pointer sm:w-[25%] sm:mr-5`}>
+                    <div onClick={() => router.push('/uploadDesign')} className={`w-[35%] h-[5%] min-h-[35px] rounded-[25px] bg-[#323c71] mr-0 flex items-center justify-center my-[8%] cursor-pointer sm:w-[25%] sm:my-4 sm:mr-5`}>
                         <span className={`text-white text-[16px]`}>Upload design</span>
                     </div>
                     {/*----------------- design upload button ends here -------------*/}
@@ -193,14 +217,14 @@ const Profile: NextPage = () => {
                 {/*------------- details ends here -----------*/}
 
                 <section className={`${styles.Content} w-[100%] h-screen  snap-start box-border pb-[10vh] sm:mt-[6vh] `}>
-                    <div className={`${styles.TabsContainer} flex w-[100%] h-[5%] items-center justify-between box-border px-3 mb-[2vh] sm:px-[10%] sm:mt-[2vh] `}>
+                    <div ref={ref2} className={`${styles.TabsContainer}  ${intersecting?'sticky top-0 mt-5 bg-white z-[100] sm:relative ':'relative'} flex w-[100%] h-[5%] items-center justify-between box-border px-3 mb-[2vh] sm:px-[10%] sm:mt-[2vh] `}>
                         <span onClick={() => setCurrentTab("My Designs")} className={`${currentTab === "My Designs" ? `border-b-4 border-[#323c71] text-[#323c71] font-bold text-[18px] ${styles.TabActive}` : `border-none text-black font-light text-[14px] ${styles.Tab}`} duration-1000 py-2 cursor-pointer `}>My Designs</span>
                         <span onClick={() => setCurrentTab("Task In Progress")} className={`${currentTab === "Task In Progress" ? `border-b-4 border-[#323c71] text-[#323c71] font-bold text-[18px] ${styles.TabActive}` : `border-none text-black font-light text-[14px] ${styles.Tab}`} duration-1000 py-2 cursor-pointer`}>Task In Progress</span>
                         <span onClick={() => setCurrentTab("Task Completed")} className={`${currentTab === "Task Completed" ? `border-b-4 border-[#323c71] text-[#323c71] font-bold text-[18px] ${styles.TabActive}` : `border-none text-black font-light text-[14px] ${styles.Tab}`} duration-1000 py-2 cursor-pointer`}>Task Completed</span>
                     </div>
                     <RenderTabs />
                 </section>
-                <Footer position='relative' />
+                {Width >640 && (<Footer position='relative' />)}
 
             </div>
 
