@@ -13,7 +13,7 @@ import { collection, getFirestore, onSnapshot, query } from 'firebase/firestore'
 import Link from 'next/link'
 import { AuthContext } from '../../contexts/AuthContext'
 import { Toaster } from 'react-hot-toast'
-import { notify } from '../../services/Services'
+import { notify, SearchUserData } from '../../services/Services'
 
 const Challenges: NextPage = () => {
     const [width, setWidth] = useState(0);
@@ -25,6 +25,7 @@ const Challenges: NextPage = () => {
     const [sortingDrawerVisiblity, setSortingDrawerVisiblity] = useState<boolean>(false)
     const [filterDrawerVisiblity, setFilterDrawerVisibility] = useState<boolean>(false);
     const [designs, setDesigns] = useState<Array<any>>([]);
+    const [currentUser, setcurrentUser] = useState<any>({})
 
     const q = query(collection(getFirestore(), "Designs"));
     onSnapshot(q, (querySnapshot) => {
@@ -34,6 +35,18 @@ const Challenges: NextPage = () => {
         // });
 
     });
+
+    const fetchUserData = async () => {
+        if (user) {
+            const userData = await SearchUserData(user?.uid)
+            setcurrentUser(userData)
+        }
+        else {
+            setcurrentUser({})
+        }
+    }
+
+
     const images = [
         '/Assets/images/image1.JPG',
         '/Assets/images/image2.JPG',
@@ -107,7 +120,7 @@ const Challenges: NextPage = () => {
                 <section className=" grid grid-cols-1 gap-y-[5vh] place-items-center snap-center py-[3vh] scrollbar-hide bg-white overflow-y-scroll snap-y snap-mandatory w-[100%] min-h-[70vh] sm:overflow-x-hidden sm:grid sm:grid-cols-4 sm:place-items-center sm:min-h-[90vh]">
                     {
                         designs.map((item, index) => (
-                            <Card images={item.data().images} title={item.data().name} description={item.data().description} level={item.data().levels} destination={`challenges/${item.data().name}`} snap={width < 640 ? 'snap-center' : "snap-none"} uid={item.data().uid} />
+                            <Card images={item.data().images} title={item.data().name} description={item.data().description} level={item.data().levels} destination={`challenges/${item.data().name}`} snap={width < 640 ? 'snap-center' : "snap-none"} uid={item.data().uid} userData={currentUser} fetchUserData={fetchUserData} />
                         ))
                     }
                     {/* <Card images={images} title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/1"} snap={width < 640 ? 'snap-start':"snap-none"} />
