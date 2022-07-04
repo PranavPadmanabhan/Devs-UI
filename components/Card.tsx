@@ -90,7 +90,7 @@ function Card({ images, title, description, level, destination, snap, uid, userD
       <h1 className='self-center text-[7vw] sm:text-[2vw] sm:mb-2 font-bold mb-2 '>{title}</h1>
       <p className="self-center max-w-[90%] ">{description}</p>
         { uid == user.uid && (<FaEllipsisV size={22} onClick={() => setsettings(!settings)} className='self-end group absolute right-4 bottom-9'/>)}
-        <div className={`${settings?'flex z-[1000] flex-col':'hidden'} absolute bg-white  self-end w-[50%] h-auto shadow-task bottom-[13%]  items-center justify-center`}>
+        <div className={`${settings?'flex z-[1000] flex-col':'hidden'} absolute bg-white  self-end w-[50%] h-auto shadow-task bottom-[13%] sm:bottom-[16%]  items-center justify-center`}>
           <div onClick={() => deleteDesign({designName:title,user,userData,images, fetchUserData})} className="h-[40px] w-[100%] self-center flex items-center justify-center">Delete</div>
         </div>
     </div>
