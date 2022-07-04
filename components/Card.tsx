@@ -75,7 +75,7 @@ function Card({ images, title, description, level, destination, snap, uid, userD
 
 
   return (
-    <div ref={ref} onMouseOver={() => setMouseOver(true)} onMouseEnter={() => setMouseOver(true)} onMouseOut={() => setMouseOver(false)} className={`relative w-[85%]  h-[90%] min-w-[85%] mx-3 min-h-[60vh] rounded-[20px] shadow-task max-w-[90vw] max-h-[30vh] bg-white my-3 p-[4%] ${snap} flex flex-col`}>
+    <div ref={ref} onMouseOver={() => setMouseOver(true)} onMouseEnter={() => setMouseOver(true)} onMouseOut={() => setMouseOver(false)} className={`relative w-[85%]  h-[90%] min-w-[85%] mx-3 min-h-[60vh] rounded-[20px] shadow-task max-w-[90vw] max-h-[30vh] bg-white my-3 p-[4%] ${snap} flex flex-col cursor-pointer`}>
       <Carousel showStatus={false} interval={2000} dynamicHeight={true} showThumbs={false} autoPlay={autoPlaySetings()} infiniteLoop={true} className={`rounded-[15px] max-h-[35vh] shadow-task`}>
         {
           images.map((item,index) => (
@@ -83,11 +83,11 @@ function Card({ images, title, description, level, destination, snap, uid, userD
           ))
         }
       </Carousel>
-      <div className="w-[40%] h-[7%] min-h-[35px] rounded-[10px] border-2 border-black box-border flex items-center justify-between mt-3 mb-1">
+      <div className="w-[40%] h-[7%] min-h-[35px] rounded-[10px] border-2 border-black box-border flex items-center justify-between sm:mt-2 mt-3 mb-1">
         <span className="ml-1">Level {level}</span>
         <div className="w-[30%] h-[85%] bg-orange-500 text-white font-bold rounded-[5px] flex items-center justify-center  mr-[2px]">{level}</div>
       </div>
-      <h1 className='self-center text-[7vw] font-bold mb-2 '>{title}</h1>
+      <h1 className='self-center text-[7vw] sm:text-[2vw] sm:mb-2 font-bold mb-2 '>{title}</h1>
       <p className="self-center max-w-[90%] ">{description}</p>
         { uid == user.uid && (<FaEllipsisV size={22} onClick={() => setsettings(!settings)} className='self-end group absolute right-4 bottom-9'/>)}
         <div className={`${settings?'flex z-[1000] flex-col':'hidden'} absolute bg-white  self-end w-[50%] h-auto shadow-task bottom-[13%]  items-center justify-center`}>
