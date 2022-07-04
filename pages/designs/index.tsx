@@ -34,11 +34,7 @@ const Designs: NextPage = () => {
         }
     }, [])
 
-    const images = [
-        '/Assets/images/image1.JPG',
-        '/Assets/images/image2.JPG',
-        '/Assets/images/image3.JPG'
-    ]
+
 
     return (
         <div className='w-screen h-screen flex flex-col justify-start items-center overflow-y-scroll snap-y snap-mandatory scrollbar-hide pt-[14vh] sm:pt-[10vh] sm:snap-none'>
