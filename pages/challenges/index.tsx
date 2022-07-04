@@ -120,15 +120,10 @@ const Challenges: NextPage = () => {
                 <section className=" grid grid-cols-1 gap-y-[5vh] place-items-center snap-center py-[3vh] scrollbar-hide bg-white overflow-y-scroll snap-y snap-mandatory w-[100%] min-h-[70vh] sm:overflow-x-hidden sm:grid sm:grid-cols-4 sm:place-items-center sm:min-h-[90vh]">
                     {
                         designs.map((item, index) => (
-                            <Card images={item.data().images} title={item.data().name} description={item.data().description} level={item.data().levels} destination={`challenges/${item.data().name}`} snap={width < 640 ? 'snap-center' : "snap-none"} uid={item.data().uid} userData={currentUser} fetchUserData={fetchUserData} />
+                            <Card images={item.data().images} title={item.data().name} description={item.data().description} level={item.data().levels} destination={``} snap={width < 640 ? 'snap-center' : "snap-none"} uid={item.data().uid} userData={currentUser} fetchUserData={fetchUserData} />
                         ))
                     }
-                    {/* <Card images={images} title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/1"} snap={width < 640 ? 'snap-start':"snap-none"} />
-                <Card images={images} title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/1"} snap={width < 640 ? 'snap-start':"snap-none"} />
-                <Card images={images} title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/1"} snap={width < 640 ? 'snap-start':"snap-none"} />
-                <Card images={images} title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/1"} snap={width < 640 ? 'snap-start':"snap-none"} />
-                <Card images={images} title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/1"} snap={width < 640 ? 'snap-start':"snap-none"} />
-                <Card images={images} title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/1"} snap={width < 640 ? 'snap-start':"snap-none"} /> */}
+                
                 </section>
                 <Footer position='relative' />
                 <Toaster />

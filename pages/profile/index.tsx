@@ -116,16 +116,11 @@ const Profile: NextPage = () => {
                 <div {...handlers} className={`${styles.singleTab} w-[100%] h-[100%] flex flex-col items-center overflow-y-scroll snap-y snap-mandatory box-border pb-[15%] scrollbar-hide sm:grid sm:grid-cols-4 sm:place-items-center sm:gap-y-5 sm:snap-none `}>
                     {
                         designs.map((item, index) => (
-                            <Card key={index} images={item.data().images} title={item.data().name} description={item.data().description} level={item.data().levels} destination={`challenges/${item.data().name}`} snap={width < 640 ? 'snap-center' : "snap-none"} uid={item.data().uid} userData={currentUser} fetchUserData={fetchUserData} />
+                            <Card key={index} images={item.data().images} title={item.data().name} description={item.data().description} level={item.data().levels} destination={``} snap={width < 640 ? 'snap-center' : "snap-none"} uid={item.data().uid} userData={currentUser} fetchUserData={fetchUserData} />
                         ))
                     }
                     {designs.length == 0??(<h1>No Data</h1>)}
-                    {/* <Card snap='snap-start' images={images} title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/1"} />
-                    <Card snap='snap-start' images={images} title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/2"} />
-                    <Card snap='snap-start' images={images} title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/3"} />
-                    <Card snap='snap-start' images={images} title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/1"} />
-                    <Card snap='snap-start' images={images} title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/2"} />
-                    <Card snap='snap-start' images={images} title='Dream Job Finder' description='The project will help you to improve your app development skills. We provide designs and assets to develop the UI.' level={1} destination={"challenges/3"} /> */}
+                   
                 </div>
             )
         }
@@ -134,7 +129,7 @@ const Profile: NextPage = () => {
                 <div {...handlers} className={`${styles.singleTab} w-[100%] h-[100%] flex flex-col items-center overflow-y-scroll snap-y snap-mandatory scrollbar-hide sm:grid sm:grid-cols-4 sm:place-items-center sm:gap-y-5 sm:snap-none pt-1`}>
  {
                         incompletedDesigns.map((item, index) => (
-                            <Card key={index} images={item.data().images} title={item.data().name} description={item.data().description} level={item.data().levels} destination={`challenges/${item.data().name}`} snap={width < 640 ? 'snap-center' : "snap-none"} uid={item.data().uid} userData={currentUser} fetchUserData={fetchUserData} />
+                            <Card key={index} images={item.data().images} title={item.data().name} description={item.data().description} level={item.data().levels} destination={``} snap={width < 640 ? 'snap-center' : "snap-none"} uid={item.data().uid} userData={currentUser} fetchUserData={fetchUserData} />
                         ))
                     }       
                  {incompletedDesigns.length == 0??(<h1>No Data</h1>)}
@@ -146,7 +141,7 @@ const Profile: NextPage = () => {
                 <div {...handlers} className={`${styles.singleTab} w-[100%] h-[100%] flex flex-col items-center overflow-y-scroll snap-y snap-mandatory scrollbar-hide sm:grid sm:grid-cols-4 sm:place-items-center sm:gap-y-5 sm:snap-none`}>
                      {
                         completedDesigns.map((item, index) => (
-                            <Card key={index} images={item.data().images} title={item.data().name} description={item.data().description} level={item.data().levels} destination={`challenges/${item.data().name}`} snap={width < 640 ? 'snap-center' : "snap-none"} uid={item.data().uid} userData={currentUser} fetchUserData={fetchUserData} />
+                            <Card key={index} images={item.data().images} title={item.data().name} description={item.data().description} level={item.data().levels} destination={``} snap={width < 640 ? 'snap-center' : "snap-none"} uid={item.data().uid} userData={currentUser} fetchUserData={fetchUserData} />
                         ))
                     }
                     {completedDesigns.length == 0??(<h1>No Data</h1>)}
