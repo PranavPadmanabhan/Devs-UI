@@ -4,6 +4,7 @@ import { NextPage } from 'next'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import React, { useContext, useEffect, useRef, useState } from 'react'
+import { Toaster } from 'react-hot-toast'
 import { useSwipeable } from 'react-swipeable'
 import Card, { UseIntersection } from '../../components/Card'
 import Footer from '../../components/Footer'
@@ -32,7 +33,7 @@ const Profile: NextPage = () => {
     const [incompletedDesigns, setIncompletedDesigns] = useState<Array<any>>([])
     const ref2 = useRef<HTMLDivElement>(null)
     const [intersecting, width] = UseIntersection({ ref: ref2, options: { rootMargin: '100px', threshold: 1 } })
-
+    const { contributions } = currentUser;
 
 //     const q = query(collection(getFirestore(), "Designs"), where('uid', '==', `${user.uid}`));
 //    const unsub =  onSnapshot(q, (querySnapshot) => {
@@ -46,12 +47,13 @@ const Profile: NextPage = () => {
       const fetch = () => {
         getDocs(collection(getFirestore(),'Designs')).then((res) => {
             setDesigns(res.docs.filter((items) => items.data().uid == user.uid));
-            setCompletedDesigns(res.docs.filter((item) => item.data().isCompleted == true))
-            setIncompletedDesigns(res.docs.filter((item) => item.data().isCompleted == false))
+            setCompletedDesigns(designs.filter((item) => item.data().isCompleted == true))
+            setIncompletedDesigns(designs.filter((item) => item.data().isCompleted == false))
 
         })
       }
 
+      
 
     const fetchUserData = async () => {
         if (user) {
@@ -69,7 +71,10 @@ const Profile: NextPage = () => {
         }
         fetchUserData();
         fetch();
-    }, [user])
+    }, [user, contributions,designs.length])
+
+  
+    
 
     const config = {
         delta: 10,
@@ -111,7 +116,7 @@ const Profile: NextPage = () => {
                 <div {...handlers} className={`${styles.singleTab} w-[100%] h-[100%] flex flex-col items-center overflow-y-scroll snap-y snap-mandatory box-border pb-[15%] scrollbar-hide sm:grid sm:grid-cols-4 sm:place-items-center sm:gap-y-5 sm:snap-none `}>
                     {
                         designs.map((item, index) => (
-                            <Card key={index} images={item.data().images} title={item.data().name} description={item.data().description} level={item.data().levels} destination={`challenges/${item.data().name}`} snap={width < 640 ? 'snap-center' : "snap-none"} uid={item.data().uid} />
+                            <Card key={index} images={item.data().images} title={item.data().name} description={item.data().description} level={item.data().levels} destination={`challenges/${item.data().name}`} snap={width < 640 ? 'snap-center' : "snap-none"} uid={item.data().uid} userData={currentUser} fetchUserData={fetchUserData} />
                         ))
                     }
                     {designs.length == 0??(<h1>No Data</h1>)}
@@ -129,7 +134,7 @@ const Profile: NextPage = () => {
                 <div {...handlers} className={`${styles.singleTab} w-[100%] h-[100%] flex flex-col items-center overflow-y-scroll snap-y snap-mandatory scrollbar-hide sm:grid sm:grid-cols-4 sm:place-items-center sm:gap-y-5 sm:snap-none pt-1`}>
  {
                         incompletedDesigns.map((item, index) => (
-                            <Card key={index} images={item.data().images} title={item.data().name} description={item.data().description} level={item.data().levels} destination={`challenges/${item.data().name}`} snap={width < 640 ? 'snap-center' : "snap-none"} uid={item.data().uid} />
+                            <Card key={index} images={item.data().images} title={item.data().name} description={item.data().description} level={item.data().levels} destination={`challenges/${item.data().name}`} snap={width < 640 ? 'snap-center' : "snap-none"} uid={item.data().uid} userData={currentUser} fetchUserData={fetchUserData} />
                         ))
                     }       
                  {incompletedDesigns.length == 0??(<h1>No Data</h1>)}
@@ -141,7 +146,7 @@ const Profile: NextPage = () => {
                 <div {...handlers} className={`${styles.singleTab} w-[100%] h-[100%] flex flex-col items-center overflow-y-scroll snap-y snap-mandatory scrollbar-hide sm:grid sm:grid-cols-4 sm:place-items-center sm:gap-y-5 sm:snap-none`}>
                      {
                         completedDesigns.map((item, index) => (
-                            <Card key={index} images={item.data().images} title={item.data().name} description={item.data().description} level={item.data().levels} destination={`challenges/${item.data().name}`} snap={width < 640 ? 'snap-center' : "snap-none"} uid={item.data().uid} />
+                            <Card key={index} images={item.data().images} title={item.data().name} description={item.data().description} level={item.data().levels} destination={`challenges/${item.data().name}`} snap={width < 640 ? 'snap-center' : "snap-none"} uid={item.data().uid} userData={currentUser} fetchUserData={fetchUserData} />
                         ))
                     }
                     {completedDesigns.length == 0??(<h1>No Data</h1>)}
@@ -192,7 +197,7 @@ const Profile: NextPage = () => {
                         {/*---------------- first column with image and follow section ends here -----------------------*/}
 
                         {/*-------------- details and social media section starts here ---------------------*/}
-                        <div className={`${styles.secondColumn} w-[50%] h-[100%] flex flex-col items-start justify-start box-border pt-5  sm:pt-0`}>
+                        <div className={`${styles.secondColumn} w-[50%] h-[100%] flex flex-col items-start justify-start box-border pt-5 pl-2  sm:pt-0`}>
                             <h1 className={`block text-[2.5vh] font-semibold whitespace-nowrap  mt-3 sm:text-[32px] sm:hidden`}>{currentUser.name?.slice(0, 8) ?? `${currentUser.email?.slice(0, 10)}`}..</h1>
                             <h1 className={`hidden sm:block text-[2.5vh] font-semibold whitespace-nowrap  mt-3 sm:text-[32px] `}>{currentUser.name ?? `${currentUser.email?.slice(0, 10)}`}</h1>
                             <SocialMediaItems title={currentUser.bio == ''  ? 'Not Available' : currentUser.bio} url='/Assets/lightmode/cv.png' />
@@ -227,6 +232,7 @@ const Profile: NextPage = () => {
                 {Width >640 && (<Footer position='relative' />)}
 
             </div>
+            <Toaster />
 
         </div>
     )

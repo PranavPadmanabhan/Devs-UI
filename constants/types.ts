@@ -42,7 +42,10 @@ export interface Cardprops {
     level: number,
     destination: string,
     snap: 'snap-start' | 'snap-center' | 'snap-end' | 'snap-none',
-    uid?:string
+    uid?:string,
+    userData:any,
+    fetchUserData?: () => Promise<void>,
+
 }
 
 
@@ -255,4 +258,13 @@ export type UploadFileManage = {
     setprogress: React.Dispatch<React.SetStateAction<number>>
     user?: any,
     design: Design,
+}
+
+export type Delete = {
+    designName:string,
+    user?: any,
+    userData:any,
+    images:string[],
+    fetchUserData?: () => Promise<void>,
+
 }

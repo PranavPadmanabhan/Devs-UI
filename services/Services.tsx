@@ -1,9 +1,9 @@
 import { getAuth, GithubAuthProvider, onAuthStateChanged, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import app from "../config/firebase";
-import { check, createDocProps, Design, HandleDesignFiles, LogOutProps, SignIn, ToolsUsed, UploadData, UploadDesign, UploadFileManage, UploadFiles, UploadImage, UploadImages, User } from "../constants/types";
-import { doc, getDoc, getFirestore, onSnapshot, setDoc } from 'firebase/firestore'
+import { check, createDocProps, Delete, Design, HandleDesignFiles, LogOutProps, SignIn, ToolsUsed, UploadData, UploadDesign, UploadFileManage, UploadFiles, UploadImage, UploadImages, User } from "../constants/types";
+import { deleteDoc, doc, getDoc, getFirestore, onSnapshot, setDoc } from 'firebase/firestore'
 import { writeStorage, deleteFromStorage } from '@rehooks/local-storage';
-import { getDownloadURL, getStorage, ref, uploadBytesResumable, UploadTask } from "firebase/storage";
+import { deleteObject, getDownloadURL, getStorage, ref, uploadBytesResumable, UploadTask } from "firebase/storage";
 import toast from "react-hot-toast";
 
 
@@ -68,7 +68,6 @@ export const createorUpdateUserDoc = ({ updating, bio, dribble, facebook, github
                 dribble: userData.dribble,
             }).then(() => toast.success('Done')).catch((err) => notify("something went wrong"))
         } else if (userData && updating) {
-            setloading(true)
             setDoc(doc(getFirestore(), 'users', `${currentUser?.uid}`), {
                 name: name == '' ? userData.name : name,
                 email: userData.email,
@@ -87,7 +86,7 @@ export const createorUpdateUserDoc = ({ updating, bio, dribble, facebook, github
                 facebook: facebook,
                 dribble: dribble,
 
-            }).then(() => { setloading(false); updateProfile(currentUser, { displayName: userData.name }); fetchUserData(); toast.success('Done') }).catch((err) => notify("something went wrong"));
+            }).then(() => { updateProfile(currentUser, { displayName: userData.name }); fetchUserData();  }).catch((err) => notify(err.message));
 
         }
 
@@ -220,7 +219,7 @@ export const uploadDesignImages = ({ files, fetchUserData, setloading, setupload
     const storage = getStorage();
     for (let index = 0; index < files.length; index++) {
         setuploading(true)
-        const storageRef = ref(storage, `Designs/${user.uid}/${design.name}/${files[index].name}`);
+        const storageRef = ref(storage, `Designs/${user.uid}/${design.name}/${design.name}-${index+1}`);
         const task = uploadBytesResumable(storageRef, files[index]);
         task.on("state_changed",
             (snapshot) => {
@@ -253,9 +252,7 @@ export const uploadDesignFiles = ({ file, setloading, setuploading, user, design
     const storage = getStorage();
     setuploading(true);
 
-    const storageRef = ref(storage, `Designs/${user.uid}/${design.name}/${file.name}`);
-    console.log(storageRef);
-
+    const storageRef = ref(storage, `Designs/${user.uid}/${design.name}/${design.name}`);
     const task = uploadBytesResumable(storageRef, file);
     task.on("state_changed",
         (snapshot) => {
@@ -281,6 +278,25 @@ export const uploadDesignFiles = ({ file, setloading, setuploading, user, design
 
 
 
+}
+
+export const deleteDesign = ({ designName, user, userData, images, fetchUserData }:Delete) => {
+    const storageRef = ref(getStorage(), `Designs/${user.uid}/${designName}/${designName}`);
+    const { bio, dribble, facebook, github, instagram, linkedIn, name, twitter, website, photoURL, followers, following, contributions } = userData;
+    const contribution = contributions - 1;
+    createorUpdateUserDoc({ updating: true, bio, dribble, facebook, github, instagram, linkedIn, name, photoURL: user.photoURL, twitter, website, contributions: contribution, followers, following, fetchUserData })
+    deleteDoc(doc(getFirestore(),`Designs/${designName}`)).then(() => {
+        toast.success("Deleted");
+        // console.log(contribution);
+        
+        deleteObject(storageRef);
+        images.map((items,index) => {
+            const reference = ref(getStorage(), `Designs/${user.uid}/${designName}/${designName}-${index+1}`);
+            deleteObject(reference);
+         
+        })
+
+    })
 }
 
 export const notify = (msg: string) => toast.error(msg, {

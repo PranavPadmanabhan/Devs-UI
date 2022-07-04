@@ -66,7 +66,7 @@ const UploadDesign: NextPage = () => {
       <div className={`${styles.MainContainer} w-[100%]  h-[100%] flex flex-col overflow-y-scroll scrollbar-hide `}>
         {
           loading || uploading ? (
-            <div className='h-[80%] w-[100%] flex items-center justify-center text-[2vw] font-bold italic'>
+            <div className='h-[80%] w-[100%] flex items-center justify-center text-[5vw] sm:text-[2vw] font-bold italic'>
               {uploading ? `Uploading..${progress}%` : 'loading...'}
             </div>
           ) : (
