@@ -5,7 +5,7 @@ import { deleteDoc, doc, getDoc, getFirestore, onSnapshot, setDoc } from 'fireba
 import { writeStorage, deleteFromStorage } from '@rehooks/local-storage';
 import { deleteObject, getDownloadURL, getStorage, ref, uploadBytesResumable, UploadTask } from "firebase/storage";
 import toast from "react-hot-toast";
-
+import firebase from 'firebase/firestore'
 
 
 const githubProvider = new GithubAuthProvider();
@@ -206,7 +206,8 @@ export const uploadDesign = ({ designName, description, completed, images, level
         shares: [],
         uid: user.uid,
         authorName: user.displayName,
-        userPhotoURL: user.photoURL
+        userPhotoURL: user.photoURL,
+        createdAt: Date.now()
     }).then(() => {
         setloading(false);
         callback()
@@ -284,6 +285,7 @@ export const deleteDesign = ({ designName, user, userData, images, fetchUserData
     const storageRef = ref(getStorage(), `Designs/${user.uid}/${designName}/${designName}`);
     const { bio, dribble, facebook, github, instagram, linkedIn, name, twitter, website, photoURL, followers, following, contributions } = userData;
     const contribution = contributions - 1;
+    console.log(contribution)
     createorUpdateUserDoc({ updating: true, bio, dribble, facebook, github, instagram, linkedIn, name, photoURL: user.photoURL, twitter, website, contributions: contribution, followers, following, fetchUserData })
     deleteDoc(doc(getFirestore(),`Designs/${designName}`)).then(() => {
         toast.success("Deleted");

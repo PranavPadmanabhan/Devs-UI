@@ -1,5 +1,5 @@
 import useLocalStorage from '@rehooks/local-storage'
-import { collection, getDocs, getFirestore, onSnapshot, query, where } from 'firebase/firestore'
+import { collection, getDocs, getFirestore, onSnapshot, query, where, orderBy } from 'firebase/firestore'
 import { NextPage } from 'next'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
@@ -35,7 +35,7 @@ const Profile: NextPage = () => {
     const [intersecting, width] = UseIntersection({ ref: ref2, options: { rootMargin: '100px', threshold: 1 } })
     const { contributions } = currentUser;
 
-//     const q = query(collection(getFirestore(), "Designs"), where('uid', '==', `${user.uid}`));
+    const q = query(collection(getFirestore(), "Designs"),orderBy('createdAt','desc'));
 //    const unsub =  onSnapshot(q, (querySnapshot) => {
 //         setDesigns(querySnapshot.docs);
 //         // querySnapshot.forEach((doc) => {
@@ -45,7 +45,7 @@ const Profile: NextPage = () => {
 
 //     });
       const fetch = () => {
-        getDocs(collection(getFirestore(),'Designs')).then((res) => {
+        getDocs(q).then((res) => {
             setDesigns(res.docs.filter((items) => items.data().uid == user.uid));
             setCompletedDesigns(designs.filter((item) => item.data().isCompleted == true))
             setIncompletedDesigns(designs.filter((item) => item.data().isCompleted == false))
@@ -116,7 +116,7 @@ const Profile: NextPage = () => {
                 <div {...handlers} className={`${styles.singleTab} w-[100%] h-[100%] flex flex-col items-center overflow-y-scroll snap-y snap-mandatory box-border pb-[15%] scrollbar-hide sm:grid sm:grid-cols-4 sm:place-items-center sm:gap-y-5 sm:snap-none `}>
                     {
                         designs.map((item, index) => (
-                            <Card key={index} images={item.data().images} title={item.data().name} description={item.data().description} level={item.data().levels} destination={``} snap={width < 640 ? 'snap-center' : "snap-none"} uid={item.data().uid} userData={currentUser} fetchUserData={fetchUserData} />
+                            <Card key={index} images={item.data().images} title={item.data().name} description={item.data().description} level={item.data().levels} destination={item.data().name} snap={width < 640 ? 'snap-center' : "snap-none"} uid={item.data().uid} userData={currentUser} fetchUserData={fetchUserData} />
                         ))
                     }
                     {designs.length == 0??(<h1>No Data</h1>)}
@@ -129,7 +129,7 @@ const Profile: NextPage = () => {
                 <div {...handlers} className={`${styles.singleTab} w-[100%] h-[100%] flex flex-col items-center overflow-y-scroll snap-y snap-mandatory scrollbar-hide sm:grid sm:grid-cols-4 sm:place-items-center sm:gap-y-5 sm:snap-none pt-1`}>
  {
                         incompletedDesigns.map((item, index) => (
-                            <Card key={index} images={item.data().images} title={item.data().name} description={item.data().description} level={item.data().levels} destination={``} snap={width < 640 ? 'snap-center' : "snap-none"} uid={item.data().uid} userData={currentUser} fetchUserData={fetchUserData} />
+                            <Card key={index} images={item.data().images} title={item.data().name} description={item.data().description} level={item.data().levels} destination={item.data().name} snap={width < 640 ? 'snap-center' : "snap-none"} uid={item.data().uid} userData={currentUser} fetchUserData={fetchUserData} />
                         ))
                     }       
                  {incompletedDesigns.length == 0??(<h1>No Data</h1>)}
@@ -141,7 +141,7 @@ const Profile: NextPage = () => {
                 <div {...handlers} className={`${styles.singleTab} w-[100%] h-[100%] flex flex-col items-center overflow-y-scroll snap-y snap-mandatory scrollbar-hide sm:grid sm:grid-cols-4 sm:place-items-center sm:gap-y-5 sm:snap-none`}>
                      {
                         completedDesigns.map((item, index) => (
-                            <Card key={index} images={item.data().images} title={item.data().name} description={item.data().description} level={item.data().levels} destination={``} snap={width < 640 ? 'snap-center' : "snap-none"} uid={item.data().uid} userData={currentUser} fetchUserData={fetchUserData} />
+                            <Card key={index} images={item.data().images} title={item.data().name} description={item.data().description} level={item.data().levels} destination={item.data().name} snap={width < 640 ? 'snap-center' : "snap-none"} uid={item.data().uid} userData={currentUser} fetchUserData={fetchUserData} />
                         ))
                     }
                     {completedDesigns.length == 0??(<h1>No Data</h1>)}

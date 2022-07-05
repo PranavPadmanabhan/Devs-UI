@@ -9,7 +9,7 @@ import OptionItems from '../../components/OptionItems'
 import DrawerItem from '../../components/DrawerItem'
 import MiniFooter from '../../components/MiniFooter'
 import styles from '../../styles/desktop.module.css'
-import { collection, getFirestore, onSnapshot, query } from 'firebase/firestore'
+import { collection, getFirestore, onSnapshot, orderBy, query } from 'firebase/firestore'
 import Link from 'next/link'
 import { AuthContext } from '../../contexts/AuthContext'
 import { Toaster } from 'react-hot-toast'
@@ -27,7 +27,7 @@ const Challenges: NextPage = () => {
     const [designs, setDesigns] = useState<Array<any>>([]);
     const [currentUser, setcurrentUser] = useState<any>({})
 
-    const q = query(collection(getFirestore(), "Designs"));
+    const q = query(collection(getFirestore(), "Designs"),orderBy('createdAt','desc'));
     onSnapshot(q, (querySnapshot) => {
         setDesigns(querySnapshot.docs);
         // querySnapshot.forEach((doc) => {
@@ -120,7 +120,7 @@ const Challenges: NextPage = () => {
                 <section className=" grid grid-cols-1 gap-y-[5vh] place-items-center snap-center py-[3vh] scrollbar-hide bg-white overflow-y-scroll snap-y snap-mandatory w-[100%] min-h-[70vh] sm:overflow-x-hidden sm:grid sm:grid-cols-4 sm:place-items-center sm:min-h-[90vh]">
                     {
                         designs.map((item, index) => (
-                            <Card images={item.data().images} title={item.data().name} description={item.data().description} level={item.data().levels} destination={``} snap={width < 640 ? 'snap-center' : "snap-none"} uid={item.data().uid} userData={currentUser} fetchUserData={fetchUserData} />
+                            <Card images={item.data().images} title={item.data().name} description={item.data().description} level={item.data().levels} destination={item.data().name} snap={width < 640 ? 'snap-center' : "snap-none"} uid={item.data().uid} userData={currentUser} fetchUserData={fetchUserData} />
                         ))
                     }
                 
