@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import Card from './Card'
 import styles from '../styles/desktop.module.css'
-import { collection, getFirestore, onSnapshot, query } from 'firebase/firestore';
+import { collection, getFirestore, onSnapshot, orderBy, query } from 'firebase/firestore';
 import { AuthContext } from '../contexts/AuthContext';
 import { SearchUserData } from '../services/Services';
 
@@ -11,13 +11,9 @@ function Carousel() {
     const [currentUser, setcurrentUser] = useState<any>({})
     const { user } = useContext(AuthContext)
 
-    const images = [
-        '/Assets/images/image1.JPG',
-        '/Assets/images/image2.JPG',
-        '/Assets/images/image3.JPG'
-    ]
 
-    const q = query(collection(getFirestore(), "Designs"));
+
+    const q = query(collection(getFirestore(), "Designs"),orderBy('createdAt','desc'));
     onSnapshot(q, (querySnapshot) => {
         setDesigns(querySnapshot.docs);
         // querySnapshot.forEach((doc) => {
