@@ -55,7 +55,7 @@ function Card({ images, title, description, level, destination, snap, uid, userD
 
 
   const navigate = () => {
-    if (!imageHover) router.push(`challenges/${destination}`);
+    if (!imageHover) router.push(`/challenges/${destination}`);
     else return null;
   }
 

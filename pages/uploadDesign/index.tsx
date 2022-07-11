@@ -41,7 +41,7 @@ const UploadDesign: NextPage = () => {
     },[])
 
     const callback = () => {
-      router.replace('/profile')
+      router.replace(`/profile/${user?.uid}`)
     }
 
 

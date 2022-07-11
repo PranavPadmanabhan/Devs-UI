@@ -38,7 +38,7 @@ export const fetchData = async (user: any, setuserData: React.Dispatch<React.Set
 
 
 export async function SearchUserData(uid?: string | null) {
-    const snapshot = await getDoc(doc(getFirestore(), 'users', `${currentUser?.uid ?? uid}`));
+    const snapshot = await getDoc(doc(getFirestore(), 'users', `${uid}`));
     if (snapshot.exists()) {
         userData = snapshot.data();
         writeStorage('uid', snapshot.data().uid);

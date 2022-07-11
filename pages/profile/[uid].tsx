@@ -34,6 +34,8 @@ const Profile: NextPage = () => {
     const ref2 = useRef<HTMLDivElement>(null)
     const [intersecting, width] = UseIntersection({ ref: ref2, options: { rootMargin: '100px', threshold: 1 } })
     const { contributions } = currentUser;
+    const { uid } = router.query;
+
 
     const q = query(collection(getFirestore(), "Designs"),orderBy('createdAt','desc'));
 //    const unsub =  onSnapshot(q, (querySnapshot) => {
@@ -57,7 +59,8 @@ const Profile: NextPage = () => {
 
     const fetchUserData = async () => {
         if (user) {
-            const userData = await SearchUserData(user?.uid)
+            console.log(uid)
+            const userData = await SearchUserData(uid?.toString())
             setcurrentUser(userData)
         }
         else {
@@ -166,7 +169,7 @@ const Profile: NextPage = () => {
                         {/*---------------- first column with image and follow section starts here -----------------------*/}
                         <div className={`${styles.FirstColumn} w-[55%] h-[100%] flex flex-col items-center justify-start box-border mt-5 pt-7 sm:w-[40%] sm:pt-2 `}>
                             <div className={`${styles.LogoContainer}  w-[100%] h-[70%] flex flex-col items-center justify-center -mt-3 pt-2 mr-3 mb-0 sm:mb-5 sm:mt-3`}>
-                                <img src={user?.photoURL ?? "/Assets/icons/avatar.png"} alt="" className={`${styles.ProfileAvatar} w-[150px] min-h-[150px] sm:w-[180px] sm:min-h-[180px] object-cover rounded-[100%]`} />
+                                <img src={currentUser?.photoURL ?? "/Assets/icons/avatar.png"} alt="" className={`${styles.ProfileAvatar} w-[150px] min-h-[150px] sm:w-[180px] sm:min-h-[180px] object-cover rounded-[100%]`} />
                                 {/*-------- update profile image button starts here ------*/}
                                 <div onClick={() => router.push('/personalDetails')} className={`${styles.EditProfileBtn} w-[50%]  h-[15%] rounded-[10px] bg-[#323c71] min-h-[32px] flex items-center justify-center cursor-pointer mb-5 mt-2 sm:w-[30%] sm:h-[20%] sm:mb-[1vh]`}>
                                     <span className={`text-white text-[4vw] sm:text-[1.5vw] `}>Edit profile</span>
@@ -181,11 +184,11 @@ const Profile: NextPage = () => {
                                 </div>
                                 <div className={`w-[25%] h-[100%] flex flex-col items-center justify-center mr-5 `}>
                                     <span className={`mb-2 text-[12px] font-light sm:text-[18px]`}>Followers</span>
-                                    <span className={`text-[22px] font-light`}>{currentUser.followers ?? 0}</span>
+                                    <span className={`text-[22px] font-light`}>{currentUser.followers?.length ?? 0}</span>
                                 </div>
                                 <div className={`w-[25%] h-[100%] flex flex-col items-center justify-center mr-5`}>
                                     <span className={`mb-2 text-[12px] font-light sm:text-[18px]`}>Following</span>
-                                    <span className={`text-[22px] font-light`}>{currentUser.following ?? 0}</span>
+                                    <span className={`text-[22px] font-light`}>{currentUser.following?.length ?? 0}</span>
                                 </div>
                             </div>
                         </div>

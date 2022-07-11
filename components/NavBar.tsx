@@ -61,7 +61,7 @@ function NavBar() {
               {
                 user ? (
                   <>
-                    <DrawerItem url='/Assets/lightmode/user.png' title='Profile' redAccent={false} onClick={() => navigate('profile')} upcoming={false} />
+                    <DrawerItem url='/Assets/lightmode/user.png' title='Profile' redAccent={false} onClick={() => navigate(`/profile/${user?.uid}`)} upcoming={false} />
                     <DrawerItem url='/Assets/lightmode/log-out.png' title='Sign Out' redAccent={true} onClick={() => { LogOut({callback:navigateBack}); }} upcoming={false} />
                   </>
                 ) : (
@@ -92,7 +92,7 @@ function NavBar() {
               {
                 user ? (
                   <>
-                    <DrawerItem url='/Assets/lightmode/user.png' title='Profile' redAccent={false} onClick={() => navigate("profile")} upcoming={false} />
+                    <DrawerItem url='/Assets/lightmode/user.png' title='Profile' redAccent={false} onClick={() => navigate(`/profile/${user?.uid}`)} upcoming={false} />
                     <DrawerItem url='/Assets/lightmode/log-out.png' title='Sign Out' redAccent={true} onClick={() => LogOut({callback:navigateBack})} upcoming={false} />
                   </>
                 ) : (
