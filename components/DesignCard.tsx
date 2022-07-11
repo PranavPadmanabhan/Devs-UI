@@ -7,7 +7,7 @@ import { UseIntersection } from './Card';
 import { FaBolt, FaComment, FaShare } from 'react-icons/fa'
 
 
-function DesignCard({ images, destination, designName, profileURL, comments, lightenings,  shares  }:designCards) {
+function DesignCard({ images, destination, designName, profileURL, comments, lightenings,  shares, uid  }:designCards) {
 
   const ref = useRef<HTMLDivElement>(null)
   const [mouseOver, setMouseOver] = useState(false)
@@ -31,6 +31,7 @@ function DesignCard({ images, destination, designName, profileURL, comments, lig
   }
 
 
+
   return (
     <div ref={ref} onMouseOver={() => setMouseOver(true)} onMouseEnter={() => setMouseOver(true)} onMouseOut={() => setMouseOver(false)} className={`relative w-[85%]  h-[90%] mx-3 min-h-[55vh] rounded-[20px] shadow-task max-w-[90vw] max-h-[30vh] bg-white my-3 p-[4%] snap-center flex flex-col cursor-pointer`}>
       <Carousel showStatus={false} interval={2000} dynamicHeight={true} showThumbs={false} autoPlay={autoPlaySetings()} infiniteLoop={true} className={`rounded-[15px] max-h-[35vh] shadow-task`}>
@@ -47,7 +48,7 @@ function DesignCard({ images, destination, designName, profileURL, comments, lig
           <img src="/Assets/lightmode/messenger.png" alt="" className="w-[30%] max-w-[40px] sm:max-w-[30px]" />
           <img src="/Assets/lightmode/share.png" alt="" className="w-[30%] max-w-[40px] sm:max-w-[30px]" />
         </div>
-        <img  src={profileURL} alt="" className="max-w-[60px] rounded-[100%] mr-[10%] border-[1px] border-gray-500 sm:max-w-[40px]" />
+        <img onClick={() => router.push(`/profile/${uid}`)} src={profileURL} alt="" className="max-w-[60px] rounded-[100%] mr-[10%] border-[1px] border-gray-500 sm:max-w-[40px]" />
        </div>
     </div>
   )

@@ -48,7 +48,7 @@ const Designs: NextPage = () => {
             <div className={`${styles.DesignCardContainer} flex flex-col w-screen items-center box-border  border-2 sm:grid sm:grid-cols-4 sm:place-items-center sm:px-[3%] gap-y-[50px] sm:pt-[3vh] sm:pb-[7vh] sm:pt-[5vh]`}>
                 {
                     designs.map((item,index) =>(
-                        <DesignCard key={index} destination='' images={item.data().images} designName={item.data().name} profileURL={item.data().userPhotoURL} />
+                        <DesignCard key={index} destination='' images={item.data().images} designName={item.data().name} profileURL={item.data().userPhotoURL} uid={item.data().uid} />
                     ))
                 }
                

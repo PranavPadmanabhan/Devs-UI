@@ -57,6 +57,7 @@ export type designCards = {
     lightenings?:number,
     comments?:Array<Object>,
     shares?:Array<any>,
+    uid:any
 }
 
 export interface optionProps {
