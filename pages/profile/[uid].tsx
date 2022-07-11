@@ -48,7 +48,7 @@ const Profile: NextPage = () => {
 //     });
       const fetch = () => {
         getDocs(q).then((res) => {
-            setDesigns(res.docs.filter((items) => items.data().uid == user.uid));
+            setDesigns(res.docs.filter((items) => items.data().uid == uid));
             setCompletedDesigns(designs.filter((item) => item.data().isCompleted == true))
             setIncompletedDesigns(designs.filter((item) => item.data().isCompleted == false))
 
