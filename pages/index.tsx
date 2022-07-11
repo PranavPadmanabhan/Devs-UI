@@ -1,5 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import { Toaster } from 'react-hot-toast'
 import Carousel from '../components/Carousel'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
@@ -63,6 +64,7 @@ const Home: NextPage = () => {
 
         <Footer position='relative'/>
       </div>
+      <Toaster />
     </div>
   )
 }

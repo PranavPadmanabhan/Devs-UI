@@ -47,12 +47,6 @@ const Challenges: NextPage = () => {
     }
 
 
-    const images = [
-        '/Assets/images/image1.JPG',
-        '/Assets/images/image2.JPG',
-        '/Assets/images/image3.JPG'
-    ]
-
     useEffect(() => {
         if (typeof (window) !== undefined) {
             setWidth(window.innerWidth);
@@ -90,7 +84,7 @@ const Challenges: NextPage = () => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <NavBar />
-            <h1 className="self-start block text-[7vw] text-black font-bold sm:hidden">Challenges</h1>
+            <h1 className="self-start ml-2 block text-[7vw] text-black font-bold sm:hidden">Challenges</h1>
 
 
             {/*--------------- second header with search options starts here ---------------*/}
@@ -98,7 +92,7 @@ const Challenges: NextPage = () => {
 
             <div className={`${styles.SmallHeader} group  flex items-center justify-between w-[100%] h-[10vh] sm:px-[3%] border-b-[1px] border-gray-400 sm:mb-5`}>
                 <div className="flex w-[60%] min-h-[45px] h-[70%] items-center justify-evenly px-[3%] sm:px-2 ml-2 bg-[#e5e7eb] rounded-[10px]">
-                    <input type="text" className=" w-[90%] h-[100%] focus:outline-none focus:group-mt-[-10px] bg-[#e5e7eb]" />
+                    <input type="text" placeholder='search challenge..' className=" w-[90%] h-[100%] focus:outline-none focus:group-mt-[-10px] bg-[#e5e7eb]" />
                     <img src="/Assets/lightmode/magnifying-glass.png" alt="" className="h-[45%]" />
                 </div>
                 <div className="flex items-center justify-evenly w-[40%] h-[100%] ">
@@ -130,7 +124,6 @@ const Challenges: NextPage = () => {
             </div>
 
             {/*--------------- challenges container ends here ---------------*/}
-
         </div>
     )
 }

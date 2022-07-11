@@ -58,14 +58,9 @@ const Profile: NextPage = () => {
       
 
     const fetchUserData = async () => {
-        if (user) {
-            console.log(uid)
             const userData = await SearchUserData(uid?.toString())
             setcurrentUser(userData)
-        }
-        else {
-            setcurrentUser({})
-        }
+     
     }
 
     useEffect(() => {
@@ -171,9 +166,17 @@ const Profile: NextPage = () => {
                             <div className={`${styles.LogoContainer}  w-[100%] h-[70%] flex flex-col items-center justify-center -mt-3 pt-2 mr-3 mb-0 sm:mb-5 sm:mt-3`}>
                                 <img src={currentUser?.photoURL ?? "/Assets/icons/avatar.png"} alt="" className={`${styles.ProfileAvatar} w-[150px] min-h-[150px] sm:w-[180px] sm:min-h-[180px] object-cover rounded-[100%]`} />
                                 {/*-------- update profile image button starts here ------*/}
-                                <div onClick={() => router.push('/personalDetails')} className={`${styles.EditProfileBtn} w-[50%]  h-[15%] rounded-[10px] bg-[#323c71] min-h-[32px] flex items-center justify-center cursor-pointer mb-5 mt-2 sm:w-[30%] sm:h-[20%] sm:mb-[1vh]`}>
-                                    <span className={`text-white text-[4vw] sm:text-[1.5vw] `}>Edit profile</span>
-                                </div>
+                                {
+                                    user?(currentUser.uid == user?.uid?(
+                                        <div onClick={() => router.push('/personalDetails')} className={`${styles.EditProfileBtn} w-[50%]  h-[15%] rounded-[10px] bg-[#323c71] min-h-[32px] flex items-center justify-center cursor-pointer mb-5 mt-2 sm:w-[30%] sm:h-[20%] sm:mb-[1vh]`}>
+                                            <span className={`text-white text-[4vw] sm:text-[1.5vw] `}>Edit profile</span>
+                                        </div>
+                                    ):(
+                                        <div onClick={() => {}} className={`${styles.EditProfileBtn} w-[50%]  h-[15%] rounded-[10px] bg-[#323c71] min-h-[32px] flex items-center justify-center cursor-pointer mb-5 mt-2 sm:w-[30%] sm:h-[20%] sm:mb-[1vh]`}>
+                                            <span className={`text-white text-[4vw] sm:text-[1.5vw] `}>Follow</span>
+                                        </div>
+                                    )):null
+                                }
                                 {/*-------- update profile image button starts here ------*/}
 
                             </div>
@@ -211,9 +214,13 @@ const Profile: NextPage = () => {
 
                     </div>
                     {/*----------------- design upload button starts here-------------*/}
-                    <div onClick={() => router.push('/uploadDesign')} className={`w-[35%] h-[5%] min-h-[35px] rounded-[25px] bg-[#323c71] mr-0 flex items-center justify-center my-[8%] cursor-pointer sm:w-[25%] sm:my-4 sm:mr-5`}>
-                        <span className={`text-white text-[16px]`}>Upload design</span>
-                    </div>
+                    {
+                        user?(currentUser.uid == user.uid && (
+                        <div onClick={() => router.push('/uploadDesign')} className={`w-[35%] h-[5%] min-h-[35px] rounded-[25px] bg-[#323c71] mr-0 flex items-center justify-center my-[8%] cursor-pointer sm:w-[25%] sm:my-4 sm:mr-5`}>
+                            <span className={`text-white text-[16px]`}>Upload design</span>
+                        </div>
+                    ) ):null
+                    }
                     {/*----------------- design upload button ends here -------------*/}
 
                 </section>
@@ -221,9 +228,15 @@ const Profile: NextPage = () => {
 
                 <section className={`${styles.Content} w-[100%] h-screen  snap-start box-border pb-[10vh] sm:mt-[6vh] `}>
                     <div ref={ref2} className={`${styles.TabsContainer}  ${intersecting?'sticky top-0 mt-5 bg-white z-[100] sm:relative ':'relative'} flex w-[100%] h-[5%] items-center justify-between box-border px-3 mb-[2vh] sm:px-[10%] sm:mt-[2vh] `}>
-                        <span onClick={() => setCurrentTab("My Designs")} className={`${currentTab === "My Designs" ? `border-b-4 border-[#323c71] text-[#323c71] font-bold text-[18px] ${styles.TabActive}` : `border-none text-black font-light text-[14px] ${styles.Tab}`} duration-1000 py-2 cursor-pointer `}>My Designs</span>
-                        <span onClick={() => setCurrentTab("Task In Progress")} className={`${currentTab === "Task In Progress" ? `border-b-4 border-[#323c71] text-[#323c71] font-bold text-[18px] ${styles.TabActive}` : `border-none text-black font-light text-[14px] ${styles.Tab}`} duration-1000 py-2 cursor-pointer`}>Task In Progress</span>
-                        <span onClick={() => setCurrentTab("Task Completed")} className={`${currentTab === "Task Completed" ? `border-b-4 border-[#323c71] text-[#323c71] font-bold text-[18px] ${styles.TabActive}` : `border-none text-black font-light text-[14px] ${styles.Tab}`} duration-1000 py-2 cursor-pointer`}>Task Completed</span>
+                        {
+                            user?(currentUser.uid == user.uid?(
+                                <>
+                                    <span onClick={() => setCurrentTab("My Designs")} className={`${currentTab === "My Designs" ? `border-b-4 border-[#323c71] text-[#323c71] font-bold text-[18px] ${styles.TabActive}` : `border-none text-black font-light text-[14px] ${styles.Tab}`} duration-1000 py-2 cursor-pointer `}>My Designs</span>
+                                    <span onClick={() => setCurrentTab("Task In Progress")} className={`${currentTab === "Task In Progress" ? `border-b-4 border-[#323c71] text-[#323c71] font-bold text-[18px] ${styles.TabActive}` : `border-none text-black font-light text-[14px] ${styles.Tab}`} duration-1000 py-2 cursor-pointer`}>Task In Progress</span>
+                                    <span onClick={() => setCurrentTab("Task Completed")} className={`${currentTab === "Task Completed" ? `border-b-4 border-[#323c71] text-[#323c71] font-bold text-[18px] ${styles.TabActive}` : `border-none text-black font-light text-[14px] ${styles.Tab}`} duration-1000 py-2 cursor-pointer`}>Task Completed</span>
+                                </>
+                            ):(<span onClick={() => setCurrentTab("My Designs")} className={`${currentTab === "My Designs" ? `border-b-4 border-[#323c71] text-[#323c71] font-bold text-[18px] ${styles.TabActive}` : `border-none text-black font-light text-[14px] ${styles.Tab}`} duration-1000 py-2 cursor-pointer `}>My Designs</span>)):(<span onClick={() => setCurrentTab("My Designs")} className={`${currentTab === "My Designs" ? `border-b-4 border-[#323c71] text-[#323c71] font-bold text-[18px] ${styles.TabActive}` : `border-none text-black font-light text-[14px] ${styles.Tab}`} duration-1000 py-2 cursor-pointer `}>Designs</span>)
+                        }
                     </div>
                     <RenderTabs />
                 </section>

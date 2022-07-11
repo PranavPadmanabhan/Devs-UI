@@ -35,7 +35,6 @@ const Challenge: NextPage = (challenges) => {
         //     // setDesigns([...designs, doc.data()])
         // });
         setcurrentElement(querySnapshot.data())
-        console.log(querySnapshot.data())
 
     });
         
@@ -88,9 +87,9 @@ const Challenge: NextPage = (challenges) => {
                     <div className={`${styles.AuthorContainer} pl-[5%] w-screen h-[13vh] flex items-center box-border sm:w-[60%]`}>
                         <img src={currentElement?.userPhotoURL} alt="" className={`w-[20%] rounded-[100%] mr-3 sm:w-[10%] sm:max-w-[90px] sm:min-w-[60px]`} />
                         <div className={` flex flex-col w-[50%] items-start justify-center h-[100%] sm:w-[60%] sm:ml-[3%]`}>
-                            <span className={`1text-[6vw] sm:text-[1.6vw] font-semibold`}>{currentElement?.uid !== user.uid?(currentElement?.authorName??"########"):"You"}</span>
+                            <span className={`1text-[6vw] sm:text-[1.6vw] font-semibold`}>{user?(currentElement?.uid !== user.uid?(currentElement?.authorName??"########"):"You"):(currentElement?.authorName??'########')}</span>
                             <div onClick={() => router.push(`/profile/${currentElement?.uid}`)} className={`${styles.VisitProfileBtn} w-[60%] h-[30%] bg-[#333c73] flex items-center justify-center rounded-[10px] sm:mt-[5px] sm:w-[50%] sm:min-w-[100px] sm:max-h-[40px] sm:h-[35%] cursor-pointer`}>
-                                <span className={`text-white text-[4vw] sm:text-[1vw] font-semibold`}>{currentElement?.uid !== user.uid? 'Visit Profile':'Profile'}</span>
+                                <span className={`text-white text-[4vw] sm:text-[1vw] font-semibold`}>{user?(currentElement?.uid !== user.uid? 'Visit Profile':'Profile'):'Visit Profile'}</span>
                             </div>
                         </div>
                     </div>
@@ -126,29 +125,3 @@ const Challenge: NextPage = (challenges) => {
 
 export default Challenge
 
-
-
-
-// export async function getStaticPaths() {
-
-//     const paths = data.map((item) => {
-//         return {
-//             params: { challengeId: `${item.id}` }
-//         }
-//     })
-
-//     return {
-//         paths,
-//         fallback: false
-//     }
-// }
-
-// export async function getStaticProps(context: any) {
-
-//     const { challengeId } = context.params;
-//     return {
-//         props: {
-//             challenges: data
-//         }
-//     }
-// }

@@ -150,9 +150,10 @@ export type createDocProps = {
     photoURL?: string,
     fetchUserData?: any,
     contributions?:number,
-    followers?:number,
-    following?:number,
-    role?:'designer'| 'developer'|'both'|null
+    followers?:any,
+    following?:any,
+    role?:'designer'| 'developer'|'both'|null,
+    uid?:any
 
 }
 

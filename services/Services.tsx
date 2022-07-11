@@ -46,7 +46,7 @@ export async function SearchUserData(uid?: string | null) {
     return userData;
 }
 
-export const createorUpdateUserDoc = ({ updating, bio, dribble, facebook, github, instagram, linkedIn, name, twitter, website, photoURL, setloading, fetchUserData, contributions, followers, following, role }: createDocProps) => {
+export const createorUpdateUserDoc = ({ updating, bio, dribble, facebook, github, instagram, linkedIn, name, twitter, website, photoURL, setloading, fetchUserData, contributions, followers, following, role, uid }: createDocProps) => {
     SearchUserData().then(() => {
         if (userData.name && !updating) {
             setDoc(doc(getFirestore(), 'users', `${currentUser?.uid}`), {
@@ -68,7 +68,7 @@ export const createorUpdateUserDoc = ({ updating, bio, dribble, facebook, github
                 dribble: userData.dribble,
             }).then(() => toast.success('Done')).catch((err) => notify("something went wrong"))
         } else if (userData && updating) {
-            setDoc(doc(getFirestore(), 'users', `${currentUser?.uid}`), {
+            setDoc(doc(getFirestore(), 'users', `${uid??currentUser?.uid}`), {
                 name: name == '' ? userData.name : name,
                 email: userData.email,
                 photoURL: photoURL,
@@ -93,12 +93,12 @@ export const createorUpdateUserDoc = ({ updating, bio, dribble, facebook, github
         else {
             if (!userData.name && !updating)
                 setDoc(doc(getFirestore(), 'users', `${currentUser.uid}`), {
-                    name: currentUser.displayName,
+                    name: currentUser.displayName??currentUser.email,
                     email: currentUser.email,
                     photoURL: currentUser.photoURL,
                     uid: currentUser.uid,
-                    followers: 0,
-                    following: 0,
+                    followers: [],
+                    following: [],
                     contributions: 0,
                     bio: '',
                     twitter: '',
@@ -210,6 +210,7 @@ export const uploadDesign = ({ designName, description, completed, images, level
         createdAt: Date.now()
     }).then(() => {
         setloading(false);
+        toast.success('Done')
         callback()
         createorUpdateUserDoc({ updating: true, bio, dribble, facebook, github, instagram, linkedIn, name, photoURL: user.photoURL, setloading, twitter, website, contributions: contribution, followers, following, fetchUserData })
     })
