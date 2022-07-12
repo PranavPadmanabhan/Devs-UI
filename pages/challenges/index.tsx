@@ -31,6 +31,7 @@ const Challenges: NextPage = () => {
     const [designs, setDesigns] = useState<Array<any>>([]);
     const [currentUser, setcurrentUser] = useState<any>({})
     const [online, setonline] = useState<boolean>(true)
+    
 
         if(online){
             const q = query(collection(getFirestore(), "Designs"),orderBy('createdAt','desc'));
@@ -125,7 +126,7 @@ const Challenges: NextPage = () => {
                 <section className=" grid grid-cols-1 gap-y-[5vh] place-items-center snap-center py-[3vh] scrollbar-hide bg-white overflow-y-scroll snap-y snap-mandatory w-[100%] min-h-[70vh] sm:overflow-x-hidden sm:grid sm:grid-cols-4 sm:place-items-center sm:min-h-[90vh]">
                     {
                         designs.map((item, index) => (
-                            <Card images={item.data().images} title={item.data().name} description={item.data().description} level={item.data().levels} destination={item.data().name} snap={width < 640 ? 'snap-center' : "snap-none"} uid={item.data().uid} userData={currentUser} fetchUserData={fetchUserData} />
+                            <Card key={index} images={item.data().images} title={item.data().name} description={item.data().description} level={item.data().levels} destination={item.data().name} snap={width < 640 ? 'snap-center' : "snap-none"} uid={item.data().uid} userData={currentUser} fetchUserData={fetchUserData} />
                         ))
                     }
                 

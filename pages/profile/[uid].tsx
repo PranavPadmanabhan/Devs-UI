@@ -9,6 +9,7 @@ import { useSwipeable } from 'react-swipeable'
 import Card, { UseIntersection } from '../../components/Card'
 import CheckInternetConnection from '../../components/CheckInternetConnection'
 import Footer from '../../components/Footer'
+import Loader from '../../components/Loader'
 import NavBar from '../../components/NavBar'
 import SocialMediaItems from '../../components/SocialMediaItems'
 import { CurrentTab, User } from '../../constants/types'
@@ -36,6 +37,8 @@ const Profile: NextPage = () => {
     const [intersecting, width] = UseIntersection({ ref: ref2, options: { rootMargin: '100px', threshold: 1 } })
     const { contributions } = currentUser;
     const { uid } = router.query;
+    const [loading, setLoading] = useState<boolean>(false)
+
 
 
     const q = query(collection(getFirestore(), "Designs"),orderBy('createdAt','desc'));
@@ -48,20 +51,22 @@ const Profile: NextPage = () => {
 
 //     });
       const fetch = () => {
+        setLoading(true)
         getDocs(q).then((res) => {
             setDesigns(res.docs.filter((items) => items.data().uid == uid));
             setCompletedDesigns(designs.filter((item) => item.data().isCompleted == true))
             setIncompletedDesigns(designs.filter((item) => item.data().isCompleted == false))
-
+            setLoading(false)
         })
       }
 
       
 
     const fetchUserData = async () => {
+        setLoading(true)
             const userData = await SearchUserData(uid?.toString())
             setcurrentUser(userData)
-     
+        setLoading(false)
     }
 
    
@@ -163,72 +168,78 @@ const Profile: NextPage = () => {
             <NavBar />
 
             {/*------------- details starts here -----------*/}
-            <div className={`box-border overflow-y-scroll snap-y snap-mandatory scrollbar-hide scroll-pt-6 `}>
-                <section className={`${styles.firstSection} w-[100%] h-[45vh]  snap-start flex flex-col items-center justify-center sm:flex-row sm:items-start`}>
-                    <div className={` w-[100%] h-[80%] flex `}>
-                        {/*---------------- first column with image and follow section starts here -----------------------*/}
-                        <div className={`${styles.FirstColumn} w-[55%] h-[100%] flex flex-col items-center justify-start box-border mt-5 pt-7 sm:w-[40%] sm:pt-2 `}>
-                            <div className={`${styles.LogoContainer}  w-[100%] h-[70%] flex flex-col items-center justify-center -mt-3 pt-2 mr-3 mb-0 sm:mb-5 sm:mt-3`}>
-                                <img src={currentUser?.photoURL ?? "/Assets/icons/avatar.png"} alt="" className={`${styles.ProfileAvatar} w-[150px] min-h-[150px] sm:w-[180px] sm:min-h-[180px] object-cover rounded-[100%]`} />
-                                {/*-------- update profile image button starts here ------*/}
-                                {
-                                    user?(currentUser.uid == user?.uid?(
-                                        <div onClick={() => router.push('/personalDetails')} className={`${styles.EditProfileBtn} w-[50%]  h-[15%] rounded-[10px] bg-[#323c71] min-h-[32px] flex items-center justify-center cursor-pointer mb-5 mt-2 sm:w-[30%] sm:h-[20%] sm:mb-[1vh]`}>
-                                            <span className={`text-white text-[4vw] sm:text-[1.5vw] `}>Edit profile</span>
-                                        </div>
-                                    ):(
-                                        <div onClick={() => {}} className={`${styles.EditProfileBtn} w-[50%]  h-[15%] rounded-[10px] bg-[#323c71] min-h-[32px] flex items-center justify-center cursor-pointer mb-5 mt-2 sm:w-[30%] sm:h-[20%] sm:mb-[1vh]`}>
-                                            <span className={`text-white text-[4vw] sm:text-[1.5vw] `}>Follow</span>
-                                        </div>
-                                    )):null
-                                }
-                                {/*-------- update profile image button starts here ------*/}
-
-                            </div>
-                            <div className={`${styles.FollowerSection} w-[100%] h-[20%] flex items-center justify-evenly mt-[10px] box-border box-border pl-9 mt-9 sm:mt-[5vh] `}>
-                                <div className={`w-[25%] h-[100%] flex flex-col items-center justify-center  mr-7`}>
-                                    <span className={`mb-2 text-[12px] font-light sm:text-[18px]`}>contributions</span>
-                                    <span className={` text-[22px] font-light`}>{currentUser.contributions ?? 0}</span>
-                                </div>
-                                <div className={`w-[25%] h-[100%] flex flex-col items-center justify-center mr-5 `}>
-                                    <span className={`mb-2 text-[12px] font-light sm:text-[18px]`}>Followers</span>
-                                    <span className={`text-[22px] font-light`}>{currentUser.followers?.length ?? 0}</span>
-                                </div>
-                                <div className={`w-[25%] h-[100%] flex flex-col items-center justify-center mr-5`}>
-                                    <span className={`mb-2 text-[12px] font-light sm:text-[18px]`}>Following</span>
-                                    <span className={`text-[22px] font-light`}>{currentUser.following?.length ?? 0}</span>
-                                </div>
-                            </div>
-                        </div>
-                        {/*---------------- first column with image and follow section ends here -----------------------*/}
-
-                        {/*-------------- details and social media section starts here ---------------------*/}
-                        <div className={`${styles.secondColumn} w-[50%] h-[100%] flex flex-col items-start justify-start box-border pt-5 pl-2  sm:pt-0`}>
-                            <h1 className={`block text-[2.5vh] font-semibold whitespace-nowrap  mt-3 sm:text-[32px] sm:hidden`}>{currentUser.name?.slice(0, 8) ?? `${currentUser.email?.slice(0, 10)}`}..</h1>
-                            <h1 className={`hidden sm:block text-[2.5vh] font-semibold whitespace-nowrap  mt-3 sm:text-[32px] `}>{currentUser.name ?? `${currentUser.email?.slice(0, 10)}`}</h1>
-                            <SocialMediaItems title={currentUser.bio == ''  ? 'Not Available' : currentUser.bio} url='/Assets/lightmode/cv.png' />
-                            <SocialMediaItems title={currentUser.website == ''  ? 'Not Available' : currentUser.website} url='/Assets/lightmode/link.png' />
-                            <SocialMediaItems title={currentUser.github == ''  ? 'Not Available' : currentUser.github} url='/Assets/lightmode/github.png' />
-                            <SocialMediaItems title={currentUser.twitter == ''  ? 'Not Available' : currentUser.twitter} url='/Assets/lightmode/twitter.png' />
-                            <SocialMediaItems title={currentUser.facebook == ''  ? 'Not Available' : currentUser.facebook} url='/Assets/lightmode/facebook.png' />
-                            <SocialMediaItems title={currentUser.dribble == ''  ? 'Not Available' : currentUser.dribble} url='/Assets/lightmode/dribble.png' />
-                            <SocialMediaItems title={currentUser.linkedIn == ''  ? 'Not Available' : currentUser.linkedIn} url='/Assets/lightmode/linkedin.png' />
-                            <SocialMediaItems title={currentUser.instagram == ''  ? 'Not Available' : currentUser.instagram} url='/Assets/lightmode/instagram.png' />
-                        </div>
-                        {/*-------------- details and social media section ends here ---------------------*/}
-
+            {
+                loading?(
+                    <div className='flex items-center justify-center w-[100vw] h-[100vh]'>
+                        <Loader />
                     </div>
-                    {/*----------------- design upload button starts here-------------*/}
-                    {
-                        user?(currentUser.uid == user.uid && (
-                        <div onClick={() => router.push('/uploadDesign')} className={`w-[35%] h-[5%] min-h-[35px] rounded-[25px] bg-[#323c71] mr-0 flex items-center justify-center my-[8%] cursor-pointer sm:w-[25%] sm:my-4 sm:mr-5`}>
-                            <span className={`text-white text-[16px]`}>Upload design</span>
-                        </div>
-                    ) ):null
-                    }
-                    {/*----------------- design upload button ends here -------------*/}
+                ):(
+                    <div className={`box-border overflow-y-scroll snap-y snap-mandatory scrollbar-hide scroll-pt-6 `}>
+                        <section className={`${styles.firstSection} w-[100%] h-[45vh]  snap-start flex flex-col items-center justify-center sm:flex-row sm:items-start`}>
+                            <div className={` w-[100%] h-[80%] flex `}>
+                                {/*---------------- first column with image and follow section starts here -----------------------*/}
+                                <div className={`${styles.FirstColumn} w-[55%] h-[100%] flex flex-col items-center justify-start box-border mt-5 pt-7 sm:w-[40%] sm:pt-2 `}>
+                                    <div className={`${styles.LogoContainer}  w-[100%] h-[70%] flex flex-col items-center justify-center -mt-3 pt-2 mr-3 mb-0 sm:mb-5 sm:mt-3`}>
+                                        <img src={currentUser?.photoURL ?? "/Assets/icons/avatar.png"} alt="" className={`${styles.ProfileAvatar} w-[150px] min-h-[150px] sm:w-[180px] sm:min-h-[180px] object-cover rounded-[100%]`} />
+                                        {/*-------- update profile image button starts here ------*/}
+                                        {
+                                            user?(currentUser.uid == user?.uid?(
+                                                <div onClick={() => router.push('/personalDetails')} className={`${styles.EditProfileBtn} w-[50%]  h-[15%] rounded-[10px] bg-[#323c71] min-h-[32px] flex items-center justify-center cursor-pointer mb-5 mt-2 sm:w-[30%] sm:h-[20%] sm:mb-[1vh]`}>
+                                                    <span className={`text-white text-[4vw] sm:text-[1.5vw] `}>Edit profile</span>
+                                                </div>
+                                            ):(
+                                                <div onClick={() => {}} className={`${styles.EditProfileBtn} w-[50%]  h-[15%] rounded-[10px] bg-[#323c71] min-h-[32px] flex items-center justify-center cursor-pointer mb-5 mt-2 sm:w-[30%] sm:h-[20%] sm:mb-[1vh]`}>
+                                                    <span className={`text-white text-[4vw] sm:text-[1.5vw] `}>Follow</span>
+                                                </div>
+                                            )):null
+                                        }
+                                        {/*-------- update profile image button starts here ------*/}
 
-                </section>
+                                    </div>
+                                    <div className={`${styles.FollowerSection} w-[100%] h-[20%] flex items-center justify-evenly mt-[10px] box-border box-border pl-9 mt-9 sm:mt-[5vh] `}>
+                                        <div className={`w-[25%] h-[100%] flex flex-col items-center justify-center  mr-7`}>
+                                            <span className={`mb-2 text-[12px] font-light sm:text-[18px]`}>contributions</span>
+                                            <span className={` text-[22px] font-light`}>{currentUser.contributions ?? 0}</span>
+                                        </div>
+                                        <div className={`w-[25%] h-[100%] flex flex-col items-center justify-center mr-5 `}>
+                                            <span className={`mb-2 text-[12px] font-light sm:text-[18px]`}>Followers</span>
+                                            <span className={`text-[22px] font-light`}>{currentUser.followers?.length ?? 0}</span>
+                                        </div>
+                                        <div className={`w-[25%] h-[100%] flex flex-col items-center justify-center mr-5`}>
+                                            <span className={`mb-2 text-[12px] font-light sm:text-[18px]`}>Following</span>
+                                            <span className={`text-[22px] font-light`}>{currentUser.following?.length ?? 0}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                {/*---------------- first column with image and follow section ends here -----------------------*/}
+
+                                {/*-------------- details and social media section starts here ---------------------*/}
+                                <div className={`${styles.secondColumn} w-[50%] h-[100%] flex flex-col items-start justify-start box-border pt-5 pl-2  sm:pt-0`}>
+                                    <h1 className={`block text-[2.5vh] font-semibold whitespace-nowrap  mt-3 sm:text-[32px] sm:hidden`}>{currentUser.name?.slice(0, 8) ?? `${currentUser.email?.slice(0, 10)}`}..</h1>
+                                    <h1 className={`hidden sm:block text-[2.5vh] font-semibold whitespace-nowrap  mt-3 sm:text-[32px] `}>{currentUser.name ?? `${currentUser.email?.slice(0, 10)}`}</h1>
+                                    <SocialMediaItems title={currentUser.bio == ''  ? 'Not Available' : currentUser.bio} url='/Assets/lightmode/cv.png' />
+                                    <SocialMediaItems title={currentUser.website == ''  ? 'Not Available' : currentUser.website} url='/Assets/lightmode/link.png' />
+                                    <SocialMediaItems title={currentUser.github == ''  ? 'Not Available' : currentUser.github} url='/Assets/lightmode/github.png' />
+                                    <SocialMediaItems title={currentUser.twitter == ''  ? 'Not Available' : currentUser.twitter} url='/Assets/lightmode/twitter.png' />
+                                    <SocialMediaItems title={currentUser.facebook == ''  ? 'Not Available' : currentUser.facebook} url='/Assets/lightmode/facebook.png' />
+                                    <SocialMediaItems title={currentUser.dribble == ''  ? 'Not Available' : currentUser.dribble} url='/Assets/lightmode/dribble.png' />
+                                    <SocialMediaItems title={currentUser.linkedIn == ''  ? 'Not Available' : currentUser.linkedIn} url='/Assets/lightmode/linkedin.png' />
+                                    <SocialMediaItems title={currentUser.instagram == ''  ? 'Not Available' : currentUser.instagram} url='/Assets/lightmode/instagram.png' />
+                                </div>
+                                {/*-------------- details and social media section ends here ---------------------*/}
+
+                            </div>
+                            {/*----------------- design upload button starts here-------------*/}
+                            {
+                                user?(currentUser.uid == user.uid && (
+                                <div onClick={() => router.push('/uploadDesign')} className={`w-[35%] h-[5%] min-h-[35px] rounded-[25px] bg-[#323c71] mr-0 flex items-center justify-center my-[8%] cursor-pointer sm:w-[25%] sm:my-4 sm:mr-5`}>
+                                    <span className={`text-white text-[16px]`}>Upload design</span>
+                                </div>
+                            ) ):null
+                            }
+                            {/*----------------- design upload button ends here -------------*/}
+
+                        </section>
                 {/*------------- details ends here -----------*/}
 
                 <section className={`${styles.Content} w-[100%] h-screen  snap-start box-border pb-[10vh] sm:mt-[6vh] `}>
@@ -248,6 +259,8 @@ const Profile: NextPage = () => {
                 {Width >640 && (<Footer position='relative' />)}
 
             </div>
+                )
+            }
             <Toaster />
 
         </div>

@@ -189,7 +189,7 @@ export type Design = {
     ImageAssetsURL?: string,
     isCompleted: boolean,
     toolsUsed?: Array<ToolsUsed> | undefined,
-    lightenings?:number,
+    lightenings?:any,
     comments?:Array<object>,
     shares?:Array<any>
 
@@ -269,4 +269,8 @@ export type Delete = {
     images:string[],
     fetchUserData?: () => Promise<void>,
 
+}
+
+export type AddLight = {
+    designName:string
 }

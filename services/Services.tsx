@@ -1,6 +1,6 @@
 import { getAuth, GithubAuthProvider, onAuthStateChanged, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import app from "../config/firebase";
-import { check, createDocProps, Delete, Design, HandleDesignFiles, LogOutProps, SignIn, ToolsUsed, UploadData, UploadDesign, UploadFileManage, UploadFiles, UploadImage, UploadImages, User } from "../constants/types";
+import { AddLight, check, createDocProps, Delete, Design, HandleDesignFiles, LogOutProps, SignIn, ToolsUsed, UploadData, UploadDesign, UploadFileManage, UploadFiles, UploadImage, UploadImages, User } from "../constants/types";
 import { deleteDoc, doc, getDoc, getFirestore, onSnapshot, setDoc } from 'firebase/firestore'
 import { writeStorage, deleteFromStorage } from '@rehooks/local-storage';
 import { deleteObject, getDownloadURL, getStorage, ref, uploadBytesResumable, UploadTask } from "firebase/storage";
@@ -405,4 +405,18 @@ export const uploadFileManage = ({ item, design, file, setFigmaFileURL, setImage
     else {
         uploadDesignFiles({ design: design, file: file, setloading, setuploading, user, setprogress, setDesignFileURL: setImageAssetURL })
     }
+}
+
+const readDesignData = async(name:string) => {
+    let design:Design | any = {};
+
+     onSnapshot(doc(getFirestore(),`Designs/${name}`), (querySnapshot) => {
+        design =  querySnapshot.data();
+    });
+    return design
+}
+
+export const addOrRemoveLight = async({designName}:AddLight) => {
+     let data:Design = await readDesignData(designName)
+     const { isCompleted, ImageAssetsURL, comments, completed, description, figmaFileURL, images, levels, lightenings, name, shares, sketchFileURL,toolsUsed } = data;
 }

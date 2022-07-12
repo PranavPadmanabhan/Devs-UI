@@ -5,6 +5,8 @@ import { designCards } from '../constants/types';
 import styles from '../styles/desktop.module.css'
 import { UseIntersection } from './Card';
 import { FaBolt, FaComment, FaShare } from 'react-icons/fa'
+import toast, { Toaster } from 'react-hot-toast';
+import { CopyToClipboard } from 'react-copy-to-clipboard' 
 
 
 function DesignCard({ images, destination, designName, profileURL, comments, lightenings,  shares, uid  }:designCards) {
@@ -30,7 +32,11 @@ function DesignCard({ images, destination, designName, profileURL, comments, lig
     else return false
   }
 
+  let url =  `${document.location.href}/${designName} `;
+  const shareDetails = { url};
 
+
+  
 
   return (
     <div ref={ref} onMouseOver={() => setMouseOver(true)} onMouseEnter={() => setMouseOver(true)} onMouseOut={() => setMouseOver(false)} className={`relative w-[85%]  h-[90%] mx-3 min-h-[55vh] rounded-[20px] shadow-task max-w-[90vw] max-h-[30vh] bg-white my-3 p-[4%] snap-center flex flex-col cursor-pointer`}>
@@ -43,13 +49,17 @@ function DesignCard({ images, destination, designName, profileURL, comments, lig
       </Carousel>
       <h1 className='self-center text-[7vw] sm:text-[2vw] sm:mb-2 font-bold mt-2 mb-2 '>{designName}</h1>
        <div className="absolute bottom-[6%] flex items-center justify-between w-[100%]">
-        <div className="flex w-[50%] items-center justify-between">
+        <div className="flex w-[40%] items-center justify-evenly">
           <img onClick={() => setlight(!light)} src={light?"/Assets/lightmode/flash(1).png":"/Assets/lightmode/flash.png"} alt="" className="w-[30%] max-w-[40px] sm:max-w-[30px]" />
-          <img src="/Assets/lightmode/messenger.png" alt="" className="w-[30%] max-w-[40px] sm:max-w-[30px]" />
-          <img src="/Assets/lightmode/share.png" alt="" className="w-[30%] max-w-[40px] sm:max-w-[30px]" />
+          <CopyToClipboard 
+            text={`https://devs-ui.vercel.app/challenges/${designName}`}
+          >
+            <img onClick={() => toast.success('copied to clipboard') } src="/Assets/lightmode/share.png" alt="" className="w-[30%] max-w-[40px] sm:max-w-[30px]" />
+          </CopyToClipboard>
         </div>
         <img onClick={() => router.push(`/profile/${uid}`)} src={profileURL} alt="" className="max-w-[60px] rounded-[100%] mr-[10%] border-[1px] border-gray-500 sm:max-w-[40px]" />
        </div>
+       <Toaster />
     </div>
   )
 }
