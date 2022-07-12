@@ -14,6 +14,9 @@ import { Design } from '../../constants/types'
 import { AuthContext } from '../../contexts/AuthContext'
 import { notify } from '../../services/Services'
 import { Toaster } from 'react-hot-toast'
+import CheckInternetConnection from '../../components/CheckInternetConnection'
+import { Detector } from 'react-detect-offline' 
+
 
 const Challenge: NextPage = (challenges) => {
 
@@ -23,6 +26,8 @@ const Challenge: NextPage = (challenges) => {
     const { user } = useContext(AuthContext);
     const [currentImage, setcurrentImage] = useState<string>();
     const [images, setimages] = useState([])
+    const [online, setonline] = useState<boolean>(true)
+
 
 
         //   getDoc(doc(getFirestore(),`Designs/${challengeName}`)).then((res) => {
@@ -30,13 +35,15 @@ const Challenge: NextPage = (challenges) => {
         //    console.log(res.data())
         // })
 
-   const unsub =  onSnapshot(doc(getFirestore(),`Designs/${challengeName}`), (querySnapshot) => {
-        // querySnapshot.forEach((doc) => {
-        //     // setDesigns([...designs, doc.data()])
-        // });
-        setcurrentElement(querySnapshot.data())
+        if(online){
+            const unsub =  onSnapshot(doc(getFirestore(),`Designs/${challengeName}`), (querySnapshot) => {
+                // querySnapshot.forEach((doc) => {
+                //     // setDesigns([...designs, doc.data()])
+                // });
+                setcurrentElement(querySnapshot.data())
 
-    });
+            });
+        }
         
 
  
@@ -52,6 +59,7 @@ const Challenge: NextPage = (challenges) => {
 
 
     return (
+        <CheckInternetConnection>
         <div className='w-screen h-screen flex flex-col items-center justify-start pt-[10vh] box-border overflow-y-scroll snap-y snap-mandatory scrollbar-hide sm:snap-none '>
             <NavBar />
             <div className="flex flex-col items-center justify-start sm:flex-row sm:items-center justify-center sm:box-border sm:px-[5%]">
@@ -119,7 +127,12 @@ const Challenge: NextPage = (challenges) => {
             </div>
             <Footer position='relative' />
             <Toaster />
+            <Detector 
+              render={() => null}
+              onChange={(o) => setonline(o)}
+            />
         </div>
+        </CheckInternetConnection>
     )
 }
 

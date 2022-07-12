@@ -7,11 +7,16 @@ import Footer from '../../components/Footer'
 import NavBar from '../../components/NavBar'
 import { Design } from '../../constants/types'
 import styles from '../../styles/desktop.module.css'
+import { Detector } from 'react-detect-offline'
+import CheckInternetConnection from '../../components/CheckInternetConnection'
+
+
 
 const Designs: NextPage = () => {
     const [width, setWidth] = useState(0);
     const [designs, setDesigns] = useState<Array<any>>([]);
-    
+    const [online, setonline] = useState<boolean>(true)
+
 
 
     useEffect(() => {
@@ -20,14 +25,16 @@ const Designs: NextPage = () => {
         }
         // console.log(width);    
         try {
-            const q = query(collection(getFirestore(), "Designs"));
-            onSnapshot(q, (querySnapshot) => {
+            if(online){
+                const q = query(collection(getFirestore(), "Designs"));
+                onSnapshot(q, (querySnapshot) => {
                 setDesigns(querySnapshot.docs);
                 // querySnapshot.forEach((doc) => {
                 //     // setDesigns([...designs, doc.data()])
                 // });
         
-            });
+                });
+            }
         } catch (error) {
             console.log(error)
         }
@@ -36,6 +43,7 @@ const Designs: NextPage = () => {
 
 
     return (
+        <CheckInternetConnection>
         <div className='w-screen h-screen flex flex-col justify-start items-center overflow-y-scroll snap-y snap-mandatory scrollbar-hide pt-[14vh] sm:pt-[10vh] sm:snap-none'>
             <Head>
                 <title>DevsUI-Designs 🌩️ </title>
@@ -54,7 +62,12 @@ const Designs: NextPage = () => {
                
             </div>
             {width > 640 && (<Footer position='relative' />)}
+            <Detector 
+              render={() => null}
+              onChange={(o) => setonline(o)}
+            />
         </div>
+        </CheckInternetConnection>
     )
 }
 

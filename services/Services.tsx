@@ -32,17 +32,25 @@ export const LogOut = async ({ callback }: LogOutProps) => {
 };
 
 export const fetchData = async (user: any, setuserData: React.Dispatch<React.SetStateAction<{}>>) => {
-    const userData = await SearchUserData(user?.uid);
-    setuserData(userData);
+    try {
+        const userData = await SearchUserData(user?.uid);
+        setuserData(userData);
+    } catch (error) {
+        
+    }
 }
 
 
 export async function SearchUserData(uid?: string | null) {
+   try {
     const snapshot = await getDoc(doc(getFirestore(), 'users', `${uid}`));
     if (snapshot.exists()) {
         userData = snapshot.data();
         writeStorage('uid', snapshot.data().uid);
     }
+   } catch (error) {
+    
+   }
     return userData;
 }
 
@@ -116,6 +124,7 @@ export const createorUpdateUserDoc = ({ updating, bio, dribble, facebook, github
 }
 
 export const AuthState = (setUser: any) => {
+   try {
     onAuthStateChanged(authentication, (user) => {
         if (user) {
             setUser(user);
@@ -126,6 +135,9 @@ export const AuthState = (setUser: any) => {
             setUser(null)
         }
     })
+   } catch (error) {
+      console.log(error)
+   }
 }
 
 export const uploadImage = ({ fetchUserData, file, setloading, setuploading, storageRef, currentUser, user }: UploadImage) => {

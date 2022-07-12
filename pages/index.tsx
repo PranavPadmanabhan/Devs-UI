@@ -2,6 +2,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import { Toaster } from 'react-hot-toast'
 import Carousel from '../components/Carousel'
+import CheckInternetConnection from '../components/CheckInternetConnection'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import NavBar from '../components/NavBar'
@@ -13,6 +14,7 @@ const Home: NextPage = () => {
 
 
   return (
+    <CheckInternetConnection>
     <div className={` box-border overflow-y-scroll snap-y snap-mandatory scrollbar-hide`}>
       <Head>
         <title>DevsUI</title>
@@ -66,6 +68,7 @@ const Home: NextPage = () => {
       </div>
       <Toaster />
     </div>
+    </CheckInternetConnection>
   )
 }
 

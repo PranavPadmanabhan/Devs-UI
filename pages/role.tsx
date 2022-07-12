@@ -1,5 +1,6 @@
 import Router from 'next/router';
 import React, { useState } from 'react'
+import CheckInternetConnection from '../components/CheckInternetConnection';
 import { createorUpdateUserDoc } from '../services/Services';
 
 type role = "developer" | "designer" | "both" | null;
@@ -12,6 +13,7 @@ function role() {
   }
 
   return (
+    <CheckInternetConnection>
     <div className='w-screen h-screen bg-portrait bg-cover bg-no-repeat bg-center flex items-center justify-center sm:bg-landscape sm:bg-cover sm:bg-no-repeat'>
 
       {/*-------------------------- roles container starts here -------------------*/}
@@ -57,6 +59,7 @@ function role() {
       {/*-------------------------- roles container starts here -------------------*/}
 
     </div>
+    </CheckInternetConnection>
   )
 }
 

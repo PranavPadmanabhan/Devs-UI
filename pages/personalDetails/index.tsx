@@ -8,6 +8,8 @@ import { AuthContext } from '../../contexts/AuthContext'
 import { SearchUserData, uploadData, uploadImage } from '../../services/Services'
 import styles from '../../styles/desktop.module.css'
 import { getStorage, ref } from "firebase/storage";
+import { Detector } from 'react-detect-offline'
+import CheckInternetConnection from '../../components/CheckInternetConnection'
 
 
 const PersonalDetails: NextPage = () => {
@@ -18,17 +20,20 @@ const PersonalDetails: NextPage = () => {
     const [uploading, setuploading] = useState<boolean>(false);
     const [Avatar, setAvatar] = useState<string | undefined>();
     const storage = getStorage();
+    const [online, setOnline] = useState<boolean>(true)
+    const [uploaded, setuploaded] = useState(false)
 
     const handleImageAsFile = (e: any) => {
         const image = e.target.files[0];
         if (!image) return;
         const storageRef = ref(storage, `profileImages/${user?.uid}/${image.name}.png`);
         uploadImage({ file: image, storageRef, setloading, fetchUserData, setuploading, currentUser, user });
+        setuploaded(true)
     }
 
     const fetchUserData = async () => {
         setloading(true)
-        if (user) {
+        if (user && online) {
             const userData = await SearchUserData(user?.uid);
             setcurrentUser(userData);
             setloading(false);
@@ -46,10 +51,11 @@ const PersonalDetails: NextPage = () => {
     useEffect(() => {
         fetchUserData();
         // console.log(currentUser);
-    }, [user]);
+    }, [user,uploaded]);
 
 
     return (
+        <CheckInternetConnection>
         <div className={`w-screen h-screen flex flex-col items-start justify-start box-border pt-[12vh]`}>
             <Head>
                 <title>DevsUI 🌩️ </title>
@@ -90,7 +96,12 @@ const PersonalDetails: NextPage = () => {
                 </div>
                 <Footer position='relative' />
             </div>
+            <Detector 
+             render={() => null}
+             onChange={(o) => setOnline(o) }
+            />
         </div>
+        </CheckInternetConnection>
     )
 }
 

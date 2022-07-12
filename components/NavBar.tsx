@@ -6,6 +6,7 @@ import styles from '../styles/desktop.module.css'
 import { AuthContext } from '../contexts/AuthContext';
 import { useRouter } from 'next/router';
 import { fetchData, LogOut, signIn } from '../services/Services';
+import { Detector } from 'react-detect-offline'
 
 
 function NavBar() {
@@ -14,13 +15,17 @@ function NavBar() {
   const { user } = useContext(AuthContext);
   const [userData, setuserData] = useState({})
   const router = useRouter();
+  const [online, setOnline] = useState<boolean>(true)
+
   const navigate = (destination: string) => {
     router.push(`/${destination}`);
     setdrawerMode(false)
   }
 
  useEffect(() => {
-   fetchData(user,setuserData);
+   if(online){
+    fetchData(user,setuserData);
+   }
  }, [])
  
 
@@ -87,7 +92,7 @@ function NavBar() {
               <DrawerItem url='/Assets/lightmode/home(1).png' title='Home' redAccent={false} onClick={() => navigate('')} upcoming={false} />
               <DrawerItem url='/Assets/lightmode/design.png' title='Designs' redAccent={false} onClick={() => navigate("designs")} upcoming={false} />
               <DrawerItem url='/Assets/lightmode/challenge.png' title='Challenges' redAccent={false} onClick={() => navigate("challenges")} upcoming={false} />
-              <DrawerItem url='/Assets/lightmode/icons8-bell-24.png' title='Notification' redAccent={false} onClick={() => navigate('/profile')} upcoming={false} />
+              <DrawerItem url='/Assets/lightmode/icons8-bell-24.png' title='Notification' redAccent={false} onClick={() => navigate('')} upcoming={false} />
               <DrawerItem url='/Assets/lightmode/moon.png' title='Darkmode' redAccent={false} onClick={() => alert('COMING SOON')} upcoming={true} />
               {
                 user ? (
@@ -112,7 +117,10 @@ function NavBar() {
 
       {/*------------- navigation bar contents ends here --------------------- */}
 
-
+      <Detector 
+       render={() => null}
+       onChange={(o) => setOnline(o)}
+      />
     </div>
   );
 }

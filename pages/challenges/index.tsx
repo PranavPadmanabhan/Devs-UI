@@ -14,6 +14,10 @@ import Link from 'next/link'
 import { AuthContext } from '../../contexts/AuthContext'
 import { Toaster } from 'react-hot-toast'
 import { notify, SearchUserData } from '../../services/Services'
+import { Detector } from 'react-detect-offline'
+import CheckInternetConnection from '../../components/CheckInternetConnection'
+
+
 
 const Challenges: NextPage = () => {
     const [width, setWidth] = useState(0);
@@ -26,18 +30,23 @@ const Challenges: NextPage = () => {
     const [filterDrawerVisiblity, setFilterDrawerVisibility] = useState<boolean>(false);
     const [designs, setDesigns] = useState<Array<any>>([]);
     const [currentUser, setcurrentUser] = useState<any>({})
+    const [online, setonline] = useState<boolean>(true)
 
-    const q = query(collection(getFirestore(), "Designs"),orderBy('createdAt','desc'));
-    onSnapshot(q, (querySnapshot) => {
-        setDesigns(querySnapshot.docs);
-        // querySnapshot.forEach((doc) => {
-        //     // setDesigns([...designs, doc.data()])
-        // });
+        if(online){
+            const q = query(collection(getFirestore(), "Designs"),orderBy('createdAt','desc'));
+        onSnapshot(q, (querySnapshot) => {
+            setDesigns(querySnapshot.docs);
+            // querySnapshot.forEach((doc) => {
+            //     // setDesigns([...designs, doc.data()])
+            // });
 
-    });
+         });
+        }
+    
+   
 
     const fetchUserData = async () => {
-        if (user) {
+        if (user && online) {
             const userData = await SearchUserData(user?.uid)
             setcurrentUser(userData)
         }
@@ -50,6 +59,7 @@ const Challenges: NextPage = () => {
     useEffect(() => {
         if (typeof (window) !== undefined) {
             setWidth(window.innerWidth);
+            
         }
 
     }, [])
@@ -77,6 +87,7 @@ const Challenges: NextPage = () => {
     }
 
     return (
+        <CheckInternetConnection>
         <div className='w-screen h-screen box-border flex flex-col pt-[9vh] overflow-hidden'>
             <Head>
                 <title>Challenges 🌩️ </title>
@@ -109,7 +120,7 @@ const Challenges: NextPage = () => {
 
             {/*--------------- challenges container starts here ---------------*/}
             <div className="flex flex-col w-[100%] h-auto overflow-x-hidden overflow-y-auto snap-y snap-mandatory scrollbar-hide">
-                {designs.length !== 0 ? null : (<Link href={user ? '/uploadDesign' : '/challenges'}><h1 onClick={uploadLinkClick} className='self-center cursor-pointer border-b-[1px] border-black mt-[35vh]'>Upload a challenge</h1></Link>)}
+                {designs.length !== 0 ? null : (<Link href={user ? '/uploadDesign' : '/challenges'}><h1 onClick={uploadLinkClick} className='self-center cursor-pointer border-b-[1px] border-black mt-[35vh] snap-center'>Upload a challenge</h1></Link>)}
 
                 <section className=" grid grid-cols-1 gap-y-[5vh] place-items-center snap-center py-[3vh] scrollbar-hide bg-white overflow-y-scroll snap-y snap-mandatory w-[100%] min-h-[70vh] sm:overflow-x-hidden sm:grid sm:grid-cols-4 sm:place-items-center sm:min-h-[90vh]">
                     {
@@ -122,9 +133,14 @@ const Challenges: NextPage = () => {
                 <Footer position='relative' />
                 <Toaster />
             </div>
+            <Detector 
+            render={() => null}
+              onChange={(o) => setonline(o) }
+            />
 
             {/*--------------- challenges container ends here ---------------*/}
         </div>
+        </CheckInternetConnection>
     )
 }
 

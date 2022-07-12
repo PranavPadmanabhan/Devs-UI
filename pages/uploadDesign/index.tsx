@@ -14,6 +14,9 @@ import { AuthContext } from '../../contexts/AuthContext';
 import toast, { Toaster } from 'react-hot-toast';
 import { addCompletedStatus, addFileType, addLevelCheckMark, addTool, createorUpdateUserDoc, handleDesignFiles, handleFiles, notify, SearchUserData, uploadDesign, uploadDesignFiles } from '../../services/Services'
 import { useRouter } from 'next/router';
+import { Detector } from 'react-detect-offline'
+import CheckInternetConnection from '../../components/CheckInternetConnection'
+
 
 const UploadDesign: NextPage = () => {
   const [uploadedDetails, setUploadedDetails] = useState<Array<string>>([] as Array<string>);
@@ -28,9 +31,10 @@ const UploadDesign: NextPage = () => {
   const [ImageAssetsURL, setImageAssetURL] = useState<string>();
   const [userData, setuserData] = useState<any>({})
   const router = useRouter()
+  const [online, setOnline] = useState<boolean>(true)
 
   const fetchUserData = async () => {
-    if (user) {
+    if (user && online) {
         const response = await SearchUserData(user.uid);
         setuserData(response);
     }
@@ -56,6 +60,7 @@ const UploadDesign: NextPage = () => {
   }
 
   return (
+    <CheckInternetConnection>
     <div className={`${styles.Container} w-screen h-screen flex flex-col items-center justify-start pt-[10vh] sm:items-start sm:box-border sm:pt-[10vh]`}>
       <Head>
         <title>DevsUI 🌩️ </title>
@@ -171,7 +176,12 @@ const UploadDesign: NextPage = () => {
         <Footer position='relative' />
       </div>
       <Toaster />
+      <Detector 
+       render={() => null}
+       onChange={(o) => setOnline(o)}
+      />
     </div>
+    </CheckInternetConnection>
   )
 }
 

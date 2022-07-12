@@ -4,9 +4,10 @@ import { NextPage } from 'next'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import React, { useContext, useEffect, useRef, useState } from 'react'
-import { Toaster } from 'react-hot-toast'
+import toast, { Toaster } from 'react-hot-toast'
 import { useSwipeable } from 'react-swipeable'
 import Card, { UseIntersection } from '../../components/Card'
+import CheckInternetConnection from '../../components/CheckInternetConnection'
 import Footer from '../../components/Footer'
 import NavBar from '../../components/NavBar'
 import SocialMediaItems from '../../components/SocialMediaItems'
@@ -63,13 +64,16 @@ const Profile: NextPage = () => {
      
     }
 
+   
     useEffect(() => {
         if(typeof(window !== undefined)){
             setwidth(window.innerWidth)
+               
         }
         fetchUserData();
         fetch();
-    }, [user, contributions,designs.length])
+        
+    }, [user, contributions,designs.length,uid])
 
   
     
@@ -149,6 +153,7 @@ const Profile: NextPage = () => {
     }
 
     return (
+        <CheckInternetConnection>
         <div className='w-screen h-screen flex flex-col box-border pt-[10vh] sm:pt-[12vh]'>
             <Head>
                 <title>DevsUI 🌩️ </title>
@@ -246,6 +251,7 @@ const Profile: NextPage = () => {
             <Toaster />
 
         </div>
+        </CheckInternetConnection>
     )
 }
 
