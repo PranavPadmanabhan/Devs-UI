@@ -52,7 +52,6 @@ function NavBar() {
 
         <div className="w-[100%] hidden sm:flex sm:items-center sm:justify-evenly ">
           <Link href={"/"}><span className={`${styles.NavBarItems} cursor-pointer`}>Home</span></Link>
-          <Link href={"/designs"}><span className={`${styles.NavBarItems} cursor-pointer`}>Designs</span></Link>
           <Link href={"/challenges"}><span className={`${styles.NavBarItems} cursor-pointer`}>Challenges</span></Link>
           <Link href={"/"}><span className={`${styles.NavBarItems} cursor-pointer`}>About Us</span></Link>
           <AiOutlineBell className={`${styles.BellIcon} cursor-pointer`} size={25} />
@@ -90,7 +89,6 @@ function NavBar() {
           {drawerMode && (
             <div className="fixed w-[55vw] h-auto overflow-hidden bg-white top-[9vh] right-[4vw] rounded-[20px] shadow-task">
               <DrawerItem url='/Assets/lightmode/home(1).png' title='Home' redAccent={false} onClick={() => navigate('')} upcoming={false} />
-              <DrawerItem url='/Assets/lightmode/design.png' title='Designs' redAccent={false} onClick={() => navigate("designs")} upcoming={false} />
               <DrawerItem url='/Assets/lightmode/challenge.png' title='Challenges' redAccent={false} onClick={() => navigate("challenges")} upcoming={false} />
               <DrawerItem url='/Assets/lightmode/icons8-bell-24.png' title='Notification' redAccent={false} onClick={() => navigate('')} upcoming={false} />
               <DrawerItem url='/Assets/lightmode/moon.png' title='Darkmode' redAccent={false} onClick={() => alert('COMING SOON')} upcoming={true} />

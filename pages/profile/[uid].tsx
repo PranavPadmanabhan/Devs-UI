@@ -120,38 +120,58 @@ const Profile: NextPage = () => {
     const RenderTabs = () => {
         if (currentTab === 'My Designs' ) {
             return (
-                <div {...handlers} className={`${styles.singleTab} w-[100%] h-[100%] flex flex-col items-center overflow-y-scroll snap-y snap-mandatory box-border pb-[15%] scrollbar-hide sm:grid sm:grid-cols-4 sm:place-items-center sm:gap-y-5 sm:snap-none `}>
+                <div {...handlers} className={`${styles.singleTab} w-[100%] h-[100%] flex flex-col items-center overflow-y-scroll snap-y snap-mandatory box-border pb-[15%] scrollbar-hide ${!designs.length?'sm:flex flex-col':'sm:grid'} sm:grid-cols-4 sm:place-items-start sm:gap-y-5 sm:snap-none `}>
                     {
                         designs.map((item, index) => (
                             <Card key={index} images={item.data().images} title={item.data().name} description={item.data().description} level={item.data().levels} destination={item.data().name} snap={width < 640 ? 'snap-center' : "snap-none"} uid={item.data().uid} userData={currentUser} fetchUserData={fetchUserData} />
                         ))
                     }
-                    {designs.length == 0??(<h1>No Data</h1>)}
+                    {
+                        !designs.length && (
+                            <div className="w-[100%] h-[100%] flex flex-col items-center justify-center">
+                                <h1 className='text-black font-bold'>No Designs</h1>
+                            </div>
+                        )
+                    }
                    
                 </div>
+          
             )
         }
         else if (currentTab === 'Task In Progress') {
             return (
-                <div {...handlers} className={`${styles.singleTab} w-[100%] h-[100%] flex flex-col items-center overflow-y-scroll snap-y snap-mandatory scrollbar-hide sm:grid sm:grid-cols-4 sm:place-items-center sm:gap-y-5 sm:snap-none pt-1`}>
- {
-                        incompletedDesigns.map((item, index) => (
+                <div {...handlers} className={`${styles.singleTab} w-[100%] h-[100%] flex flex-col items-center  overflow-y-scroll snap-y snap-mandatory scrollbar-hide ${!incompletedDesigns.length?'sm:flex flex-col':'sm:grid'} sm:grid-cols-4 sm:place-items-start sm:gap-y-5 sm:snap-none pt-1`}>
+                    {
+                       incompletedDesigns.map((item, index) => (
                             <Card key={index} images={item.data().images} title={item.data().name} description={item.data().description} level={item.data().levels} destination={item.data().name} snap={width < 640 ? 'snap-center' : "snap-none"} uid={item.data().uid} userData={currentUser} fetchUserData={fetchUserData} />
                         ))
-                    }       
-                 {incompletedDesigns.length == 0??(<h1>No Data</h1>)}
+                    }  
+                    {
+                        !incompletedDesigns.length && (
+                            <div className="w-[100%] h-[100%] flex flex-col items-center justify-center">
+                                <h1 className='text-black font-bold'>No Incomplete Designs</h1>
+                            </div>
+                        )
+                    }
                 </div>
             )
         }
         else {
             return (
-                <div {...handlers} className={`${styles.singleTab} w-[100%] h-[100%] flex flex-col items-center overflow-y-scroll snap-y snap-mandatory scrollbar-hide sm:grid sm:grid-cols-4 sm:place-items-center sm:gap-y-5 sm:snap-none`}>
+                <div {...handlers} className={`${styles.singleTab} w-[100%] h-[100%] flex flex-col items-center overflow-y-scroll snap-y snap-mandatory scrollbar-hide ${!completedDesigns.length?'sm:flex flex-col':'sm:grid'} sm:grid-cols-4 sm:place-items-start sm:gap-y-5 sm:snap-none`}>
                      {
                         completedDesigns.map((item, index) => (
                             <Card key={index} images={item.data().images} title={item.data().name} description={item.data().description} level={item.data().levels} destination={item.data().name} snap={width < 640 ? 'snap-center' : "snap-none"} uid={item.data().uid} userData={currentUser} fetchUserData={fetchUserData} />
                         ))
                     }
-                    {completedDesigns.length == 0??(<h1>No Data</h1>)}
+                    {
+                        !completedDesigns.length && (
+                            <div className="w-[100%] h-[100%] flex flex-col items-center justify-center">
+                                <h1 className='text-black font-bold'>No Completed Designs</h1>
+                            </div>
+                        )
+                    }
+                    
                 </div>
             )
         }
@@ -163,7 +183,7 @@ const Profile: NextPage = () => {
             <Head>
                 <title>DevsUI 🌩️ </title>
                 <meta name="description" content="Generated by create next app" />
-                <link rel="icon" href="/faviconhttps://www.getdroidtips.com/realme-narzo-10a-firmware-flash-file/#google_vignette.ico" />
+                <link rel="icon" href="/favicon.ico" />
             </Head>
             <NavBar />
 
