@@ -94,9 +94,9 @@ const Profile: NextPage = () => {
     const handlers = useSwipeable({
         onSwipedLeft: (eventData) => {
             if (currentTab === "My Designs") {
-                setCurrentTab("Task In Progress")
+                if(user && currentUser.uid === user.uid) setCurrentTab("Task In Progress")
             }
-            else if (currentTab === "Task In Progress") {
+            else if ( currentTab === "Task In Progress") {
                 setCurrentTab("Task Completed")
             }
             else {
@@ -118,7 +118,7 @@ const Profile: NextPage = () => {
     });
 
     const RenderTabs = () => {
-        if (currentTab === 'My Designs') {
+        if (currentTab === 'My Designs' ) {
             return (
                 <div {...handlers} className={`${styles.singleTab} w-[100%] h-[100%] flex flex-col items-center overflow-y-scroll snap-y snap-mandatory box-border pb-[15%] scrollbar-hide sm:grid sm:grid-cols-4 sm:place-items-center sm:gap-y-5 sm:snap-none `}>
                     {
