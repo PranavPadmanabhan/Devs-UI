@@ -216,7 +216,7 @@ const Profile: NextPage = () => {
                                         {/*-------- update profile image button starts here ------*/}
 
                                     </div>
-                                    <div className={`${styles.FollowerSection} w-[100%] h-[20%] flex items-center justify-evenly mt-[10px] box-border box-border pl-9 mt-9 sm:mt-[5vh] `}>
+                                    <div className={`${styles.FollowerSection} w-[100%] h-[20%] flex items-center justify-evenly  box-border pl-9 mt-9 sm:mt-[5vh] `}>
                                         <div className={`w-[25%] h-[100%] flex flex-col items-center justify-center  mr-7`}>
                                             <span className={`mb-2 text-[12px] font-light sm:text-[18px]`}>contributions</span>
                                             <span className={` text-[22px] font-light`}>{currentUser.contributions ?? 0}</span>
