@@ -51,9 +51,9 @@ function NavBar() {
         {/*---------------- navigation bar items visible only in desktop mode starts here --------------------*/}
 
         <div className="w-[100%] hidden sm:flex sm:items-center sm:justify-evenly ">
-          <Link href={"/"}><span className={`${styles.NavBarItems} cursor-pointer`}>Home</span></Link>
-          <Link href={"/challenges"}><span className={`${styles.NavBarItems} cursor-pointer`}>Challenges</span></Link>
-          <Link href={"/"}><span className={`${styles.NavBarItems} cursor-pointer`}>About Us</span></Link>
+          <Link href={"/"}><span className={`${styles.NavBarItems} ${router.pathname === '/'?'text-[#323c71] font-semibold border-b-2 border-[#323c71]':'text-black'}  cursor-pointer`}>Home</span></Link>
+          <Link href={"/challenges"}><span className={`${styles.NavBarItems} ${router.pathname === '/challenges'?'text-[#323c71] font-semibold border-b-2 border-[#323c71]':'text-black'} cursor-pointer`}>Challenges</span></Link>
+          <Link href={"/"}><span className={`${styles.NavBarItems} ${router.pathname === '/about'?'text-[#323c71] font-semibold border-b-2 border-[#323c71]':'text-black'} cursor-pointer`}>About Us</span></Link>
           <AiOutlineBell className={`${styles.BellIcon} cursor-pointer`} size={25} />
           <div className="group flex flex-col items-center justify-center cursor-pointer">
             <img src={user?.photoURL ?? "/Assets/icons/avatar.png"} alt="" className={`${styles.Avatar} w-[40px] h-[40px] object-cover max-w-[50px] rounded-[100%] cursor-pointer`} />
@@ -83,7 +83,7 @@ function NavBar() {
 
         {/*------------------- navigation items(Hamburger menu) visible only in mobile view starts here ------------------*/}
 
-        <div className="group flex items-center justify-center w-[40px] h-[37px] bg-white rounded-[5px] block sm:hidden shadow-task">
+        <div className="group flex items-center justify-center w-[40px] h-[37px] bg-white rounded-[5px]  sm:hidden shadow-task">
           <img onClick={() => setdrawerMode(!drawerMode)} src="/Hamburger Menu.svg" alt="" className="w-[90%] max-w-[25px] " />
           {/*---------------- navigation drawer in mobile view starts here -------------*/}
           {drawerMode && (

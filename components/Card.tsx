@@ -77,7 +77,7 @@ function Card({ images, title, description, level, destination, snap, uid, userD
 
 
   return (
-    <div onMouseOver={() => setMouseOver(true)} onMouseEnter={() => setMouseOver(true)} onMouseOut={() => setMouseOver(false)}  onClick={() => (user && uid == user.uid) ? null:navigate()} ref={ref} className={`relative w-[85%]  h-[90%] min-w-[85%] mx-3 min-h-[60vh] z-[1] rounded-[20px] shadow-task max-w-[90vw] max-h-[30vh] bg-white my-3 p-[4%] ${snap} flex flex-col cursor-pointer`}>
+    <div onMouseOver={() => setMouseOver(true)} onMouseEnter={() => setMouseOver(true)} onMouseOut={() => setMouseOver(false)}  onClick={() => (user && uid == user.uid) ? null:navigate()} ref={ref} className={`relative w-[85%]  h-[90%] min-w-[30%] mx-3 min-h-[60vh] z-[1] rounded-[20px] shadow-task max-w-[300px] max-h-[30vh] bg-white my-3 p-[4%] ${snap} flex flex-col cursor-pointer`}>
       <Carousel  showStatus={false} interval={2000} dynamicHeight={true} showThumbs={false} autoPlay={autoPlaySetings()} infiniteLoop={true} className={`rounded-[15px] max-h-[35vh] shadow-task`}>
         {
           images.map((item,index) => (
@@ -85,7 +85,7 @@ function Card({ images, title, description, level, destination, snap, uid, userD
           ))
         }
       </Carousel>
-      <div className="w-[40%] h-[7%] min-h-[35px] rounded-[10px] border-2 border-black box-border flex items-center justify-between sm:mt-2 mt-3 mb-1">
+      <div className="w-[40%] h-[7%] min-w-[120px] min-h-[35px] rounded-[10px] border-2 border-black box-border flex items-center justify-between sm:mt-2 mt-3 mb-1">
         <span className="ml-1">Level {level}</span>
         <div className={`w-[30%] h-[85%] ${colors[level - 1]} text-white font-bold rounded-[5px] flex items-center justify-center  mr-[2px]`}>{level}</div>
       </div>

@@ -274,3 +274,5 @@ export type Delete = {
 export type AddLight = {
     designName:string
 }
+
+export type SortOptions = 'Easier First' | 'Harder First' | null;

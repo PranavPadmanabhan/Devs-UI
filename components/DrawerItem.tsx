@@ -1,5 +1,3 @@
-import Link from 'next/link'
-import { useRouter } from 'next/router'
 import React from 'react'
 import { drawerProps } from '../constants/types'
 import styles from '../styles/desktop.module.css'
