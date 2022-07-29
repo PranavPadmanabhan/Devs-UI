@@ -41,17 +41,18 @@ const Challenges: NextPage = () => {
     
 
       
-    if(online){
-        const q = query(collection(getFirestore(), "Designs"),orderBy('createdAt','desc'));
-    onSnapshot(q, (querySnapshot) => {
-        setLoading(true)
-        setDesigns(querySnapshot.docs);
-        setLoading(false)
-        // querySnapshot.forEach((doc) => {
-        //     // setDesigns([...designs, doc.data()])
-        // });
-     });
-    }
+    useEffect(() => {
+        if(online){
+            const q = query(collection(getFirestore(), "Designs"),orderBy('createdAt','desc'));
+        onSnapshot(q, (querySnapshot) => {
+            setDesigns(querySnapshot.docs);
+            // querySnapshot.forEach((doc) => {
+            //     // setDesigns([...designs, doc.data()])
+            // });
+         });
+        }
+    }, [])
+    
    
 
     const fetchUserData = async () => {
@@ -235,7 +236,7 @@ const Challenges: NextPage = () => {
                     <div onClick={() => {
                         setSortingDrawerVisiblity(!sortingDrawerVisiblity);
                         setFilterDrawerVisibility(false)
-                    }} className="relative group w-[40%] h-[70%] min-h-[45px] flex flex-col items-center justify-center rounded-[10px] cursor-pointer bg-[#e5e7eb] border-[1px] border-gray-300 cursor-pointer">
+                    }} className="relative group w-[40%] h-[70%] min-h-[45px] flex flex-col items-center justify-center rounded-[10px] bg-[#e5e7eb] border-[1px] border-gray-300 cursor-pointer">
                         <h1 className="hidden sm:flex">sort by</h1>
                         <FaSort color='black' size={25} className='block sm:hidden lg:hidden' />
                         <div className="fixed z-[100] hidden sm:hidden sm:group-hover:flex sm:flex-col top-[18%] w-[15%] min-h-[10%] bg-[#e5e7eb] sm:border-[1px] border-gray-300 sm:rounded-[10px] sm:overflow-hidden">
@@ -250,7 +251,7 @@ const Challenges: NextPage = () => {
                         </div>
                         {
                             sortingDrawerVisiblity && (
-                                <div className="fixed z-[100]  flex flex-col top-[23%] w-[45%] min-h-[10%] bg-[#e5e7eb] border-[1px] border-gray-300 rounded-[10px] overflow-hidden">
+                                <div className="fixed z-[100]  flex flex-col top-[25%] w-[45%] min-h-[10%] bg-[#e5e7eb] border-[1px] border-gray-300 rounded-[10px] overflow-hidden">
                                 <div onClick={() => addSorting('Easier First')} className="w-[100%] h-[45px] flex items-center justify-between px-3 border-b-[1px] border-b-gray-300">
                                     <span className="">Easier First</span>
                                     { sort === 'Easier First' &&(<AiOutlineCheck size={24} color="green" />)}
@@ -266,7 +267,7 @@ const Challenges: NextPage = () => {
                     <div onClick={() => {
                         setFilterDrawerVisibility(!filterDrawerVisiblity);
                         setSortingDrawerVisiblity(false);
-                        }} className="relative group w-[40%] h-[70%] min-h-[45px] flex flex-col items-center justify-center rounded-[10px] cursor-pointer bg-[#e5e7eb] border-[1px] border-gray-300 cursor-pointer">
+                        }} className="relative group w-[40%] h-[70%] min-h-[45px] flex flex-col items-center justify-center rounded-[10px]  bg-[#e5e7eb] border-[1px] border-gray-300 cursor-pointer">
                         <h1 className="hidden sm:flex">Filter by</h1>
                         <FaFilter color='black' size={25} className='block sm:hidden lg:hidden' />
                         <div className="fixed z-[100] hidden sm:hidden sm:group-hover:flex sm:flex-col w-[15%] h-auto min-h-[10%] top-[18%] bg-[#e5e7eb] sm:border-[1px] border-gray-300 sm:rounded-[10px] sm:overflow-hidden">
@@ -281,7 +282,7 @@ const Challenges: NextPage = () => {
                         </div>
                         {
                             filterDrawerVisiblity && (
-                                <div className="fixed z-[100] flex flex-col w-[45%] h-auto min-h-[10%] top-[23%] right-[2%] bg-[#e5e7eb] border-[1px] border-gray-300 rounded-[10px] overflow-hidden">
+                                <div className="fixed z-[100] flex flex-col w-[45%] h-auto min-h-[10%] top-[25%] right-[2%] bg-[#e5e7eb] border-[1px] border-gray-300 rounded-[10px] overflow-hidden">
                                     {
                                         filterOptions.map((item,index) => (
                                         <div key={index} onClick={() => addFilter(item,index)} className="w-[100%] h-[45px] flex items-center justify-between px-3 border-b-[1px] border-b-gray-300">
