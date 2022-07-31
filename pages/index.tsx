@@ -29,7 +29,7 @@ const Home: NextPage = () => {
 
         <div className={`${styles.SiteDetails} w-screen h-screen flex flex-col items-center justify-start pt-[13vh] snap-center`}>
           <div className={`self-center w-[95%]  h-[16vh]  rounded-[15px] mb-[2vh]  bg-discord bg-[#5965f1] bg-fit bg-no-repeat bg-center flex items-end shadow-task justify-center sm:pt-[12vh] sm:h-[25vh] sm:max-h-[300px]  sm:pb-[10px] sm:bg-center sm:bottom-[2.5rem] sm:mb-[18vh]`}>
-            <h1 className={`hidden sm:block text-white font-semibold text-[2vw] tracking-wide`}>Connect  with  1000+  people  through  Discord</h1>
+            <h1 className={`hidden sm:block text-white font-semibold text-[1.3rem]  tracking-wide`}>Connect  with  1000+  people  through  Discord</h1>
           </div>
           <div className={`flex flex-col items-center h-[65vh] pt-[2vh] justify-start sm:flex-row sm:w-[80%]`}>
             <div className={`flex flex-col items-center justify-center`}>
