@@ -77,8 +77,8 @@ function Card({ images, title, description, level, destination, snap, uid, userD
 
 
   return (
-    <div onMouseOver={() => setMouseOver(true)} onMouseEnter={() => setMouseOver(true)} onMouseOut={() => setMouseOver(false)}  onClick={() => (user && uid == user.uid) ? null:navigate()} ref={ref} className={`relative w-[85%]  h-[90%] min-w-[85%] mx-3 min-h-[60vh] z-[1] rounded-[20px] shadow-task sm:max-w-[300px] max-h-[30vh] bg-white my-3 p-[4%] ${snap} flex flex-col cursor-pointer`}>
-      <Carousel  showStatus={false} interval={2000} dynamicHeight={true} showThumbs={false} autoPlay={autoPlaySetings()} infiniteLoop={true} className={`rounded-[15px] max-h-[35vh] shadow-task`}>
+    <div onMouseOver={() => setMouseOver(true)} onMouseEnter={() => setMouseOver(true)} onMouseLeave={() => setMouseOver(false)} onMouseOut={() => setMouseOver(false)}  onClick={() => (user && uid == user.uid) ? null:navigate()} ref={ref} className={`relative w-[85%]  h-[90%] min-w-[8%] mx-3 min-h-[60vh] z-[1] rounded-[20px] shadow-task sm:max-w-[300px] max-h-[30vh] bg-white my-3 p-[4%] ${snap} flex flex-col cursor-pointer`}>
+      <Carousel  showStatus={false} interval={1500} dynamicHeight={true} showThumbs={false} autoPlay={autoPlaySetings()} infiniteLoop={true} className={`rounded-[15px] max-h-[35vh] shadow-task`}>
         {
           images.map((item,index) => (
             <img key={index} src={item} alt="" className="h-[60%] min-h-[35vh] max-h-[35vh] bg-grey-200 w-[100%] object-fill rounded-[15px] z-[-1]" />
