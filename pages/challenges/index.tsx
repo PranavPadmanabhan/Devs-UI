@@ -92,11 +92,12 @@ const Challenges: NextPage = () => {
         else {
             setFilter([...filter, item])
             setSort(null)
-            designs.map((des) => {
-                if(des.data().levels === item.toString()){
-                    setFilteredArray([...filteredArray,des])
-                }
-            })
+            // designs.map((des) => {
+            //     if(des.data().levels === item.toString()){
+            //         setFilteredArray([...filteredArray,des])
+            //     }
+            // })
+            setFilteredArray([...filteredArray,...designs.filter(des => des.data().levels === item.toString())])
         }
     }
    
@@ -251,7 +252,7 @@ const Challenges: NextPage = () => {
                         </div>
                         {
                             sortingDrawerVisiblity && (
-                                <div className="fixed z-[100]  flex flex-col top-[25%] w-[45%] min-h-[10%] bg-[#e5e7eb] border-[1px] border-gray-300 rounded-[10px] overflow-hidden">
+                                <div className="fixed z-[100] sm:hidden lg:hidden  flex flex-col top-[25%] w-[45%] min-h-[10%] bg-[#e5e7eb] border-[1px] border-gray-300 rounded-[10px] overflow-hidden">
                                 <div onClick={() => addSorting('Easier First')} className="w-[100%] h-[45px] flex items-center justify-between px-3 border-b-[1px] border-b-gray-300">
                                     <span className="">Easier First</span>
                                     { sort === 'Easier First' &&(<AiOutlineCheck size={24} color="green" />)}
@@ -270,7 +271,7 @@ const Challenges: NextPage = () => {
                         }} className="relative group w-[40%] h-[70%] min-h-[45px] flex flex-col items-center justify-center rounded-[10px]  bg-[#e5e7eb] border-[1px] border-gray-300 cursor-pointer">
                         <h1 className="hidden sm:flex">Filter by</h1>
                         <FaFilter color='black' size={25} className='block sm:hidden lg:hidden' />
-                        <div className="fixed z-[100] hidden sm:hidden sm:group-hover:flex sm:flex-col w-[15%] h-auto min-h-[10%] top-[18%] bg-[#e5e7eb] sm:border-[1px] border-gray-300 sm:rounded-[10px] sm:overflow-hidden">
+                        <div className="fixed z-[100] hidden sm:hidden sm:group-hover:flex sm:flex-col w-[15%] sm:max-w-[200px] h-auto min-h-[10%] top-[18%] bg-[#e5e7eb] sm:border-[1px] border-gray-300 sm:rounded-[10px] sm:overflow-hidden">
                             {
                                 filterOptions.map((item,index) => (
                                 <div key={index} onClick={() => addFilter(item,index)} className="w-[100%] h-[45px] flex items-center justify-between px-3 border-b-[1px] border-b-gray-300">
@@ -282,7 +283,7 @@ const Challenges: NextPage = () => {
                         </div>
                         {
                             filterDrawerVisiblity && (
-                                <div className="fixed z-[100] flex flex-col w-[45%] h-auto min-h-[10%] top-[25%] right-[2%] bg-[#e5e7eb] border-[1px] border-gray-300 rounded-[10px] overflow-hidden">
+                                <div className="fixed z-[100] sm:hidden lg:hidden flex flex-col w-[45%] h-auto min-h-[10%] top-[25%] right-[2%] bg-[#e5e7eb] border-[1px] border-gray-300 rounded-[10px] overflow-hidden">
                                     {
                                         filterOptions.map((item,index) => (
                                         <div key={index} onClick={() => addFilter(item,index)} className="w-[100%] h-[45px] flex items-center justify-between px-3 border-b-[1px] border-b-gray-300">
